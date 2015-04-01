@@ -1,0 +1,35 @@
+{
+    "name" :        "PerspectiveView",
+    "title" :       "PerspectiveView",
+    "description" : "Javascript library for rendering grid based maps into a virtual, perspective, 3d top view with canvas",
+    "version":      "0.1.0",
+    "author" : {
+        "name" : "Danny Grübl",
+        "url" :  "https://github.com/hans-sperling/perspectiveview/blob/master/AUTHORS.txt"
+    },
+    "repository" : {
+        "type" : "git",
+        "url" :  "https://github.com/hans-sperling/perspectiveview"
+    },
+    "keywords" : [
+        "perpective view",
+        "javascript",
+        "canvas",
+        "browser",
+        "library"
+    ],
+    "bugs" : {
+        "url" :   "https://github.com/jquery/jquery/issues",
+        "email" : "perspectiveview@bluejade.de"
+    },
+    "licenses" : [{
+        "type" : "MIT",
+        "url" :  "https://github.com/hans-sperling/perspectiveview/blob/master/LICENSE.txt"
+    }],
+    "dependencies" : {},
+    "devDependencies" : {
+        "gulp" :       "latest",
+        "gulp-sass" :  "latest",
+        "gulp-jsdoc" : "latest"
+    }
+}

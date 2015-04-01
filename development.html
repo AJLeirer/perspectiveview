@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PerspectiveView</title>
+        <meta name="description" content="Javascript library for rendering grid based maps into a virtual, perspective, 3d top view with canvas">
+        <link rel="stylesheet" href="src/css/reset.css">
+        <link rel="stylesheet" href="src/css/development-layout.css">
+
+        <!-- PerspectiveView library (DEV-MOVE) -->
+        <script src="dev/perspectiveview.js"></script>
+
+        <!-- Necessary vendor scripts -->
+        <script src="src/js/vendor/jquery.js"></script>
+        <script src="src/js/vendor/requestAnimationFrame.js"></script>
+        <script src="src/js/vendor/stats.js"></script>
+
+        <!-- Development application for initializing and testing -->
+        <script src="src/js/app.js"></script>
+        <script src="src/js/modules/simpleGame.js"></script>
+        <script src="src/js/modules/simpleCharacter.js"></script>
+        <script src="src/js/modules/simpleControls.js"></script>
+        <script src="src/js/modules/simpleMap.js"></script>
+        <script src="src/js/modules/simpleRenderer.js"></script>
+    </head>
+    <body class="bright">
+        <div class="wrapper">
+            <div class="content">
+                <div class="application">
+                    <canvas data-scene="application"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
