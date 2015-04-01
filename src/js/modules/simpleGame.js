@@ -236,10 +236,7 @@
 
         priv.map = mod.map.getMap();
 
-
-
-        mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
-        /*mod.perspectiveView.setConfig({
+        mod.perspectiveView.setConfig({
             canvas:  $('canvas[data-scene="application"]')[0],
             context: $('canvas[data-scene="application"]')[0].getContext("2d"),
             unit: {
@@ -248,11 +245,11 @@
             },
             depth: 0.05,
             referencePoint: {
-                x: 340,
-                y: 260
+                x: 260,
+                y: 180
             },
             map: priv.map
-        });*/
+        });
 
         pub.start();
     };
