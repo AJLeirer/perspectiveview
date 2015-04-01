@@ -236,9 +236,16 @@
 
         priv.map = mod.map.getMap();
 
+
+
+        mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
+        mod.perspectiveView.setUnitSize(50, 50, 0.05);
+        mod.perspectiveView.setVanishingPoint({x: 225, y: 175});
+
+
+
         mod.perspectiveView.setConfig({
-            canvas:  $('canvas[data-scene="application"]')[0],
-            context: $('canvas[data-scene="application"]')[0].getContext("2d"),
+            canvas:  document.getElementById('myCanvas'),
             unit: {
                 width:  40,
                 height: 40
