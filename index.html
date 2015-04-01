@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PerspectiveView</title>
+        <meta name="description" content="Javascript library for rendering grid based maps into a virtual, perspective, 3d top view with canvas">
+        <link rel="stylesheet" href="dist/css/layout.css">
+
+        <!-- PerspectiveView library (RELEASE-MODE) -->
+        <script src="releases/perspectiveview_v0.1.0.js"></script>
+
+        <!-- Necessary vendor scripts -->
+        <script src="src/js/vendor/jquery.js"></script>
+        <script src="src/js/vendor/requestAnimationFrame.js"></script>
+        <script src="src/js/vendor/stats.js"></script>
+
+        <!-- Development application for initializing and testing -->
+        <script src="src/js/app.js"></script>
+        <script src="src/js/modules/simpleGame.js"></script>
+        <script src="src/js/modules/simpleCharacter.js"></script>
+        <script src="src/js/modules/simpleControls.js"></script>
+        <script src="src/js/modules/simpleMap.js"></script>
+        <script src="src/js/modules/simpleRenderer.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <h1 class="headline">
+                    <!-- <a class="domainname" href="http://bluejade.de">bluejade.de</a> -->
+                    <span class="domainname">bluejade.de</span>
+                    <span class="separator">/</span>
+                    <span class="projectname">PerspectiveView</span>
+                    <span class="version">(v0.1.0)</span>
+                </h1>
+                <div class="navigation">
+                    <ul class="menu">
+                        <li class="item active" data-item="info" data-cta="info">
+                            <p class="cta" title="Show/Hide infos">
+                                <span class="icon">
+                                    Infos
+                                </span>
+                            </p>
+                        </li>
+                        <!--
+                        <li class="item" data-item="params" data-cta="params">
+                            <p class="cta" title="Show/Hide parameters">
+                                <span class="icon">
+                                    Params
+                                </span>
+                            </p>
+                        </li>
+                        <li class="item" data-item="docs" data-cta="docs">
+                            <a class="cta" title="Check the documentation" target="_blank" href="https://hans-sperling.github.io/perspectiveview/docs/PerspectiveView/v0.1.0/PerspectiveView.html">
+                                <span class="icon">
+                                    Docs
+                                </span>
+                            </a>
+                        </li>
+                        <li class="item" data-item="download" data-cta="download">
+                            <a class="cta" title="Download PerspectiveView" href="download.html">
+                                <span class="icon">
+                                    Docs
+                                </span>
+                            </a>
+                        </li>
+                        -->
+                        <li class="item" data-item="fork" data-cta="code">
+                            <a class="cta" title="Check the sourcecode" target="_blank" href="https://github.com/perspectiveview/perspectiveview">
+                                <span class="icon">
+                                    Sourcecode
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="social">
+                        <li class="item" data-item="xing">
+                            <a class="cta" href="https://xing.com/profile/Danny_Gruebl" title="Check out Danny's profile on XING">
+                                <span class="icon"></span>
+                            </a>
+                        </li>
+                        <li class="item" data-item="github">
+                            <a class="cta" href="https://github.com/hans-sperling" title="Follow Danny on GitHub">
+                                <span class="icon"></span>
+                            </a>
+                        </li>
+                        <li class="item" data-item="bluejade">
+                            <a class="cta" href="http://bluejade.de/" title="Visit Danny on his homepage">
+                                <span class="icon"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content">
+                <div class="sidebar info visible">
+                    <h2>Infos:</h2>
+                    <p>Sample for the <strong>PerspectiveView</strong> library in action.</p>
+                    <h3>Usage:</h3>
+                    <p><strong>WASD</strong> or <strong>Arrow-Keys</strong> to navigate the blue rectangle through the map.</p>
+                </div>
+<!--
+                <div class="params">
+                    <h2>Params:</h2>
+                </div>
+-->
+                <div class="application">
+                    <canvas data-scene="application"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+[class^="icon"]:before, [class*=" icon"]:before {
+    font-family: "icons";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .4em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+
+}
+
+[data-item="game"]     span.icon:before { content: '\e800'; }
+[data-item="code"]     span.icon:before { content: '\e801'; }
+[data-item="docs"]     span.icon:before { content: '\e802'; }
+[data-item="info"]     span.icon:before { content: '\e803'; }
+[data-item="xing"]     span.icon:before { content: '\e804'; }
+[data-item="github"]   span.icon:before { content: '\e805'; }
+[data-item="fork"]     span.icon:before { content: '\e806'; }
+[data-item="bluejade"] span.icon:before { content: '\e807'; }
+[data-item="mail"],
+[data-item="contact"]  span.icon:before { content: '\e808'; }
+[data-item="user"]     span.icon:before { content: '\e809'; }
+[data-item="at"]       span.icon:before { content: '\e80a'; }
+[data-item="project"]  span.icon:before { content: '\e80b'; }
+[data-item="home"]     span.icon:before { content: '\e80c'; }
+[data-item="settings"] span.icon:before { content: '\e80d'; }
+[data-item="params"]   span.icon:before { content: '\e80e'; }

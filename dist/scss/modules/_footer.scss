@@ -1,0 +1,50 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 30px;
+    display: block;
+    background: rgb(33,33,44);
+    color: rgb(130,140,160);
+
+
+
+
+    .navigation  {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        background: rgba(255,255,255,0.1);
+
+        .item {
+            line-height: 100%;
+            font-size: 12px;
+            cursor: pointer;
+
+            .cta {
+                display: block;
+                padding: 10px 15px 5px 15px;
+                width: 100%;
+                color: rgb(130,140,160);
+
+                &:hover {
+                    padding: 5px 15px 5px 15px;
+                    border-top: 5px solid rgba(255,255,255,0.1);
+                }
+            }
+        }
+
+        .menu {
+            height: 100%;
+            list-style: none;
+            float: right;
+            @include noselect();
+
+            li {
+                float: left;
+            }
+        }
+    }
+}

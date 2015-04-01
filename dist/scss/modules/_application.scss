@@ -1,0 +1,64 @@
+.content {
+    position: relative;
+    width: 100%;
+    padding: 10px 10px 0px 10px;
+    max-width: 100%;
+    color: #eee;
+    font-size: 50px;
+    overflow: hidden;
+    padding-left: 320px;
+
+    .info {
+
+    }
+
+    .sidebar.info,
+    .sidebar.params {
+        position: absolute;
+        left: 0;
+        width: 320px;
+        height: 850px;
+        background: rgba(0,0,0,0.6);
+        padding: 15px;
+
+        display: none;
+
+        h2, h3 {
+            font-family: "Monda";
+            font-weight: 700;
+            font-size: 26px;
+            line-height: 120%;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        p, label, input {
+            font-family: "Noto Sans";
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 150%;
+            padding-bottom: 10px;
+        }
+
+        strong {
+            color: rgb(127,191,255);
+        }
+    }
+
+    .info.visible,
+    .params.visible {
+        display: block;
+    }
+
+    .application {
+        width: 680px;
+        height: 680px;
+        margin: 0 auto;
+        box-sizing: content-box;
+        background: rgba(255,255,255,0.4);
+        border: 1px solid black;
+    }
+}
