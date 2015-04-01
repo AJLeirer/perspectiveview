@@ -1,5 +1,8 @@
 /**
- * @class PerspectiveView
+ * Creates an instance of PerspectiveView
+ *
+ * @class
+ * @constructor
  */
 function PerspectiveView() {
     'use strict';
@@ -9,6 +12,7 @@ function PerspectiveView() {
     // --------------------------------------------------------------------------------------------- CONSTANTS
 
 
+    var SELF = this,
 
     /**
      * Toggle the development mode.
@@ -19,7 +23,7 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Boolean}
      */
-    var DEV_MODE = true;
+    DEV_MODE = true;
 
 
 
@@ -63,9 +67,7 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Object}
      */
-    priv.defaults = {
-
-    };
+    priv.defaults = {};
 
 
 
@@ -127,7 +129,7 @@ function PerspectiveView() {
      */
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
-            if (!isHtmlCanvasElement(canvas)) {
+            if (!SELF.isHtmlCanvasElement(canvas)) {
                 console.error('Parameter <canvas> is not a valid HTML canvas element :: ', canvas);
                 return;
             }
@@ -154,7 +156,7 @@ function PerspectiveView() {
      */
     pub.setContext = function setContext(context) {
         if (DEV_MODE) {
-            if (!isObject(context)) {
+            if (!SELF.isObject(context)) {
                 console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', context);
                 return;
             }
