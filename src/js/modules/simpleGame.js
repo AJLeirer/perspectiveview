@@ -245,8 +245,8 @@
             },
             depth: 0.05,
             referencePoint: {
-                x: 340,
-                y: 260
+                x: 260,
+                y: 180
             },
             map: priv.map
         });
