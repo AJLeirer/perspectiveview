@@ -122,6 +122,8 @@
             rightPosition  = (position.x + (width  / 2)),
             bottomPosition = (position.y + (height / 2)),
             leftPosition   = (position.x - (width  / 2)),
+            unitWidth      = 40,
+            unitHeight     = 40,
             gridY, gridX;
 
 
@@ -129,8 +131,8 @@
             if (movement.moveUp) {
                 topPosition -= speed;
 
-                gridX = position.x  / 50 | position.x  / 50;
-                gridY = topPosition / 50 | topPosition / 50;
+                gridX = position.x  / unitWidth  | position.x  / unitWidth;
+                gridY = topPosition / unitHeight | topPosition / unitHeight;
 
                 if (priv.map[gridY][gridX] > 0) {
                     //position.y += speed;
@@ -142,8 +144,8 @@
             else if (movement.moveDown) {
                 bottomPosition += speed;
 
-                gridX = position.x  / 50 | position.x  / 50;
-                gridY = bottomPosition / 50 | bottomPosition / 50;
+                gridX = position.x  / unitWidth     | position.x  / unitWidth;
+                gridY = bottomPosition / unitHeight | bottomPosition / unitHeight;
 
                 if (priv.map[gridY][gridX] > 0) {
                     //position.y -= speed;
@@ -156,11 +158,11 @@
             if (movement.moveLeft) {
                 leftPosition -= speed;
 
-                gridX = leftPosition / 50 | leftPosition / 50;
-                gridY = position.y  / 50 | position.y  / 50;
+                gridX = leftPosition / unitWidth | leftPosition / unitWidth;
+                gridY = position.y  / unitHeight | position.y  / unitHeight;
 
                 if (priv.map[gridY][gridX] > 0) {
-                    //position.x -= (50 - (leftPosition % 50));
+                    //position.x -= (unitWidth - (leftPosition % 50));
 
                 }
                 else {
@@ -170,8 +172,8 @@
             else if (movement.moveRight) {
                 rightPosition += speed;
 
-                gridX = rightPosition / 50 | rightPosition / 50;
-                gridY = position.y  / 50 | position.y  / 50;
+                gridX = rightPosition / unitWidth | rightPosition / unitWidth;
+                gridY = position.y  / unitHeight  | position.y  / unitHeight;
 
                 if (priv.map[gridY][gridX] > 0) {
                     //position.x -= speed;
@@ -228,8 +230,8 @@
         mod.character.run();
 
         mod.renderer
-            .setUnit(50, 50)
-            .setCanvas($('canvas[data-scene="application"]')[0], 850, 850)
+            .setUnit(40, 40)
+            .setCanvas($('canvas[data-scene="application"]')[0], 680, 680)
             .setContext($('canvas[data-scene="application"]')[0].getContext("2d"));
 
         priv.map = mod.map.getMap();
@@ -239,13 +241,13 @@
             canvas:  $('canvas[data-scene="application"]')[0],
             context: $('canvas[data-scene="application"]')[0].getContext("2d"),
             unit: {
-                width:  50,
-                height: 50
+                width:  40,
+                height: 40
             },
             depth: 0.05,
             referencePoint: {
-                x: 425,
-                y: 325
+                x: 340,
+                y: 260
             },
             map: priv.map
         });
