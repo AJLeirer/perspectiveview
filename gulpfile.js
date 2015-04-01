@@ -15,11 +15,11 @@ var gulp  = require('gulp'),
 
 var path = {
     sass :  {
-        input  : './dist/scss/',
+        input  : './dist/scss/*.scss',
         output : './dist/css/'
     },
     docs : {
-        input  : './perspectiveview.js',
+        input  : './dev/*.js',
         output : './docs/'
     }
 };
@@ -29,7 +29,7 @@ var path = {
 // ------------------------------------------------------------------------------------------------------ SASS
 
 gulp.task('sass', function () {
-    return gulp.src(path.sass.input + '*.scss')
+    return gulp.src(path.sass.input)
                .pipe(sass())
                .pipe(gulp.dest(path.sass.output));
 });
@@ -39,26 +39,27 @@ gulp.task('sass', function () {
 gulp.task('docs', function () {
     return gulp.src(path.docs.input)
         .pipe(jsdoc.parser({
-            name: 'PerspectiveView',
-            description: 'description',
-            version: 'v0.1.0',
-            licenses: ['MIT'],
-            plugins: false}))
+            name:        'PerspectiveView',
+            version:     'v0.1.0',
+            description: 'Javascript library for rendering grid based maps into a virtual, perspective, 3d top view with canvas.',
+            licenses:    ['MIT'],
+            plugins:     false //['plugins/markdown']
+        }))
         .pipe(jsdoc.generator(
             path.docs.output, {
-                cleverLinks: false,
-                monospaceLinks: true,
-                systemName: "PerspectiveView",
-                footer: "Created by Danny Grübl",
-                copyright: "2015",
-                navType: "vertical",
-                linenums: true,
+                path:            'ink-docstrap',
+                systemName:      'PerspectiveView',
+                footer:          'Created by Danny Grübl',
+                copyright:       '2015',
+                navType:         'vertical',
+                theme:           'journal',
+                linenums:        true,
                 collapseSymbols: true,
-                inverseNav: false
+                inverseNav:      true
             }, {
-                showPrivate: true,
-                monospaceLinks: false,
-                cleverLinks: false,
+                showPrivate:       true,
+                monospaceLinks:    true,
+                cleverLinks:       true,
                 outputSourceFiles: true
             }
         ));
