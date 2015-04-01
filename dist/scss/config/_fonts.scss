@@ -1,0 +1,51 @@
+// --------------------------------------------------------------------------------------------------------------- Monda
+
+@font-face {
+    font-family: "Monda";
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$root}font/monda.woff) format("woff");
+}
+
+@font-face {
+    font-family: "Monda";
+    font-style: normal;
+    font-weight: 700;
+    src: url(#{$root}font/monda-bold.woff) format("woff");
+}
+
+// ----------------------------------------------------------------------------------------------------------- Noto Sans
+
+@font-face {
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$root}font/noto-sans.woff) format("woff");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url(#{$root}font/noto-sans-bold.woff) format("woff");
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    font-style: italic;
+    font-weight: 400;
+    src: url(#{$root}font/noto-sans-italic.woff) format("woff");
+}
+
+// --------------------------------------------------------------------------------------------------------------- Icons
+
+@font-face {
+    font-family: 'icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$root}font/icons.eot?57225614);
+    src: url(#{$root}font/icons.eot?57225614#iefix) format('embedded-opentype'),
+         url(#{$root}font/icons.woff?57225614)      format('woff'),
+         url(#{$root}font/icons.ttf?57225614)       format('truetype'),
+         url(#{$root}font/icons.svg?57225614#icons) format('svg');
+}
