@@ -231,14 +231,14 @@
 
         mod.renderer
             .setUnit(40, 40)
-            .setCanvas($('canvas[data-scene="application"]')[0], 680, 680)
-            .setContext($('canvas[data-scene="application"]')[0].getContext("2d"));
+            .setCanvas(document.getElementById('myCanvas'), 680, 680)
+            .setContext(document.getElementById('myCanvas').getContext("2d"));
 
         priv.map = mod.map.getMap();
 
 
 
-        mod.perspectiveView.setCanvas($('canvas[data-scene="application"]')[0]);
+        mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
         /*mod.perspectiveView.setConfig({
             canvas:  $('canvas[data-scene="application"]')[0],
             context: $('canvas[data-scene="application"]')[0].getContext("2d"),
