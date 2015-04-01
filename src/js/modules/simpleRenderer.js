@@ -189,8 +189,8 @@
                     priv.context.fillStyle = 'rgb(50,50,50)';
                 }
                 else {
+                    //priv.context.fillStyle = 'rgb(255,255,255)';
                     priv.context.fillStyle = 'rgba(0,0,0,0.0)';
-                    priv.context.fillStyle = 'rgb(255,255,255)';
                 }
                 priv.context.fillRect(
                     (x * unitWidth),

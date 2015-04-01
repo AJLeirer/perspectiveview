@@ -139,7 +139,7 @@ body {
   font-family: "Noto Sans";
   font-weight: 200;
   font-size: 16px;
-  min-width: 1250px; }
+  min-width: 1000px; }
 
 .wrapper {
   min-height: 100%;
@@ -220,11 +220,11 @@ body {
   color: #eee;
   font-size: 50px;
   overflow: hidden;
-  padding-left: 400px; }
+  padding-left: 320px; }
   .content .sidebar.info, .content .sidebar.params {
     position: absolute;
     left: 0;
-    width: 400px;
+    width: 320px;
     height: 850px;
     background: rgba(0, 0, 0, 0.6);
     padding: 15px;
@@ -232,15 +232,15 @@ body {
     .content .sidebar.info h2, .content .sidebar.info h3, .content .sidebar.params h2, .content .sidebar.params h3 {
       font-family: "Monda";
       font-weight: 700;
-      font-size: 28px;
+      font-size: 26px;
       line-height: 120%;
       padding-bottom: 10px; }
     .content .sidebar.info h3, .content .sidebar.params h3 {
-      font-size: 20px; }
+      font-size: 18px; }
     .content .sidebar.info p, .content .sidebar.info label, .content .sidebar.info input, .content .sidebar.params p, .content .sidebar.params label, .content .sidebar.params input {
       font-family: "Noto Sans";
       font-weight: 400;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 150%;
       padding-bottom: 10px; }
     .content .sidebar.info strong, .content .sidebar.params strong {
