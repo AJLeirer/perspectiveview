@@ -35,7 +35,22 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Boolean}
      */
-    DEV_MODE = true;
+    DEV_MODE = true,
+
+
+
+    /**
+     * Contains the settings for DEV_MODE
+     *
+     * @private
+     * @alias DEV
+     * @memberof PerspectiveView
+     * @type {Object}
+     * @property {Boolean} abortOnError - Script will abort if an error occurs
+     */
+    DEV = {
+        abortOnError: false
+    };
 
 
 
@@ -79,7 +94,13 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Object}
      */
-    priv.defaults = {};
+    priv.defaults = {
+        unit: {
+            width:  32,
+            height: 32,
+            depth:  0.05
+        }
+    };
 
 
 
@@ -108,6 +129,25 @@ function PerspectiveView() {
 
 
 
+    /**
+     * Stores the size of an unit and the depth factor.
+     *
+     * @private
+     * @alias unit
+     * @memberof PerspectiveView
+     * @type {Object}
+     * @property {Number} width  - Width (size on x-axis) in px
+     * @property {Number} height - Height (size on y-axis) in px
+     * @property {Number} depth  - Depth (size on virtual z-axis) as factor
+     */
+    priv.unit = {
+        width:  0,
+        height: 0,
+        depth:  0
+    };
+
+
+
     // ------------------------------------------------------------------------------------------------ Public
 
 
@@ -117,6 +157,7 @@ function PerspectiveView() {
      *
      * @public
      * @function
+     * @ignore
      * @alias setConfig
      * @memberof PerspectiveView
      * @param {Object} configuration - Complete configuration object
@@ -140,7 +181,7 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Create an instance of PerspectiveView
+     *  // Creates an instance of PerspectiveView
      *  var pv = newPerspectiveView();
      *
      *  // Get HTML canvas element
@@ -151,8 +192,8 @@ function PerspectiveView() {
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
             if (!SELF.isHtmlCanvasElement(canvas)) {
-                console.error('Parameter <canvas> is not a valid HTML canvas element :: ', canvas);
-                return;
+                console.error('Parameter <canvas> is not a valid HTML canvas element :: ', '{' , typeof canvas, '} :: ', canvas);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
 
@@ -176,7 +217,7 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Create an instance of PerspectiveView
+     *  // Creates an instance of PerspectiveView
      *  var pv = newPerspectiveView();
      *
      *  // Get HTML canvas element
@@ -188,13 +229,62 @@ function PerspectiveView() {
     pub.setContext = function setContext(context) {
         if (DEV_MODE) {
             if (!SELF.isObject(context)) {
-                console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', context);
-                return;
+                console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', '{' , typeof context, '} :: ', context);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
 
         priv.context = context;
     };
+
+
+
+    /**
+     * Sets the size an unit. A unit is usually the size of a common tile.
+     *
+     * @public
+     * @function
+     * @alias setUnitSize
+     * @memberof PerspectiveView
+     * @param {Number} width  - Width (size on x-axis) of an unit/tile in px
+     * @param {Number} height - Height (size on y-axis) of an unit/tile in px
+     * @param {Number} depth  - Depth  (size on virtual z-axis) of an unit/tile as factor
+     * @return {void}
+     *
+     * @example
+     *  // Creates an instance of PerspectiveView
+     *  var pv = newPerspectiveView();
+     *
+     *  // Sizes of a tile
+     *  var width  = 50;   // px
+     *  var height = 50;   // px
+     *  var depth  = 0.05; // as factor
+     *
+     *  pv.setUnitSize(width, height, depth);
+     */
+    pub.setUnitSize = function setUnitSize(width, height, depth) {
+        if (DEV_MODE) {
+            if (!SELF.isSize(width)) {
+                console.error('Parameter <width> is not a valid size :: ', '{' , typeof width, '} :: ', width);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+
+            if (!SELF.isSize(height)) {
+                console.error('Parameter <height> is not a valid size :: ', '{' , typeof width, '} :: ', height);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+
+            if (!SELF.isSize(depth)) {
+                console.error('Parameter <depth> is not a valid size :: ', '{' , typeof depth, '} :: ', depth);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.unit.width  = Number(width);
+        priv.unit.height = Number(height);
+        priv.unit.depth  = Number(depth);
+    };
+
 
 
     // ------------------------------------------------------------------------------------------------ Return
