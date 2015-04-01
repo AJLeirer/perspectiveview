@@ -5,11 +5,11 @@
     "version":      "0.1.0",
     "author" : {
         "name" : "Danny Grübl",
-        "url" :  "https://github.com/hans-sperling/perspectiveview/blob/master/AUTHORS.txt"
+        "url" :  "https://github.com/perspectiveview/perspectiveview/blob/master/AUTHORS.txt"
     },
     "repository" : {
         "type" : "git",
-        "url" :  "https://github.com/hans-sperling/perspectiveview"
+        "url" :  "https://github.com/perspectiveview/perspectiveview"
     },
     "keywords" : [
         "perpective view",
@@ -19,17 +19,18 @@
         "library"
     ],
     "bugs" : {
-        "url" :   "https://github.com/jquery/jquery/issues",
+        "url" :   "https://github.com/perspectiveview/perspectiveview/issues",
         "email" : "perspectiveview@bluejade.de"
     },
     "licenses" : [{
         "type" : "MIT",
-        "url" :  "https://github.com/hans-sperling/perspectiveview/blob/master/LICENSE.txt"
+        "url" :  "https://github.com/perspectiveview/perspectiveview/blob/master/LICENSE.txt"
     }],
     "dependencies" : {},
     "devDependencies" : {
-        "gulp" :       "latest",
-        "gulp-sass" :  "latest",
-        "gulp-jsdoc" : "latest"
+        "gulp" :         "latest",
+        "gulp-sass" :    "latest",
+        "gulp-jsdoc" :   "latest",
+        "ink-docstrap" : "latest"
     }
 }
