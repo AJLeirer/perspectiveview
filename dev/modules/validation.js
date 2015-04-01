@@ -57,3 +57,54 @@ PerspectiveView.prototype.isNumber = function isNumber(value) {
 PerspectiveView.prototype.isSize = function isSize(value) {
     return (this.isNumber(value) && (value >= 0));
 };
+
+
+
+/**
+ * Checks if the given value is a valid coordinate.
+ * Value must be of type object including properties x and y of type number and they must be greater or equal than zero.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isCoordinate
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isCoordinate = function isCoordinate(value) {
+    return ((this.isObject(value)) &&
+            (this.isNumber(value.x)) &&
+            (this.isNumber(value.y)));
+};
+
+
+
+/**
+ * Checks if the given value is a valid cell.
+ * Value must be of type object including properties x and y of type number and they must be greater or equal than zero.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isCell
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isCell = function isCell(value) {
+    return ((this.isObject(value)) &&
+    (this.isNumber(value.x)) &&
+    (this.isNumber(value.x)));
+};
+
+
+
+/**
+ * Checks if the given value is undefined.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isNotSet
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isNotSet = function isNotSet(value) {
+    return (!(value));
+};
