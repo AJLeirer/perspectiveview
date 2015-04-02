@@ -337,7 +337,7 @@ function PerspectiveView() {
      *     [1, 0, 0, 0, 1],
      *     [1, 0, 1, 1, 1],
      *     [1, 0, 0, 0, 1],
-     *     [1, 1, 1, 1, 1],
+     *     [1, 1, 1, 1, 1]
      * ];
      *
      * // Set map as new map
@@ -545,7 +545,7 @@ function PerspectiveView() {
      * // ...
      *
      * // Get canvas element
-     * pv.getCanvas(); // Returns {} or the set <canvas> element
+     * pv.getCanvas(); // Returns <canvas>
      */
     pub.getCanvas = function getCanvas() {
         return priv.canvas;
@@ -569,10 +569,50 @@ function PerspectiveView() {
      * // ...
      *
      * // Get config object
-     * pv.getConfig(); // Returns {...}
+     * pv.getConfig(); // Returns {
+     *                 //     canvas:  <canvas>,
+     *                 //     context: {...},
+     *                 //     map:     [[1, 1, 1, 1, 1],
+     *                 //               [1, 0, 0, 0, 1],
+     *                 //               [1, 0, 1, 1, 1],
+     *                 //               [1, 0, 0, 0, 1],
+     *                 //               [1, 1, 1, 1, 1]],
+     *                 //     renderMode: 'flat',
+     *                 //     unitSize: {
+     *                 //         width:  50,
+     *                 //         height: 50,
+     *                 //         depth:  0.05
+     *                 //     },
+     *                 //     vanishingPoint: {
+     *                 //         x: 225,
+     *                 //         y: 175
+     *                 //     },
+     *                 //     vanishingCell: {
+     *                 //         x: 4,
+     *                 //         y: 3
+     *                 //     }
+     *                 // }
      */
     pub.getConfig = function getConfig() {
-        return {}; // todo
+        return {
+            canvas:     priv.canvas,
+            context:    priv.context,
+            map:        priv.map,
+            renderMode: priv.renderMode,
+            unitSize: {
+                width:  priv.unit.width,
+                height: priv.unit.height,
+                depth:  priv.unit.depth
+            },
+            vanishingPoint: {
+                x: priv.vanishingPoint.x,
+                y: priv.vanishingPoint.y
+            },
+            vanishingCell: {
+                x: priv.vanishingCell.x,
+                y: priv.vanishingCell.y
+            }
+        };
     };
 
 
@@ -593,7 +633,7 @@ function PerspectiveView() {
      * // ...
      *
      * // Get context object
-     * pv.getContext(); // Returns {} or the set context of the <canvas> element
+     * pv.getContext(); // Returns context of <canvas>
      */
     pub.getContext = function getContext() {
         return priv.context;
@@ -617,7 +657,11 @@ function PerspectiveView() {
      * // ...
      *
      * // Get map array
-     * pv.getMap(); // Returns []
+     * pv.getMap(); // Returns [[1, 1, 1, 1, 1],
+     *              //          [1, 0, 0, 0, 1],
+     *              //          [1, 0, 1, 1, 1],
+     *              //          [1, 0, 0, 0, 1],
+     *              //          [1, 1, 1, 1, 1]]
      */
     pub.getMap = function getMap() {
         return priv.map;
@@ -640,7 +684,7 @@ function PerspectiveView() {
      *
      * // ...
      *
-     * // Get render mode as string
+     * // Get render mode
      * pv.getRenderMode(); // Returns 'flat'
      */
     pub.getRenderMode = function getRenderMode() {
@@ -665,7 +709,7 @@ function PerspectiveView() {
      * // ...
      *
      * // Get size object of a unit
-     * pv.getUnitSize(); // Returns {width: 0, height: 0, depth: 0}
+     * pv.getUnitSize(); // Returns {width: 50, height: 50, depth: 0.05}
      */
     pub.getUnitSize = function getUnitSize() {
         return {
