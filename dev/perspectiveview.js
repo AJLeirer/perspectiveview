@@ -82,7 +82,7 @@ function PerspectiveView() {
 
 
 
-    // ----------------------------------------------------------------------------------------------- Private
+    // ---------------------------------------------------------------------------------------------- Defaults
 
 
 
@@ -116,6 +116,10 @@ function PerspectiveView() {
 
 
 
+    // ----------------------------------------------------------------------------------------------- Private
+
+
+
     /**
      * Stores the necessary HTML canvas element to set by user.
      *
@@ -137,60 +141,7 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Object}
      */
-    priv.canvas = {};
-
-
-
-    /**
-     * Stores the size of an unit and the depth factor.
-     *
-     * @private
-     * @alias unit
-     * @memberof PerspectiveView
-     * @type {Object}
-     * @property {Number} width  - Width (size on x-axis) in px
-     * @property {Number} height - Height (size on y-axis) in px
-     * @property {Number} depth  - Depth (size on virtual z-axis) as factor
-     */
-    priv.unit = {
-        width:  0,
-        height: 0,
-        depth:  0
-    };
-
-
-
-    /**
-     * Stores the coordinate of the vanishing point needs to draw perspective objects.
-     *
-     * @private
-     * @alias vanishingPoint
-     * @memberof PerspectiveView
-     * @type {Object}
-     * @property {Number} x - Position on x-axis in px
-     * @property {Number} y - Position on y-axis in px
-     */
-    priv.vanishingPoint = {
-        x: 0,
-        y: 0
-    };
-
-
-
-    /**
-     * Stores the current cell in which the vanishing point is located.
-     *
-     * @private
-     * @alias vanishingCell
-     * @memberof PerspectiveView
-     * @type {Object}
-     * @property {Number} x - Cell on x-axis in units/tiles.
-     * @property {Number} y - Cell on y-axis in units/tiles.
-     */
-    priv.vanishingCell = {
-        x: 0,
-        y: 0
-    };
+    priv.context = {};
 
 
 
@@ -214,6 +165,59 @@ function PerspectiveView() {
      * @type {string}
      */
     priv.renderMode = '';
+
+
+
+    /**
+     * Stores the size of an unit and the depth factor.
+     *
+     * @private
+     * @alias unit
+     * @memberof PerspectiveView
+     * @type {Object}
+     * @property {Number} width  - Width (size on x-axis) in px
+     * @property {Number} height - Height (size on y-axis) in px
+     * @property {Number} depth  - Depth (size on virtual z-axis) as factor
+     */
+    priv.unit = {
+        width:  0,
+        height: 0,
+        depth:  0
+    };
+
+
+
+    /**
+     * Stores the current cell in which the vanishing point is located.
+     *
+     * @private
+     * @alias vanishingCell
+     * @memberof PerspectiveView
+     * @type {Object}
+     * @property {Number} x - Cell on x-axis in units/tiles.
+     * @property {Number} y - Cell on y-axis in units/tiles.
+     */
+    priv.vanishingCell = {
+        x: 0,
+        y: 0
+    };
+
+
+
+    /**
+     * Stores the coordinate of the vanishing point needs to draw perspective objects.
+     *
+     * @private
+     * @alias vanishingPoint
+     * @memberof PerspectiveView
+     * @type {Object}
+     * @property {Number} x - Position on x-axis in px
+     * @property {Number} y - Position on y-axis in px
+     */
+    priv.vanishingPoint = {
+        x: 0,
+        y: 0
+    };
 
 
 
