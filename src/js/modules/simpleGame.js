@@ -239,9 +239,11 @@
 
 
         mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
-        mod.perspectiveView.setUnitSize(50, 50, 0.05);
-        mod.perspectiveView.setVanishingPoint({x: 225, y: 175});
+        mod.perspectiveView.setContext(document.getElementById('myCanvas').getContext('2d'));
+        mod.perspectiveView.setUnitSize(40, 40, 0.05);
+        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
         mod.perspectiveView.setMap(priv.map);
+        mod.perspectiveView.setRenderMode('flat');
 
 
 

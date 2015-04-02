@@ -108,7 +108,8 @@ function PerspectiveView() {
             x: 0,
             y: 0
         },
-        map: [[0]]
+        map: [[0]],
+        renderMode: 'flat'
     };
 
 
@@ -203,6 +204,13 @@ function PerspectiveView() {
      * @type {Array}
      */
     priv.map = [];
+
+
+    /**
+     *
+     * @type {string}
+     */
+    priv.renderMode = '';
 
 
 
@@ -456,6 +464,32 @@ function PerspectiveView() {
 
         priv.map = map;
     };
+
+
+
+    /**
+     * Sets the type/mode of rendering.
+     * Value must be a string in lower cases. Valid modes: [flat]
+     *
+     * @public
+     * @function
+     * @alias setRenderMode
+     * @memberof PerspectiveView
+     * @param {String} mode
+     * @return {void}
+     */
+    pub.setRenderMode = function setRenderMode(mode) {
+        if (DEV_MODE) {
+            if (!SELF.isRenderMode(mode)) {
+                console.error('Parameter <mode> is not a valid rendering mode :: ', '{' , typeof mode, '} :: ', mode);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.renderMode = mode.toString().toLowerCase();
+    };
+
+
 
     // -------------------------------------------------------------------------------------- Getter
 

@@ -123,3 +123,33 @@ PerspectiveView.prototype.isArray = function isArray(value) {
 PerspectiveView.prototype.isMap = function isMap(value) {
     return (this.isArray(value) && value.length > 0 && this.isArray(value[0]) && value[0].length > 0);
 };
+
+
+
+/**
+ * Checks if the given value is a string.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isString
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isString= function isString(value) {
+    return ((typeof value === 'string'));
+};
+
+
+
+/**
+ * Checks if the given value is a valid rendering mode.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isRenderMode
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isRenderMode = function isRenderMode(value) {
+    return (this.isString(value) && (value === 'flat'));
+};
