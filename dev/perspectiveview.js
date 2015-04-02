@@ -271,7 +271,7 @@ function PerspectiveView() {
      * @return {void}
      */
     pub.setConfig = function setConfig(configuration) {
-
+        // todo
     };
 
 
@@ -545,6 +545,30 @@ function PerspectiveView() {
      */
     pub.getCanvas = function getCanvas() {
         return priv.canvas;
+    };
+
+
+
+    /**
+     * Returns an object of the current configuration.
+     *
+     * @public
+     * @function
+     * @alias getConfig
+     * @memberof PerspectiveView
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // [...]
+     *
+     * // Get canvas
+     * pv.getConfig(); // Returns {...}
+     */
+    pub.getConfig = function getConfig() {
+        return {}; // todo
     };
 
 
