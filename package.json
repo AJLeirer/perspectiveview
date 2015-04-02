@@ -30,7 +30,7 @@
     "devDependencies" : {
         "gulp" :         "latest",
         "gulp-sass" :    "latest",
-        "gulp-jsdoc" :   "latest",
+        "jsdoc" :        "latest",
         "ink-docstrap" : "latest"
     }
 }
