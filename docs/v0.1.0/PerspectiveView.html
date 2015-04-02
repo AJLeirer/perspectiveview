@@ -1360,23 +1360,23 @@ z-axis).
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Sizes of a tile
- var width  = 50;   // px
- var height = 50;   // px
- var depth  = 0.05; // as factor
+// Sizes of a tile
+var width  = 50;   // px
+var height = 50;   // px
+var depth  = 0.05; // as factor
 
- pv.setUnitSize(width, height, depth);
+pv.setUnitSize(width, height, depth);
 
- // Set coordinate to get vanishing cell from
- var coordinate = {
-     x: 225; // px
-     y: 175; // px
- };
+// Set coordinate to get vanishing cell from
+var coordinate = {
+    x: 225; // px
+    y: 175; // px
+};
 
- // Get vanishing cell of the given parameter coordinate
- getVanishingCell(coordinate); // Returns { x: 4, y: 3 }</pre>
+// Get vanishing cell of the given parameter coordinate
+getVanishingCell(coordinate); // Returns { x: 4, y: 3 }</pre>
 
 
     
@@ -3060,13 +3060,13 @@ VValue must be of type number and must be greater or equal than zero.
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Get HTML canvas element
- var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
+// Get HTML canvas element
+var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
 
- // Set myCanvas as new canvas
- pv.setCanvas(myCanvas);</pre>
+// Set myCanvas as new canvas
+pv.setCanvas(myCanvas);</pre>
 
 
     
@@ -3224,14 +3224,14 @@ Automatically the context is set as 2d.
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Get HTML canvas element and its context
- var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
- var context  = myCanvas.getContext(&#x27;2d&#x27;);
+// Get HTML canvas element and its context
+var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
+var context  = myCanvas.getContext(&#x27;2d&#x27;);
 
- // Set context as new context
- pv.setContext(context);</pre>
+// Set context as new context
+pv.setContext(context);</pre>
 
 
     
@@ -3390,19 +3390,19 @@ will be rendered as a cuboid.
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Simple map 5 x 5 units/tiles
- var map = [
-     [1, 1, 1, 1, 1],
-     [1, 0, 0, 0, 1],
-     [1, 0, 1, 1, 1],
-     [1, 0, 0, 0, 1],
-     [1, 1, 1, 1, 1],
- ];
+// Simple map 5 x 5 units/tiles
+var map = [
+    [1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1],
+    [1, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1],
+];
 
- // Set map as new map
- pv.setMap(map);</pre>
+// Set map as new map
+pv.setMap(map);</pre>
 
 
     
@@ -3560,13 +3560,13 @@ Value must be a string in lower cases. Valid modes: [flat]
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Mode to be set as rendering mode. Should be written in lower cases!
- var mode = &#x27;flat&#x27;;
+// Mode to be set as rendering mode. Should be written in lower cases!
+var mode = &#x27;flat&#x27;;
 
- // Set mode as new render mode
- pv.setRenderMode(mode);</pre>
+// Set mode as new render mode
+pv.setRenderMode(mode);</pre>
 
 
     
@@ -3769,15 +3769,15 @@ Value must be a string in lower cases. Valid modes: [flat]
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Sizes of a tile
- var width  = 50;   // px
- var height = 50;   // px
- var depth  = 0.05; // as factor
+// Sizes of a tile
+var width  = 50;   // px
+var height = 50;   // px
+var depth  = 0.05; // as factor
 
- // Set width, height and depth as new unit sizes
- pv.setUnitSize(width, height, depth);</pre>
+// Set width, height and depth as new unit sizes
+pv.setUnitSize(width, height, depth);</pre>
 
 
     
@@ -4006,16 +4006,16 @@ Value must be a string in lower cases. Valid modes: [flat]
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Cell to be set as vanishing cell
- var cell = {
-     x: 4; // Position on x-axis in the grid
-     y: 3; // Position on y-axis in the grid
- };
+// Cell to be set as vanishing cell
+var cell = {
+    x: 4; // Position on x-axis in the grid
+    y: 3; // Position on y-axis in the grid
+};
 
- // Set cell as new vanishing cell
- pv.setVanishingCell(cell);</pre>
+// Set cell as new vanishing cell
+pv.setVanishingCell(cell);</pre>
 
 
     
@@ -4244,16 +4244,16 @@ Value must be a string in lower cases. Valid modes: [flat]
         <h5>Example</h5>
         
     <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
- var pv = newPerspectiveView();
+var pv = newPerspectiveView();
 
- // Coordinate to be set as vanishing point
- var coordinate = {
-     x: 225; // px
-     y: 175; // px
- };
+// Coordinate to be set as vanishing point
+var coordinate = {
+    x: 225; // px
+    y: 175; // px
+};
 
- // Set coordinate as new vanishing point
- pv.setVanishingPoint(coordinate);</pre>
+// Set coordinate as new vanishing point
+pv.setVanishingPoint(coordinate);</pre>
 
 
     
@@ -4300,7 +4300,7 @@ Value must be a string in lower cases. Valid modes: [flat]
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on 2015-04-02T21:36:06+02:00 using the <a
+	on 2015-04-02T21:39:58+02:00 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
