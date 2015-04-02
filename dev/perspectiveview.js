@@ -493,6 +493,16 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @param {String} mode
      * @return {void}
+     *
+     * @example
+     *  // Creates an instance of PerspectiveView
+     *  var pv = newPerspectiveView();
+     *
+     *  // Mode to be set as rendering mode. Should be written in lower cases!
+     *  var mode = 'flat';
+     *
+     *  // Set mode as new render mode
+     *  pv.setRenderMode(mode);
      */
     pub.setRenderMode = function setRenderMode(mode) {
         if (DEV_MODE) {
