@@ -626,6 +626,30 @@ function PerspectiveView() {
 
 
     /**
+     * Returns the rendering mode as string.
+     *
+     * @public
+     * @function
+     * @alias getRenderMode
+     * @memberof PerspectiveView
+     * @return {String}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // [...]
+     *
+     * // Get render mode as string
+     * pv.getRenderMode(); // Returns 'flat'
+     */
+    pub.getRenderMode = function getRenderMode() {
+        return priv.renderMode;
+    };
+
+
+
+    /**
      * Returns the current vanishing cell of the given coordinate.
      *
      * @public
