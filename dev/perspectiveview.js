@@ -526,7 +526,7 @@ function PerspectiveView() {
 
 
     /**
-     * Returns the HTML canvas element
+     * Returns the HTML canvas element.
      *
      * @public
      * @function
@@ -540,11 +540,35 @@ function PerspectiveView() {
      *
      * // [...]
      *
-     * // Get
+     * // Get canvas
      * pv.getCanvas(); // Returns {} or the set <canvas> element
      */
-    pub.getCanvas = function() {
+    pub.getCanvas = function getCanvas() {
         return priv.canvas;
+    };
+
+
+
+    /**
+     * Returns the context of the HTML canvas element.
+     *
+     * @public
+     * @function
+     * @alias getContext
+     * @memberof PerspectiveView
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // [...]
+     *
+     * // Get context
+     * pv.getContext(); // Returns {} or the set context of the <canvas> element
+     */
+    pub.getContext = function getContext() {
+        return priv.context;
     };
 
 
