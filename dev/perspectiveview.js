@@ -540,7 +540,7 @@ function PerspectiveView() {
      *
      * // [...]
      *
-     * // Get canvas
+     * // Get canvas element
      * pv.getCanvas(); // Returns {} or the set <canvas> element
      */
     pub.getCanvas = function getCanvas() {
@@ -564,7 +564,7 @@ function PerspectiveView() {
      *
      * // [...]
      *
-     * // Get canvas
+     * // Get config object
      * pv.getConfig(); // Returns {...}
      */
     pub.getConfig = function getConfig() {
@@ -588,11 +588,35 @@ function PerspectiveView() {
      *
      * // [...]
      *
-     * // Get context
+     * // Get context object
      * pv.getContext(); // Returns {} or the set context of the <canvas> element
      */
     pub.getContext = function getContext() {
         return priv.context;
+    };
+
+
+
+    /**
+     * Returns the map array.
+     *
+     * @public
+     * @function
+     * @alias getMap
+     * @memberof PerspectiveView
+     * @return {Array}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // [...]
+     *
+     * // Get map array
+     * pv.getMap(); // Returns [...]
+     */
+    pub.getMap = function getMap() {
+        return priv.map;
     };
 
 
