@@ -542,7 +542,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get canvas element
      * pv.getCanvas(); // Returns {} or the set <canvas> element
@@ -566,7 +566,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get config object
      * pv.getConfig(); // Returns {...}
@@ -590,7 +590,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get context object
      * pv.getContext(); // Returns {} or the set context of the <canvas> element
@@ -614,7 +614,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get map array
      * pv.getMap(); // Returns [...]
@@ -638,7 +638,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get render mode as string
      * pv.getRenderMode(); // Returns 'flat'
@@ -662,7 +662,7 @@ function PerspectiveView() {
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // [...]
+     * // ...
      *
      * // Get size object of a unit
      * pv.getUnitSize(); // Returns {width: 0, height: 0, depth: 0}
