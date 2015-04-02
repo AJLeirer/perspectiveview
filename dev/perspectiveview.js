@@ -268,7 +268,6 @@ function PerspectiveView() {
      *
      * @public
      * @function
-     * @ignore
      * @alias setConfig
      * @memberof PerspectiveView
      * @param {Object} configuration - Complete configuration object
