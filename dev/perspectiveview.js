@@ -107,7 +107,8 @@ function PerspectiveView() {
         vanishingCell: {
             x: 0,
             y: 0
-        }
+        },
+        map: [[0]]
     };
 
 
@@ -190,7 +191,23 @@ function PerspectiveView() {
 
 
 
+    /**
+     * Stores the map or just a part of the users map.
+     * A map is a 2d array containing number values. A zero marks a free/accessible unit/tile, a number higher than zero
+     * is a blocked unit/tile and will rendered as a cuboid where the number declares the depth (size on virtual
+     * z-axis).
+     *
+     * @private
+     * @alias map
+     * @memberof PerspectiveView
+     * @type {Array}
+     */
+    priv.map = [];
+
+
+
     // ------------------------------------------------------------------------------------------------ Public
+    // -------------------------------------------------------------------------------------- Setter
 
 
 
@@ -417,6 +434,34 @@ function PerspectiveView() {
     };
 
 
+    /**
+     * Sets the map or just a part of the map.
+     * A valid map must be a 2d array of numbers, where zero will not be rendered and all numbers greater than zero
+     * will be rendered as a cuboid.
+     *
+     * @public
+     * @function
+     * @alias setMap
+     * @memberof PerspectiveView
+     * @param {Array} map
+     * @return {void}
+     */
+    pub.setMap = function setMap(map) {
+        if (DEV_MODE) {
+            if (!SELF.isMap(map)) {
+                console.error('Parameter <map> is not a valid map :: ', '{' , typeof map, '} :: ', map);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.map = map;
+
+        console.log(priv.map);
+    };
+
+    // -------------------------------------------------------------------------------------- Getter
+
+
 
     /**
      * Returns the current vanishing cell of the given coordinate.
@@ -465,6 +510,8 @@ function PerspectiveView() {
             y: Math.floor(Number(coordinate.y) / priv.unit.height)
         };
     };
+
+
 
     // ------------------------------------------------------------------------------------------------ Return
 

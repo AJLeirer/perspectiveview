@@ -108,3 +108,35 @@ PerspectiveView.prototype.isCell = function isCell(value) {
 PerspectiveView.prototype.isNotSet = function isNotSet(value) {
     return (!(value));
 };
+
+
+
+
+/**
+ * Checks if the given value is an array
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isArray
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isArray = function isArray(value) {
+    return ((typeof value === 'object'));
+};
+
+
+
+
+/**
+ * Checks if the given value is a valid map.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isMap
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isMap = function isMap(value) {
+    return (this.isArray(value) && value.length > 0 && this.isArray(value[0]) && value[0].length > 0);
+};
