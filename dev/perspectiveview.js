@@ -650,6 +650,34 @@ function PerspectiveView() {
 
 
     /**
+     * Returns the size of a unit/tile.
+     *
+     * @public
+     * @function
+     * @alias getUnitSize
+     * @memberof PerspectiveView
+     * @return {{width: {Number}, height: ({Number}, depth: {Number}}}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // [...]
+     *
+     * // Get size object of a unit
+     * pv.getUnitSize(); // Returns {width: 0, height: 0, depth: 0}
+     */
+    pub.getUnitSize = function getUnitSize() {
+        return {
+            width:  priv.unit.width,
+            height: priv.unit.height,
+            depth:  priv.unit.depth
+        };
+    };
+
+
+
+    /**
      * Returns the current vanishing cell of the given coordinate.
      *
      * @public
