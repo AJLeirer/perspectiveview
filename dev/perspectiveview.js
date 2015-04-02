@@ -242,10 +242,10 @@ function PerspectiveView() {
      * var pv = newPerspectiveView();
      *
      * // Get HTML canvas element
-     * var myCanvas = document.getElementById('myCanvas');
+     * var canvas = document.getElementById('myCanvas');
      *
-     * // Set myCanvas as new canvas
-     * pv.setCanvas(myCanvas);
+     * // Set canvas as new canvas
+     * pv.setCanvas(canvas);
      */
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
@@ -273,9 +273,65 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @param {Object} configuration - Complete configuration object
      * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Set a valid config
+     * pv.setConfig({
+     *     canvas: document.getElementById('myCanvas'),
+     *     map: [
+     *         [1, 1, 1, 1, 1],
+     *         [1, 0, 0, 0, 1],
+     *         [1, 0, 1, 1, 1],
+     *         [1, 0, 0, 0, 1],
+     *         [1, 1, 1, 1, 1]
+     *     ],
+     *     renderMode: 'flat',
+     *     unitSize: {
+     *         width:  50,
+     *         height: 50,
+     *         depth:  0.05
+     *     },
+     *     vanishingPoint: {
+     *         x: 225,
+     *         y: 175
+     *     }
+     * });
      */
     pub.setConfig = function setConfig(configuration) {
-        // todo
+        var config         = typeof configuration         === 'object' ? configuration         : {},
+            unitSize       = typeof config.unitSize       === 'object' ? config.unitSize       : {},
+            vanishingPoint = typeof config.vanishingPoint === 'object' ? config.vanishingPoint : {},
+            vanishingCell  = typeof config.vanishingCell  === 'object' ? config.vanishingCell  : {};
+
+        config = {
+            canvas:     config.canvas     !== undefined ? config.canvas     : priv.canvas,
+            context:    config.context    !== undefined ? config.context    : priv.context,
+            map:        config.map        !== undefined ? config.map        : priv.map,
+            renderMode: config.renderMode !== undefined ? config.renderMode : priv.renderMode,
+            unitSize: {
+                width:  unitSize.width  !== undefined ? unitSize.width  : priv.unit.width,
+                height: unitSize.height !== undefined ? unitSize.height : priv.unit.height,
+                depth:  unitSize.depth  !== undefined ? unitSize.depth  : priv.unit.depth
+            },
+            vanishingPoint: {
+                x: vanishingPoint.x !== undefined ? vanishingPoint.x : priv.vanishingPoint.x,
+                y: vanishingPoint.y !== undefined ? vanishingPoint.y : priv.vanishingPoint.y
+            },
+            vanishingCell: {
+                x: vanishingCell.x !== undefined ? vanishingCell.x : priv.vanishingCell.x,
+                y: vanishingCell.y !== undefined ? vanishingCell.y : priv.vanishingCell.y
+            }
+        };
+
+        pub.setCanvas(config.canvas);
+        pub.setContext(config.context);
+        pub.setMap(config.map);
+        pub.setUnitSize(config.unitSize.width, config.unitSize.height, config.unitSize.depth);
+        pub.setVanishingPoint(config.vanishingPoint);
+        pub.setVanishingCell(config.vanishingCell);
     };
 
 
@@ -467,7 +523,7 @@ function PerspectiveView() {
     pub.setVanishingCell = function setVanishingCell(cell) {
         if (DEV_MODE) {
             if (!SELF.isCell(cell)) {
-                console.error('Parameter <unit> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
+                console.error('Parameter <cell> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
@@ -760,8 +816,6 @@ function PerspectiveView() {
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
-
-        coordinate = coordinate || {};
 
         return {
             x: Math.floor(Number(coordinate.x) / priv.unit.width),

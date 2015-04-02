@@ -235,18 +235,37 @@
             .setContext(document.getElementById('myCanvas').getContext("2d"));
 
         priv.map = mod.map.getMap();
-
-
-
+/*
         mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
         mod.perspectiveView.setContext(document.getElementById('myCanvas').getContext('2d'));
-        mod.perspectiveView.setUnitSize(40, 40, 0.05);
-        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
         mod.perspectiveView.setMap(priv.map);
+        mod.perspectiveView.setUnitSize(40, 40, 0.05);
         mod.perspectiveView.setRenderMode('flat');
-
-
-
+        mod.perspectiveView.setVanishingCell({x: 7, y: 5});
+        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
+*/
+/*
+        mod.perspectiveView.setConfig({
+            canvas:   document.getElementById('myCanvas'),
+            context:  document.getElementById('myCanvas').getContext('2d'),
+            map:      priv.map,
+            unitSize: {
+                width:  40,
+                height: 40,
+                depth: 0.05
+            },
+            renderMode: 'flat',
+            vanishingCell: {
+                x: 7,
+                y: 5
+            },
+            vanishingPoint: {
+                x: 260,
+                y: 180
+            }
+        });
+*/
+/*
         mod.perspectiveView.setConfig({
             canvas:  document.getElementById('myCanvas'),
             unit: {
@@ -260,7 +279,7 @@
             },
             map: priv.map
         });
-
+*/
         pub.start();
     };
 
