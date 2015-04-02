@@ -97,22 +97,6 @@ PerspectiveView.prototype.isCell = function isCell(value) {
 
 
 /**
- * Checks if the given value is undefined.
- *
- * @function
- * @memberof PerspectiveView
- * @alias isNotSet
- * @param {*} value
- * @return {Boolean}
- */
-PerspectiveView.prototype.isNotSet = function isNotSet(value) {
-    return (!(value));
-};
-
-
-
-
-/**
  * Checks if the given value is an array
  *
  * @function
@@ -124,7 +108,6 @@ PerspectiveView.prototype.isNotSet = function isNotSet(value) {
 PerspectiveView.prototype.isArray = function isArray(value) {
     return ((typeof value === 'object'));
 };
-
 
 
 

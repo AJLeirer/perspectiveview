@@ -455,8 +455,6 @@ function PerspectiveView() {
         }
 
         priv.map = map;
-
-        console.log(priv.map);
     };
 
     // -------------------------------------------------------------------------------------- Getter
