@@ -656,7 +656,7 @@ function PerspectiveView() {
      * @function
      * @alias getUnitSize
      * @memberof PerspectiveView
-     * @return {{width: {Number}, height: ({Number}, depth: {Number}}}
+     * @return {{width: priv.unit.width, height: priv.unit.height, depth: priv.unit.depth}}
      *
      * @example
      * // Creates an instance of PerspectiveView
@@ -725,6 +725,32 @@ function PerspectiveView() {
         };
     };
 
+
+
+    /**
+     * Returns the vanishing point.
+     *
+     * @public
+     * @function
+     * @alias getVanishingPoint
+     * @memberof PerspectiveView
+     * @return {{x: Number, y: Number}}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get vanishing point
+     * getVanishingPoint(); // Returns { x: 225, y: 175 }
+     */
+    pub.getVanishingPoint = function getVanishingPoint() {
+        return {
+            x: priv.vanishingPoint.x,
+            y: priv.vanishingPoint.y
+        };
+    };
 
 
     // ------------------------------------------------------------------------------------------------ Return
