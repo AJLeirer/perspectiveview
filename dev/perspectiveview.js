@@ -617,7 +617,7 @@ function PerspectiveView() {
      * // ...
      *
      * // Get map array
-     * pv.getMap(); // Returns [...]
+     * pv.getMap(); // Returns []
      */
     pub.getMap = function getMap() {
         return priv.map;
