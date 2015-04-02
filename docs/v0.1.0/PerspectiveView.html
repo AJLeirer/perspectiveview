@@ -1244,7 +1244,7 @@ var pv = newPerspectiveView();
 // ...
 
 // Get canvas element
-pv.getCanvas(); // Returns {} or the set &lt;canvas&gt; element</pre>
+pv.getCanvas(); // Returns &lt;canvas&gt;</pre>
 
 
     
@@ -1357,7 +1357,29 @@ var pv = newPerspectiveView();
 // ...
 
 // Get config object
-pv.getConfig(); // Returns {...}</pre>
+pv.getConfig(); // Returns {
+                //     canvas:  &lt;canvas&gt;,
+                //     context: {...},
+                //     map:     [[1, 1, 1, 1, 1],
+                //               [1, 0, 0, 0, 1],
+                //               [1, 0, 1, 1, 1],
+                //               [1, 0, 0, 0, 1],
+                //               [1, 1, 1, 1, 1]],
+                //     renderMode: &#x27;flat&#x27;,
+                //     unitSize: {
+                //         width:  50,
+                //         height: 50,
+                //         depth:  0.05
+                //     },
+                //     vanishingPoint: {
+                //         x: 225,
+                //         y: 175
+                //     },
+                //     vanishingCell: {
+                //         x: 4,
+                //         y: 3
+                //     }
+                // }</pre>
 
 
     
@@ -1470,7 +1492,7 @@ var pv = newPerspectiveView();
 // ...
 
 // Get context object
-pv.getContext(); // Returns {} or the set context of the &lt;canvas&gt; element</pre>
+pv.getContext(); // Returns context of &lt;canvas&gt;</pre>
 
 
     
@@ -1583,7 +1605,11 @@ var pv = newPerspectiveView();
 // ...
 
 // Get map array
-pv.getMap(); // Returns [...]</pre>
+pv.getMap(); // Returns [[1, 1, 1, 1, 1],
+             //          [1, 0, 0, 0, 1],
+             //          [1, 0, 1, 1, 1],
+             //          [1, 0, 0, 0, 1],
+             //          [1, 1, 1, 1, 1]]</pre>
 
 
     
@@ -1695,7 +1721,7 @@ var pv = newPerspectiveView();
 
 // ...
 
-// Get render mode as string
+// Get render mode
 pv.getRenderMode(); // Returns &#x27;flat&#x27;</pre>
 
 
@@ -1809,7 +1835,7 @@ var pv = newPerspectiveView();
 // ...
 
 // Get size object of a unit
-pv.getUnitSize(); // Returns {width: 0, height: 0, depth: 0}</pre>
+pv.getUnitSize(); // Returns {width: 50, height: 50, depth: 0.05}</pre>
 
 
     
@@ -3676,6 +3702,108 @@ getVanishingPoint(); // Returns { x: 225, y: 175 }</pre>
         
             
 <dt>
+    <h4 class="name" id=".priv.init"><span class="type-signature">&lt;static> </span>priv.init<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Constructor, will be called if a new instance of PerspectiveView has been initialized.
+Sets the default values.
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id=".setCanvas"><span class="type-signature">&lt;static> </span>setCanvas<span class="signature">(canvas, canvas)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
@@ -3850,10 +3978,189 @@ getVanishingPoint(); // Returns { x: 225, y: 175 }</pre>
 var pv = newPerspectiveView();
 
 // Get HTML canvas element
-var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
+var canvas = document.getElementById(&#x27;myCanvas&#x27;);
 
-// Set myCanvas as new canvas
-pv.setCanvas(myCanvas);</pre>
+// Set canvas as new canvas
+pv.setCanvas(canvas);</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".setConfig"><span class="type-signature">&lt;static> </span>setConfig<span class="signature">(configuration)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Sets te entire configuration or just one part.
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>configuration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Complete configuration object</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
+var pv = newPerspectiveView();
+
+// Set a valid config
+pv.setConfig({
+    canvas: document.getElementById(&#x27;myCanvas&#x27;),
+    map: [
+        [1, 1, 1, 1, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 1, 1, 1],
+        [1, 0, 0, 0, 1],
+        [1, 1, 1, 1, 1]
+    ],
+    renderMode: &#x27;flat&#x27;,
+    unitSize: {
+        width:  50,
+        height: 50,
+        depth:  0.05
+    },
+    vanishingPoint: {
+        x: 225,
+        y: 175
+    }
+});</pre>
 
 
     
@@ -4185,7 +4492,7 @@ var map = [
     [1, 0, 0, 0, 1],
     [1, 0, 1, 1, 1],
     [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1]
 ];
 
 // Set map as new map
@@ -5087,7 +5394,7 @@ pv.setVanishingPoint(coordinate);</pre>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on 2015-04-02T22:52:50+02:00 using the <a
+	on 2015-04-03T00:27:54+02:00 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
