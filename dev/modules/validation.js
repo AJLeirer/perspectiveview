@@ -97,14 +97,59 @@ PerspectiveView.prototype.isCell = function isCell(value) {
 
 
 /**
- * Checks if the given value is undefined.
+ * Checks if the given value is an array
  *
  * @function
  * @memberof PerspectiveView
- * @alias isNotSet
+ * @alias isArray
  * @param {*} value
  * @return {Boolean}
  */
-PerspectiveView.prototype.isNotSet = function isNotSet(value) {
-    return (!(value));
+PerspectiveView.prototype.isArray = function isArray(value) {
+    return ((typeof value === 'object'));
+};
+
+
+
+/**
+ * Checks if the given value is a valid map.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isMap
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isMap = function isMap(value) {
+    return (this.isArray(value) && value.length > 0 && this.isArray(value[0]) && value[0].length > 0);
+};
+
+
+
+/**
+ * Checks if the given value is a string.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isString
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isString= function isString(value) {
+    return ((typeof value === 'string'));
+};
+
+
+
+/**
+ * Checks if the given value is a valid rendering mode.
+ *
+ * @function
+ * @memberof PerspectiveView
+ * @alias isRenderMode
+ * @param {*} value
+ * @return {Boolean}
+ */
+PerspectiveView.prototype.isRenderMode = function isRenderMode(value) {
+    return (this.isString(value) && (value === 'flat'));
 };
