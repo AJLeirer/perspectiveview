@@ -206,6 +206,7 @@ function PerspectiveView() {
     priv.map = [];
 
 
+
     /**
      *
      * @type {string}
@@ -216,23 +217,6 @@ function PerspectiveView() {
 
     // ------------------------------------------------------------------------------------------------ Public
     // -------------------------------------------------------------------------------------- Setter
-
-
-
-    /**
-     * Sets te entire configuration or just one part.
-     *
-     * @public
-     * @function
-     * @ignore
-     * @alias setConfig
-     * @memberof PerspectiveView
-     * @param {Object} configuration - Complete configuration object
-     * @return {void}
-     */
-    pub.setConfig = function setConfig(configuration) {
-
-    };
 
 
 
@@ -274,6 +258,23 @@ function PerspectiveView() {
 
 
     /**
+     * Sets te entire configuration or just one part.
+     *
+     * @public
+     * @function
+     * @ignore
+     * @alias setConfig
+     * @memberof PerspectiveView
+     * @param {Object} configuration - Complete configuration object
+     * @return {void}
+     */
+    pub.setConfig = function setConfig(configuration) {
+
+    };
+
+
+
+    /**
      * Sets the HTML canvas element the map manipulations should be rendered to.
      * Automatically the context is set as 2d.
      *
@@ -304,6 +305,81 @@ function PerspectiveView() {
         }
 
         priv.context = context;
+    };
+
+
+
+    /**
+     * Sets the map or just a part of the map.
+     * A valid map must be a 2d array of numbers, where zero will not be rendered and all numbers greater than zero
+     * will be rendered as a cuboid.
+     *
+     * @public
+     * @function
+     * @alias setMap
+     * @memberof PerspectiveView
+     * @param {Array} map
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Simple map 5 x 5 units/tiles
+     * var map = [
+     *     [1, 1, 1, 1, 1],
+     *     [1, 0, 0, 0, 1],
+     *     [1, 0, 1, 1, 1],
+     *     [1, 0, 0, 0, 1],
+     *     [1, 1, 1, 1, 1],
+     * ];
+     *
+     * // Set map as new map
+     * pv.setMap(map);
+     */
+    pub.setMap = function setMap(map) {
+        if (DEV_MODE) {
+            if (!SELF.isMap(map)) {
+                console.error('Parameter <map> is not a valid map :: ', '{' , typeof map, '} :: ', map);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.map = map;
+    };
+
+
+
+    /**
+     * Sets the type/mode of rendering.
+     * Value must be a string in lower cases. Valid modes: [flat]
+     *
+     * @public
+     * @function
+     * @alias setRenderMode
+     * @memberof PerspectiveView
+     * @param {String} mode
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Mode to be set as rendering mode. Should be written in lower cases!
+     * var mode = 'flat';
+     *
+     * // Set mode as new render mode
+     * pv.setRenderMode(mode);
+     */
+    pub.setRenderMode = function setRenderMode(mode) {
+        if (DEV_MODE) {
+            if (!SELF.isRenderMode(mode)) {
+                console.error('Parameter <mode> is not a valid rendering mode :: ', '{' , typeof mode, '} :: ', mode);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.renderMode = mode.toString().toLowerCase();
     };
 
 
@@ -439,80 +515,6 @@ function PerspectiveView() {
 
         priv.vanishingCell.x = Number(cell.x);
         priv.vanishingCell.y = Number(cell.y);
-    };
-
-
-    /**
-     * Sets the map or just a part of the map.
-     * A valid map must be a 2d array of numbers, where zero will not be rendered and all numbers greater than zero
-     * will be rendered as a cuboid.
-     *
-     * @public
-     * @function
-     * @alias setMap
-     * @memberof PerspectiveView
-     * @param {Array} map
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Simple map 5 x 5 units/tiles
-     * var map = [
-     *     [1, 1, 1, 1, 1],
-     *     [1, 0, 0, 0, 1],
-     *     [1, 0, 1, 1, 1],
-     *     [1, 0, 0, 0, 1],
-     *     [1, 1, 1, 1, 1],
-     * ];
-     *
-     * // Set map as new map
-     * pv.setMap(map);
-     */
-    pub.setMap = function setMap(map) {
-        if (DEV_MODE) {
-            if (!SELF.isMap(map)) {
-                console.error('Parameter <map> is not a valid map :: ', '{' , typeof map, '} :: ', map);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.map = map;
-    };
-
-
-
-    /**
-     * Sets the type/mode of rendering.
-     * Value must be a string in lower cases. Valid modes: [flat]
-     *
-     * @public
-     * @function
-     * @alias setRenderMode
-     * @memberof PerspectiveView
-     * @param {String} mode
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Mode to be set as rendering mode. Should be written in lower cases!
-     * var mode = 'flat';
-     *
-     * // Set mode as new render mode
-     * pv.setRenderMode(mode);
-     */
-    pub.setRenderMode = function setRenderMode(mode) {
-        if (DEV_MODE) {
-            if (!SELF.isRenderMode(mode)) {
-                console.error('Parameter <mode> is not a valid rendering mode :: ', '{' , typeof mode, '} :: ', mode);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.renderMode = mode.toString().toLowerCase();
     };
 
 
