@@ -82,7 +82,7 @@ function PerspectiveView() {
 
 
 
-    // ----------------------------------------------------------------------------------------------- Private
+    // ---------------------------------------------------------------------------------------------- Defaults
 
 
 
@@ -95,22 +95,28 @@ function PerspectiveView() {
      * @type {Object}
      */
     priv.defaults = {
+        canvas: {},
+        context: {},
+        map: [[0]],
+        renderMode: 'flat',
         unit: {
             width:  32,
             height: 32,
             depth:  0.05
         },
-        vanishingPoint: {
-            x: 0,
-            y: 0
-        },
         vanishingCell: {
             x: 0,
             y: 0
         },
-        map: [[0]],
-        renderMode: 'flat'
+        vanishingPoint: {
+            x: 0,
+            y: 0
+        }
     };
+
+
+
+    // ----------------------------------------------------------------------------------------------- Private
 
 
 
@@ -135,7 +141,30 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Object}
      */
-    priv.canvas = {};
+    priv.context = {};
+
+
+
+    /**
+     * Stores the map or just a part of the users map.
+     * A map is a 2d array containing number values. A zero marks a free/accessible unit/tile, a number higher than zero
+     * is a blocked unit/tile and will rendered as a cuboid where the number declares the depth (size on virtual
+     * z-axis).
+     *
+     * @private
+     * @alias map
+     * @memberof PerspectiveView
+     * @type {Array}
+     */
+    priv.map = [];
+
+
+
+    /**
+     *
+     * @type {string}
+     */
+    priv.renderMode = '';
 
 
 
@@ -159,23 +188,6 @@ function PerspectiveView() {
 
 
     /**
-     * Stores the coordinate of the vanishing point needs to draw perspective objects.
-     *
-     * @private
-     * @alias vanishingPoint
-     * @memberof PerspectiveView
-     * @type {Object}
-     * @property {Number} x - Position on x-axis in px
-     * @property {Number} y - Position on y-axis in px
-     */
-    priv.vanishingPoint = {
-        x: 0,
-        y: 0
-    };
-
-
-
-    /**
      * Stores the current cell in which the vanishing point is located.
      *
      * @private
@@ -193,46 +205,24 @@ function PerspectiveView() {
 
 
     /**
-     * Stores the map or just a part of the users map.
-     * A map is a 2d array containing number values. A zero marks a free/accessible unit/tile, a number higher than zero
-     * is a blocked unit/tile and will rendered as a cuboid where the number declares the depth (size on virtual
-     * z-axis).
+     * Stores the coordinate of the vanishing point needs to draw perspective objects.
      *
      * @private
-     * @alias map
+     * @alias vanishingPoint
      * @memberof PerspectiveView
-     * @type {Array}
+     * @type {Object}
+     * @property {Number} x - Position on x-axis in px
+     * @property {Number} y - Position on y-axis in px
      */
-    priv.map = [];
-
-
-    /**
-     *
-     * @type {string}
-     */
-    priv.renderMode = '';
+    priv.vanishingPoint = {
+        x: 0,
+        y: 0
+    };
 
 
 
     // ------------------------------------------------------------------------------------------------ Public
     // -------------------------------------------------------------------------------------- Setter
-
-
-
-    /**
-     * Sets te entire configuration or just one part.
-     *
-     * @public
-     * @function
-     * @ignore
-     * @alias setConfig
-     * @memberof PerspectiveView
-     * @param {Object} configuration - Complete configuration object
-     * @return {void}
-     */
-    pub.setConfig = function setConfig(configuration) {
-
-    };
 
 
 
@@ -274,6 +264,23 @@ function PerspectiveView() {
 
 
     /**
+     * Sets te entire configuration or just one part.
+     *
+     * @public
+     * @function
+     * @ignore
+     * @alias setConfig
+     * @memberof PerspectiveView
+     * @param {Object} configuration - Complete configuration object
+     * @return {void}
+     */
+    pub.setConfig = function setConfig(configuration) {
+        // todo
+    };
+
+
+
+    /**
      * Sets the HTML canvas element the map manipulations should be rendered to.
      * Automatically the context is set as 2d.
      *
@@ -306,140 +313,6 @@ function PerspectiveView() {
         priv.context = context;
     };
 
-
-
-    /**
-     * Sets the size an unit. A unit is usually the size of a common tile.
-     *
-     * @public
-     * @function
-     * @alias setUnitSize
-     * @memberof PerspectiveView
-     * @param {Number} width  - Width (size on x-axis) of an unit/tile in px
-     * @param {Number} height - Height (size on y-axis) of an unit/tile in px
-     * @param {Number} depth  - Depth  (size on virtual z-axis) of an unit/tile as factor
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Sizes of a tile
-     * var width  = 50;   // px
-     * var height = 50;   // px
-     * var depth  = 0.05; // as factor
-     *
-     * // Set width, height and depth as new unit sizes
-     * pv.setUnitSize(width, height, depth);
-     */
-    pub.setUnitSize = function setUnitSize(width, height, depth) {
-        if (DEV_MODE) {
-            if (!SELF.isSize(width)) {
-                console.error('Parameter <width> is not a valid width :: ', '{' , typeof width, '} :: ', width);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-
-            if (!SELF.isSize(height)) {
-                console.error('Parameter <height> is not a valid height :: ', '{' , typeof width, '} :: ', height);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-
-            if (!SELF.isSize(depth)) {
-                console.error('Parameter <depth> is not a valid depth :: ', '{' , typeof depth, '} :: ', depth);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.unit.width  = Number(width);
-        priv.unit.height = Number(height);
-        priv.unit.depth  = Number(depth);
-    };
-
-
-
-    /**
-     * Sets the vanishing point to which refers to the perspective view, like architectural drawing.
-     *
-     * @public
-     * @function
-     * @alias setVanishingPoint
-     * @memberof PerspectiveView
-     * @param {Object} coordinate
-     * @param {Number} coordinate.x - Coordinate on x-axis in px
-     * @param {Number} coordinate.y - Coordinate on y-axis in px
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Coordinate to be set as vanishing point
-     * var coordinate = {
-     *     x: 225; // px
-     *     y: 175; // px
-     * };
-     *
-     * // Set coordinate as new vanishing point
-     * pv.setVanishingPoint(coordinate);
-     */
-    pub.setVanishingPoint = function setVanishingPoint(coordinate) {
-        if (DEV_MODE) {
-            if (!SELF.isCoordinate(coordinate)) {
-                console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        coordinate.x = Number(coordinate.x);
-        coordinate.y = Number(coordinate.y);
-
-        priv.vanishingPoint.x = coordinate.x;
-        priv.vanishingPoint.y = coordinate.y;
-
-        pub.setVanishingCell(pub.getVanishingCell({
-            x: coordinate.x,
-            y: coordinate.y
-        }));
-    };
-
-
-
-    /**
-     * Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
-     *
-     * @public
-     * @function
-     * @alias setVanishingCell
-     * @memberof PerspectiveView
-     * @param {Object} cell
-     * @param {Number} cell.x - Position on x-axis in units/tiles
-     * @param {Number} cell.y - Position on y-axis in units/tiles
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Cell to be set as vanishing cell
-     * var cell = {
-     *     x: 4; // Position on x-axis in the grid
-     *     y: 3; // Position on y-axis in the grid
-     * };
-     *
-     * // Set cell as new vanishing cell
-     * pv.setVanishingCell(cell);
-     */
-    pub.setVanishingCell = function setVanishingCell(cell) {
-        if (DEV_MODE) {
-            if (!SELF.isCell(cell)) {
-                console.error('Parameter <unit> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.vanishingCell.x = Number(cell.x);
-        priv.vanishingCell.y = Number(cell.y);
-    };
 
 
     /**
@@ -517,7 +390,290 @@ function PerspectiveView() {
 
 
 
+    /**
+     * Sets the size an unit. A unit is usually the size of a common tile.
+     *
+     * @public
+     * @function
+     * @alias setUnitSize
+     * @memberof PerspectiveView
+     * @param {Number} width  - Width (size on x-axis) of an unit/tile in px
+     * @param {Number} height - Height (size on y-axis) of an unit/tile in px
+     * @param {Number} depth  - Depth  (size on virtual z-axis) of an unit/tile as factor
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Sizes of a tile
+     * var width  = 50;   // px
+     * var height = 50;   // px
+     * var depth  = 0.05; // as factor
+     *
+     * // Set width, height and depth as new unit sizes
+     * pv.setUnitSize(width, height, depth);
+     */
+    pub.setUnitSize = function setUnitSize(width, height, depth) {
+        if (DEV_MODE) {
+            if (!SELF.isSize(width)) {
+                console.error('Parameter <width> is not a valid width :: ', '{' , typeof width, '} :: ', width);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+
+            if (!SELF.isSize(height)) {
+                console.error('Parameter <height> is not a valid height :: ', '{' , typeof width, '} :: ', height);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+
+            if (!SELF.isSize(depth)) {
+                console.error('Parameter <depth> is not a valid depth :: ', '{' , typeof depth, '} :: ', depth);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.unit.width  = Number(width);
+        priv.unit.height = Number(height);
+        priv.unit.depth  = Number(depth);
+    };
+
+
+
+    /**
+     * Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
+     *
+     * @public
+     * @function
+     * @alias setVanishingCell
+     * @memberof PerspectiveView
+     * @param {Object} cell
+     * @param {Number} cell.x - Position on x-axis in units/tiles
+     * @param {Number} cell.y - Position on y-axis in units/tiles
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Cell to be set as vanishing cell
+     * var cell = {
+     *     x: 4; // Position on x-axis in the grid
+     *     y: 3; // Position on y-axis in the grid
+     * };
+     *
+     * // Set cell as new vanishing cell
+     * pv.setVanishingCell(cell);
+     */
+    pub.setVanishingCell = function setVanishingCell(cell) {
+        if (DEV_MODE) {
+            if (!SELF.isCell(cell)) {
+                console.error('Parameter <unit> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.vanishingCell.x = Number(cell.x);
+        priv.vanishingCell.y = Number(cell.y);
+    };
+
+
+
+    /**
+     * Sets the vanishing point to which refers to the perspective view, like architectural drawing.
+     *
+     * @public
+     * @function
+     * @alias setVanishingPoint
+     * @memberof PerspectiveView
+     * @param {Object} coordinate
+     * @param {Number} coordinate.x - Coordinate on x-axis in px
+     * @param {Number} coordinate.y - Coordinate on y-axis in px
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Coordinate to be set as vanishing point
+     * var coordinate = {
+     *     x: 225; // px
+     *     y: 175; // px
+     * };
+     *
+     * // Set coordinate as new vanishing point
+     * pv.setVanishingPoint(coordinate);
+     */
+    pub.setVanishingPoint = function setVanishingPoint(coordinate) {
+        if (DEV_MODE) {
+            if (!SELF.isCoordinate(coordinate)) {
+                console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        coordinate.x = Number(coordinate.x);
+        coordinate.y = Number(coordinate.y);
+
+        priv.vanishingPoint.x = coordinate.x;
+        priv.vanishingPoint.y = coordinate.y;
+
+        pub.setVanishingCell(pub.getVanishingCell({
+            x: coordinate.x,
+            y: coordinate.y
+        }));
+    };
+
+
+
     // -------------------------------------------------------------------------------------- Getter
+
+
+
+    /**
+     * Returns the HTML canvas element.
+     *
+     * @public
+     * @function
+     * @alias getCanvas
+     * @memberof PerspectiveView
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get canvas element
+     * pv.getCanvas(); // Returns {} or the set <canvas> element
+     */
+    pub.getCanvas = function getCanvas() {
+        return priv.canvas;
+    };
+
+
+
+    /**
+     * Returns an object of the current configuration.
+     *
+     * @public
+     * @function
+     * @alias getConfig
+     * @memberof PerspectiveView
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get config object
+     * pv.getConfig(); // Returns {...}
+     */
+    pub.getConfig = function getConfig() {
+        return {}; // todo
+    };
+
+
+
+    /**
+     * Returns the context of the HTML canvas element.
+     *
+     * @public
+     * @function
+     * @alias getContext
+     * @memberof PerspectiveView
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get context object
+     * pv.getContext(); // Returns {} or the set context of the <canvas> element
+     */
+    pub.getContext = function getContext() {
+        return priv.context;
+    };
+
+
+
+    /**
+     * Returns the map array.
+     *
+     * @public
+     * @function
+     * @alias getMap
+     * @memberof PerspectiveView
+     * @return {Array}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get map array
+     * pv.getMap(); // Returns [...]
+     */
+    pub.getMap = function getMap() {
+        return priv.map;
+    };
+
+
+
+    /**
+     * Returns the rendering mode as string.
+     *
+     * @public
+     * @function
+     * @alias getRenderMode
+     * @memberof PerspectiveView
+     * @return {String}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get render mode as string
+     * pv.getRenderMode(); // Returns 'flat'
+     */
+    pub.getRenderMode = function getRenderMode() {
+        return priv.renderMode;
+    };
+
+
+
+    /**
+     * Returns the size of a unit/tile.
+     *
+     * @public
+     * @function
+     * @alias getUnitSize
+     * @memberof PerspectiveView
+     * @return {{width: priv.unit.width, height: priv.unit.height, depth: priv.unit.depth}}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get size object of a unit
+     * pv.getUnitSize(); // Returns {width: 0, height: 0, depth: 0}
+     */
+    pub.getUnitSize = function getUnitSize() {
+        return {
+            width:  priv.unit.width,
+            height: priv.unit.height,
+            depth:  priv.unit.depth
+        };
+    };
 
 
 
@@ -569,6 +725,32 @@ function PerspectiveView() {
         };
     };
 
+
+
+    /**
+     * Returns the vanishing point.
+     *
+     * @public
+     * @function
+     * @alias getVanishingPoint
+     * @memberof PerspectiveView
+     * @return {{x: Number, y: Number}}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get vanishing point
+     * getVanishingPoint(); // Returns { x: 225, y: 175 }
+     */
+    pub.getVanishingPoint = function getVanishingPoint() {
+        return {
+            x: priv.vanishingPoint.x,
+            y: priv.vanishingPoint.y
+        };
+    };
 
 
     // ------------------------------------------------------------------------------------------------ Return
