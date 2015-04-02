@@ -453,6 +453,22 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @param {Array} map
      * @return {void}
+     *
+     * @example
+     *  // Creates an instance of PerspectiveView
+     *  var pv = newPerspectiveView();
+     *
+     *  // Simple map 5 x 5 units/tiles
+     *  var map = [
+     *      [1, 1, 1, 1, 1],
+     *      [1, 0, 0, 0, 1],
+     *      [1, 0, 1, 1, 1],
+     *      [1, 0, 0, 0, 1],
+     *      [1, 1, 1, 1, 1],
+     *  ];
+     *
+     *  // Set map as new map
+     *  pv.setMap(map);
      */
     pub.setMap = function setMap(map) {
         if (DEV_MODE) {
