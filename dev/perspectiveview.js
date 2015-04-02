@@ -95,21 +95,23 @@ function PerspectiveView() {
      * @type {Object}
      */
     priv.defaults = {
+        canvas: {},
+        context: {},
+        map: [[0]],
+        renderMode: 'flat',
         unit: {
             width:  32,
             height: 32,
             depth:  0.05
         },
-        vanishingPoint: {
-            x: 0,
-            y: 0
-        },
         vanishingCell: {
             x: 0,
             y: 0
         },
-        map: [[0]],
-        renderMode: 'flat'
+        vanishingPoint: {
+            x: 0,
+            y: 0
+        }
     };
 
 
@@ -434,6 +436,45 @@ function PerspectiveView() {
 
 
     /**
+     * Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
+     *
+     * @public
+     * @function
+     * @alias setVanishingCell
+     * @memberof PerspectiveView
+     * @param {Object} cell
+     * @param {Number} cell.x - Position on x-axis in units/tiles
+     * @param {Number} cell.y - Position on y-axis in units/tiles
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Cell to be set as vanishing cell
+     * var cell = {
+     *     x: 4; // Position on x-axis in the grid
+     *     y: 3; // Position on y-axis in the grid
+     * };
+     *
+     * // Set cell as new vanishing cell
+     * pv.setVanishingCell(cell);
+     */
+    pub.setVanishingCell = function setVanishingCell(cell) {
+        if (DEV_MODE) {
+            if (!SELF.isCell(cell)) {
+                console.error('Parameter <unit> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.vanishingCell.x = Number(cell.x);
+        priv.vanishingCell.y = Number(cell.y);
+    };
+
+
+
+    /**
      * Sets the vanishing point to which refers to the perspective view, like architectural drawing.
      *
      * @public
@@ -480,46 +521,31 @@ function PerspectiveView() {
 
 
 
+    // -------------------------------------------------------------------------------------- Getter
+
+
+
     /**
-     * Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
+     * Returns the HTML canvas element
      *
      * @public
      * @function
-     * @alias setVanishingCell
+     * @alias getCanvas
      * @memberof PerspectiveView
-     * @param {Object} cell
-     * @param {Number} cell.x - Position on x-axis in units/tiles
-     * @param {Number} cell.y - Position on y-axis in units/tiles
-     * @return {void}
+     * @return {Object}
      *
      * @example
      * // Creates an instance of PerspectiveView
      * var pv = newPerspectiveView();
      *
-     * // Cell to be set as vanishing cell
-     * var cell = {
-     *     x: 4; // Position on x-axis in the grid
-     *     y: 3; // Position on y-axis in the grid
-     * };
+     * // [...]
      *
-     * // Set cell as new vanishing cell
-     * pv.setVanishingCell(cell);
+     * // Get
+     * pv.getCanvas(); // Returns {} or the set <canvas> element
      */
-    pub.setVanishingCell = function setVanishingCell(cell) {
-        if (DEV_MODE) {
-            if (!SELF.isCell(cell)) {
-                console.error('Parameter <unit> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.vanishingCell.x = Number(cell.x);
-        priv.vanishingCell.y = Number(cell.y);
+    pub.getCanvas = function() {
+        return priv.canvas;
     };
-
-
-
-    // -------------------------------------------------------------------------------------- Getter
 
 
 
