@@ -248,14 +248,14 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Get HTML canvas element
-     *  var myCanvas = document.getElementById('myCanvas');
+     * // Get HTML canvas element
+     * var myCanvas = document.getElementById('myCanvas');
      *
-     *  // Set myCanvas as new canvas
-     *  pv.setCanvas(myCanvas);
+     * // Set myCanvas as new canvas
+     * pv.setCanvas(myCanvas);
      */
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
@@ -285,15 +285,15 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Get HTML canvas element and its context
-     *  var myCanvas = document.getElementById('myCanvas');
-     *  var context  = myCanvas.getContext('2d');
+     * // Get HTML canvas element and its context
+     * var myCanvas = document.getElementById('myCanvas');
+     * var context  = myCanvas.getContext('2d');
      *
-     *  // Set context as new context
-     *  pv.setContext(context);
+     * // Set context as new context
+     * pv.setContext(context);
      */
     pub.setContext = function setContext(context) {
         if (DEV_MODE) {
@@ -321,16 +321,16 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Sizes of a tile
-     *  var width  = 50;   // px
-     *  var height = 50;   // px
-     *  var depth  = 0.05; // as factor
+     * // Sizes of a tile
+     * var width  = 50;   // px
+     * var height = 50;   // px
+     * var depth  = 0.05; // as factor
      *
-     *  // Set width, height and depth as new unit sizes
-     *  pv.setUnitSize(width, height, depth);
+     * // Set width, height and depth as new unit sizes
+     * pv.setUnitSize(width, height, depth);
      */
     pub.setUnitSize = function setUnitSize(width, height, depth) {
         if (DEV_MODE) {
@@ -370,17 +370,17 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Coordinate to be set as vanishing point
-     *  var coordinate = {
-     *      x: 225; // px
-     *      y: 175; // px
-     *  };
+     * // Coordinate to be set as vanishing point
+     * var coordinate = {
+     *     x: 225; // px
+     *     y: 175; // px
+     * };
      *
-     *  // Set coordinate as new vanishing point
-     *  pv.setVanishingPoint(coordinate);
+     * // Set coordinate as new vanishing point
+     * pv.setVanishingPoint(coordinate);
      */
     pub.setVanishingPoint = function setVanishingPoint(coordinate) {
         if (DEV_MODE) {
@@ -417,17 +417,17 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Cell to be set as vanishing cell
-     *  var cell = {
-     *      x: 4; // Position on x-axis in the grid
-     *      y: 3; // Position on y-axis in the grid
-     *  };
+     * // Cell to be set as vanishing cell
+     * var cell = {
+     *     x: 4; // Position on x-axis in the grid
+     *     y: 3; // Position on y-axis in the grid
+     * };
      *
-     *  // Set cell as new vanishing cell
-     *  pv.setVanishingCell(cell);
+     * // Set cell as new vanishing cell
+     * pv.setVanishingCell(cell);
      */
     pub.setVanishingCell = function setVanishingCell(cell) {
         if (DEV_MODE) {
@@ -455,20 +455,20 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Simple map 5 x 5 units/tiles
-     *  var map = [
-     *      [1, 1, 1, 1, 1],
-     *      [1, 0, 0, 0, 1],
-     *      [1, 0, 1, 1, 1],
-     *      [1, 0, 0, 0, 1],
-     *      [1, 1, 1, 1, 1],
-     *  ];
+     * // Simple map 5 x 5 units/tiles
+     * var map = [
+     *     [1, 1, 1, 1, 1],
+     *     [1, 0, 0, 0, 1],
+     *     [1, 0, 1, 1, 1],
+     *     [1, 0, 0, 0, 1],
+     *     [1, 1, 1, 1, 1],
+     * ];
      *
-     *  // Set map as new map
-     *  pv.setMap(map);
+     * // Set map as new map
+     * pv.setMap(map);
      */
     pub.setMap = function setMap(map) {
         if (DEV_MODE) {
@@ -495,14 +495,14 @@ function PerspectiveView() {
      * @return {void}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Mode to be set as rendering mode. Should be written in lower cases!
-     *  var mode = 'flat';
+     * // Mode to be set as rendering mode. Should be written in lower cases!
+     * var mode = 'flat';
      *
-     *  // Set mode as new render mode
-     *  pv.setRenderMode(mode);
+     * // Set mode as new render mode
+     * pv.setRenderMode(mode);
      */
     pub.setRenderMode = function setRenderMode(mode) {
         if (DEV_MODE) {
@@ -534,24 +534,24 @@ function PerspectiveView() {
      * @return {Object}
      *
      * @example
-     *  // Creates an instance of PerspectiveView
-     *  var pv = newPerspectiveView();
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
      *
-     *  // Sizes of a tile
-     *  var width  = 50;   // px
-     *  var height = 50;   // px
-     *  var depth  = 0.05; // as factor
+     * // Sizes of a tile
+     * var width  = 50;   // px
+     * var height = 50;   // px
+     * var depth  = 0.05; // as factor
      *
-     *  pv.setUnitSize(width, height, depth);
+     * pv.setUnitSize(width, height, depth);
      *
-     *  // Set coordinate to get vanishing cell from
-     *  var coordinate = {
-     *      x: 225; // px
-     *      y: 175; // px
-     *  };
+     * // Set coordinate to get vanishing cell from
+     * var coordinate = {
+     *     x: 225; // px
+     *     y: 175; // px
+     * };
      *
-     *  // Get vanishing cell of the given parameter coordinate
-     *  getVanishingCell(coordinate); // Returns { x: 4, y: 3 }
+     * // Get vanishing cell of the given parameter coordinate
+     * getVanishingCell(coordinate); // Returns { x: 4, y: 3 }
      */
     pub.getVanishingCell = function getVanishingCell(coordinate) {
         if (DEV_MODE) {
