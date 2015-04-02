@@ -109,8 +109,8 @@ function PerspectiveView() {
             y: 0
         },
         vanishingPoint: {
-            x: 0,
-            y: 0
+            x: 16,
+            y: 16
         }
     };
 
@@ -217,6 +217,25 @@ function PerspectiveView() {
     priv.vanishingPoint = {
         x: 0,
         y: 0
+    };
+
+
+
+    /**
+     * Constructor, will be called if a new instance of PerspectiveView has been initialized.
+     * Sets the default values.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @return {void}
+     */
+    priv.init = function init() {
+        // Set default values
+        pub.setMap(priv.defaults.map);
+        pub.setUnitSize(priv.defaults.unit.width , priv.defaults.unit.height , priv.defaults.unit.depth);
+        pub.setVanishingPoint(priv.defaults.vanishingPoint);
+        pub.setVanishingCell(priv.defaults.vanishingCell);
     };
 
 
@@ -850,10 +869,21 @@ function PerspectiveView() {
     };
 
 
+
+    // -------------------------------------------------------------------------------------- Call constructor
+
+
+
+    (function() { priv.init(); }());
+
+
+
     // ------------------------------------------------------------------------------------------------ Return
 
 
 
     return pub;
-}
 
+
+
+}
