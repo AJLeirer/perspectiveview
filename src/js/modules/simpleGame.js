@@ -191,8 +191,8 @@
                 .renderMap(priv.map)
                 .renderCharacter(position.x, position.y, width, height);
 
-            //mod.perspectiveView.setReferencePoint(position.x, position.y);
-            //mod.perspectiveView.render();
+            mod.perspectiveView.setReferencePoint(position.x, position.y);
+            mod.perspectiveView.render();
 
             raf(priv.loop);
         }
@@ -265,7 +265,7 @@
             }
         });
 */
-/*
+
         mod.perspectiveView.setConfig({
             canvas:  document.getElementById('myCanvas'),
             unit: {
@@ -279,7 +279,7 @@
             },
             map: priv.map
         });
-*/
+
         pub.start();
     };
 
