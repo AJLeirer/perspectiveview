@@ -184,15 +184,16 @@
             }
             mod.character.setPosition({x: position.x, y: position.y});
 
-
-
-            mod.renderer
-                .clean()
-                .renderMap(priv.map)
-                .renderCharacter(position.x, position.y, width, height);
+            // Helper
+            mod.renderer.clean();
 
             //mod.perspectiveView.setReferencePoint(position.x, position.y);
-            //mod.perspectiveView.render();
+
+            // Real renderer from PerspectiveView
+            mod.perspectiveView.render();
+
+            // Helper
+            mod.renderer.renderCharacter(position.x, position.y, width, height);
 
             raf(priv.loop);
         }
@@ -235,13 +236,14 @@
             .setContext(document.getElementById('myCanvas').getContext("2d"));
 
         priv.map = mod.map.getMap();
-/*
         mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
         mod.perspectiveView.setContext(document.getElementById('myCanvas').getContext('2d'));
         mod.perspectiveView.setMap(priv.map);
         mod.perspectiveView.setUnitSize(40, 40, 0.05);
-        mod.perspectiveView.setRenderMode('flat');
         mod.perspectiveView.setVanishingCell({x: 7, y: 5});
+        mod.perspectiveView.setRenderMode('flat');
+
+/*
         mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
 */
 /*

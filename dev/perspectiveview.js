@@ -229,6 +229,10 @@ window.PERSPECTIVEVIEW = (function() {
 
 
 
+    priv.render = {};
+
+
+
     // ------------------------------------------------------------------------------------------------ Public
     // -------------------------------------------------------------------------------------- Setter
 
@@ -276,7 +280,7 @@ window.PERSPECTIVEVIEW = (function() {
      */
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
-            if (!SELF.isHtmlCanvasElement(canvas)) {
+            if (!DEV.util.validate.isHtmlCanvasElement(canvas)) {
                 console.error('Parameter <canvas> is not a valid HTML canvas element :: ', '{' , typeof canvas, '} :: ', canvas);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -386,7 +390,7 @@ window.PERSPECTIVEVIEW = (function() {
      */
     pub.setContext = function setContext(context) {
         if (DEV_MODE) {
-            if (!SELF.isObject(context)) {
+            if (!DEV.util.validate.isObject(context)) {
                 console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', '{' , typeof context, '} :: ', context);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -468,6 +472,9 @@ window.PERSPECTIVEVIEW = (function() {
         }
 
         priv.renderMode = mode.toString().toLowerCase();
+
+        priv.render = pub.getModule('render_' + priv.renderMode);
+
     };
 
 
@@ -990,6 +997,25 @@ window.PERSPECTIVEVIEW = (function() {
         }
 
         return {};
+    };
+
+
+
+    // ------------------------------------------------------------------------------------------------ Render
+
+
+
+    /**
+     * Renders rhe current state
+     *
+     * @public
+     * @memberof PerspectiveView
+     * @function
+     * @alias render
+     * @return {Object}
+     */
+    pub.render = function render() {
+        priv.render.render();
     };
 
 

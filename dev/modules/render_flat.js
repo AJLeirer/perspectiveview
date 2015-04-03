@@ -66,13 +66,14 @@
      * @return {Array}
      */
     priv.getRenderOrder = function getRenderOrder(map) {
-        var y         = map.length,
-            x         = map[0].length,
-            orderlist = [];
+        var yAmount   = map.length,
+            xAmount   = map[0].length,
+            orderlist = [],
+            x,y;
 
         // The map will be rendered in reversed order, so the orderlist has also to be determent in reversed order
-        while (y--) {
-            while (x--) {
+        for(y = (yAmount - 1); y >= 0; y--) {
+            for(x = (xAmount - 1); x >= 0; x--) {
                 orderlist.push({ x: x, y: y });
             }
         }
@@ -101,6 +102,7 @@
             mapItemPosition,
             mapItemObject;
 
+
         context.save();
         while (itemAmount--) {
             mapItemPosition = order[itemAmount];
@@ -113,13 +115,13 @@
                 context.fillStyle = 'rgb(255,255,255)';
             }
 
-            priv.context.fillRect(
+            context.fillRect(
                 (mapItemPosition.x * width),
                 (mapItemPosition.y * height),
                 width,
                 height
             );
-            priv.context.fill();
+            context.fill();
         }
         context.restore();
     };
@@ -127,6 +129,23 @@
 
 
     // ------------------------------------------------------------------------------------------------ Public
+
+
+
+    /**
+     * Public API render method
+     *
+     * @public
+     * @memberof! PerspectiveView.render_flat
+     * @function
+     * @alias render
+     * @return {void}
+     */
+    pub.render = function render() {
+        var map = pv.getMap();
+        priv.renderOrder = priv.getRenderOrder(map);
+        priv.renderMap(map);
+    };
 
 
 
