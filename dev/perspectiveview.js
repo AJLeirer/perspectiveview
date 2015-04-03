@@ -1,7 +1,7 @@
 /**
  * To create an instance of PerspectiveView
  *
- * @returns {Object}
+ * @returns {window.PERSPECTIVEVIEW}
  * @constructor
  */
 function PerspectiveView() {
@@ -11,7 +11,7 @@ function PerspectiveView() {
 
 
 /**
- *
+ * PERSPECTIVEVIEW
  *
  * @class
  */
@@ -885,12 +885,13 @@ window.PERSPECTIVEVIEW = (function() {
 
 
     /**
-     * Provides an interface for priv.modules to append them.
+     * Provides an interface for appending modules.
      *
      * @public
      * @function
-     * @memberof getVanishingPoint
-     * @param  {Object} module  - The complete module object to be appended
+     * @memberof PerspectiveView
+     * @alias appendModule
+     * @param  {Object} module - Module object to be appended
      * @return {void}
      */
     pub.appendModule = function appendModule(module) {
@@ -915,12 +916,22 @@ window.PERSPECTIVEVIEW = (function() {
 
 
 
+    /**
+     * Provides an interface for appending development utilities.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias appendDevUtility
+     * @param  {Object} module - Module object to be appended
+     * @return {void}
+     */
     pub.appendDevUtility = function appendDevUtility(module) {
         var id;
 
         if (DEV_MODE) {
             if ((!module) || (typeof module !== 'object')) {
-                console.error('Parameter <module> is not a valid PerspectiveView module :: ', '{' , typeof module, '} :: ', module);
+                console.error('Parameter <module> is not a valid PerspectiveView dev utility :: ', '{' , typeof module, '} :: ', module);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
@@ -933,8 +944,8 @@ window.PERSPECTIVEVIEW = (function() {
                 DEV.util[id] = module[id];
             }
         }
-
     };
+
 
 
     /**
@@ -942,8 +953,9 @@ window.PERSPECTIVEVIEW = (function() {
      *
      * @public
      * @function
-     * @memberof getVanishingPoint
-     * @param  {string} moduleId - The name/id of the requested module
+     * @memberof PerspectiveView
+     * @alias getModule
+     * @param  {String} moduleId - The name/id of the requested module
      * @return {Object}
      */
     pub.getModule = function getModule(moduleId) {
@@ -952,6 +964,30 @@ window.PERSPECTIVEVIEW = (function() {
         for (id in mod) {
             if (id === moduleId) {
                 return mod[id];
+            }
+        }
+
+        return {};
+    };
+
+
+
+    /**
+     * Returns a requested development utility.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias getDevUtility
+     * @param  {String} moduleId - The name/id of the requested module
+     * @return {Object}
+     */
+    pub.getDevUtility = function getDevUtility(moduleId) {
+        var id;
+
+        for (id in DEV.util) {
+            if (id === moduleId) {
+                return DEV.util[id];
             }
         }
 

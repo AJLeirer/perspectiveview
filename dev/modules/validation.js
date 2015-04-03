@@ -1,12 +1,33 @@
 /**
+ * Revealing module for validation.
  *
+ * @module
+ * @param {Object} window   - Global window object
+ * @param {Object} document - Global document object
+ * @param {Object} pv       - PerspectiveView with empty object fallback
  */
 ;(function validate(win, doc, pv) {
     'use strict';
 
 
 
+    // ------------------------------------------------------------------------------------------------- Scope
+
+
+
+    /**
+     * Stores the public scope.
+     *
+     * @public
+     * @ignore
+     * @memberof PerspectiveView
+     * @type {Object}
+     */
     var pub = {};
+
+
+
+    // ------------------------------------------------------------------------------------------------ Public
 
 
 
@@ -165,6 +186,10 @@
     pub.isRenderMode = function isRenderMode(value) {
         return (this.isString(value) && (value === 'flat'));
     };
+
+
+
+    // -------------------------------------------------------------------------------------- Appending module
 
 
 
