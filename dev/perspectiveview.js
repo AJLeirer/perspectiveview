@@ -1,10 +1,21 @@
 /**
- * Creates an instance of PerspectiveView
+ * To create multiple instances of PerspectiveView
  *
- * @class
+ * @returns {Object}
  * @constructor
  */
 function PerspectiveView() {
+    return window.PERSPECTIVEVIEW;
+}
+
+
+
+/**
+ *
+ *
+ * @class
+ */
+window.PERSPECTIVEVIEW = (function() {
     'use strict';
 
 
@@ -35,7 +46,7 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Boolean}
      */
-    DEV_MODE = true,
+    DEV_MODE = false,
 
 
 
@@ -51,7 +62,6 @@ function PerspectiveView() {
     DEV = {
         abortOnError: false
     };
-
 
 
     // ------------------------------------------------------------------------------------------------- Scope
@@ -244,10 +254,10 @@ function PerspectiveView() {
      */
     priv.init = function init() {
         // Set default values
-        pub.setMap(priv.defaults.map);
-        pub.setUnitSize(priv.defaults.unit.width , priv.defaults.unit.height , priv.defaults.unit.depth);
-        pub.setVanishingPoint(priv.defaults.vanishingPoint);
-        pub.setVanishingCell(priv.defaults.vanishingCell);
+        //pub.setMap(priv.defaults.map);
+        //pub.setUnitSize(priv.defaults.unit.width , priv.defaults.unit.height , priv.defaults.unit.depth);
+        //pub.setVanishingPoint(priv.defaults.vanishingPoint);
+        //pub.setVanishingCell(priv.defaults.vanishingCell);
     };
 
 
@@ -897,7 +907,7 @@ function PerspectiveView() {
      */
     pub.appendModule = function appendModule(module) {
         var id;
-
+/*
         if (DEV_MODE) {
             if ((!mode) || (typeof mode !== 'object')) {
                 console.error('Parameter <module> is not a valid PerspectiveView module :: ', '{' , typeof module, '} :: ', module);
@@ -912,7 +922,7 @@ function PerspectiveView() {
             else {
                 mod[id] = module[id];
             }
-        }
+        }*/
     };
 
 
@@ -956,4 +966,4 @@ function PerspectiveView() {
 
 
 
-}
+})();
