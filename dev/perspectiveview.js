@@ -71,6 +71,18 @@ function PerspectiveView() {
 
 
     /**
+     * Stores a scope for modules.
+     *
+     * @private
+     * @ignore
+     * @memberof PerspectiveView
+     * @type {Object}
+     */
+    mod = {},
+
+
+
+    /**
      * Stores the public scope.
      *
      * @public
@@ -866,6 +878,64 @@ function PerspectiveView() {
             x: priv.vanishingPoint.x,
             y: priv.vanishingPoint.y
         };
+    };
+
+
+
+    // ------------------------------------------------------------------------------ Handle modules
+
+
+
+    /**
+     * Provides an interface for priv.modules to append them.
+     *
+     * @public
+     * @function
+     * @memberof getVanishingPoint
+     * @param  {Object} module  - The complete module object to be appended
+     * @return {void}
+     */
+    pub.appendModule = function appendModule(module) {
+        var id;
+
+        if (DEV_MODE) {
+            if ((!mode) || (typeof mode !== 'object')) {
+                console.error('Parameter <module> is not a valid PerspectiveView module :: ', '{' , typeof module, '} :: ', module);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        for (id in module) {
+            if (mod.hasOwnProperty(id)) {
+                console.error('There already exists an module named \'' + id + '\'');
+            }
+            else {
+                mod[id] = module[id];
+            }
+        }
+    };
+
+
+
+    /**
+     * Returns a requested module.
+     *
+     * @public
+     * @function
+     * @memberof getVanishingPoint
+     * @param  {string} moduleId - The name/id of the requested module
+     * @return {Object}
+     */
+    pub.getModule = function getModule(moduleId) {
+        var id;
+
+        for (id in mod) {
+            if (id === moduleId) {
+                return mod[id];
+            }
+        }
+
+        return {};
     };
 
 
