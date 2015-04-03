@@ -1,28 +1,24 @@
 /**
- * Creates an instance of PerspectiveView
+ * To create an instance of PerspectiveView
  *
- * @class
- * @constructor
+ * @namespace PerspectiveView
+ * @returns {window.PERSPECTIVEVIEW}
  */
 function PerspectiveView() {
+    return window.PERSPECTIVEVIEW;
+}
+
+
+
+/**
+ * @ignore
+ */
+window.PERSPECTIVEVIEW = (function() {
     'use strict';
 
 
 
     // --------------------------------------------------------------------------------------------- CONSTANTS
-
-
-
-    /**
-     * Outer scope for inner functions.
-     *
-     * @private
-     * @alias SELF
-     * @ignore
-     * @memberof PerspectiveView
-     * @type {PerspectiveView}
-     */
-    var SELF = this,
 
 
 
@@ -35,7 +31,7 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @type {Boolean}
      */
-    DEV_MODE = true,
+    var DEV_MODE = true,
 
 
 
@@ -49,9 +45,9 @@ function PerspectiveView() {
      * @property {Boolean} abortOnError - Script will abort if an error occurs
      */
     DEV = {
-        abortOnError: false
+        abortOnError: false,
+        util: {}
     };
-
 
 
     // ------------------------------------------------------------------------------------------------- Scope
@@ -67,6 +63,18 @@ function PerspectiveView() {
      * @type {Object}
      */
     var priv = {},
+
+
+
+    /**
+     * Stores a scope for modules.
+     *
+     * @private
+     * @ignore
+     * @memberof PerspectiveView
+     * @type {Object}
+     */
+    mod = {},
 
 
 
@@ -221,6 +229,11 @@ function PerspectiveView() {
 
 
 
+    // ------------------------------------------------------------------------------------------------ Public
+    // -------------------------------------------------------------------------------------- Setter
+
+
+
     /**
      * Constructor, will be called if a new instance of PerspectiveView has been initialized.
      * Sets the default values.
@@ -230,18 +243,13 @@ function PerspectiveView() {
      * @memberof PerspectiveView
      * @return {void}
      */
-    priv.init = function init() {
+    pub.init = function init() {
         // Set default values
         pub.setMap(priv.defaults.map);
         pub.setUnitSize(priv.defaults.unit.width , priv.defaults.unit.height , priv.defaults.unit.depth);
         pub.setVanishingPoint(priv.defaults.vanishingPoint);
         pub.setVanishingCell(priv.defaults.vanishingCell);
     };
-
-
-
-    // ------------------------------------------------------------------------------------------------ Public
-    // -------------------------------------------------------------------------------------- Setter
 
 
 
@@ -419,7 +427,7 @@ function PerspectiveView() {
      */
     pub.setMap = function setMap(map) {
         if (DEV_MODE) {
-            if (!SELF.isMap(map)) {
+            if (!DEV.util.validate.isMap(map)) {
                 console.error('Parameter <map> is not a valid map :: ', '{' , typeof map, '} :: ', map);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -453,7 +461,7 @@ function PerspectiveView() {
      */
     pub.setRenderMode = function setRenderMode(mode) {
         if (DEV_MODE) {
-            if (!SELF.isRenderMode(mode)) {
+            if (!DEV.util.validate.isRenderMode(mode)) {
                 console.error('Parameter <mode> is not a valid rendering mode :: ', '{' , typeof mode, '} :: ', mode);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -490,17 +498,17 @@ function PerspectiveView() {
      */
     pub.setUnitSize = function setUnitSize(width, height, depth) {
         if (DEV_MODE) {
-            if (!SELF.isSize(width)) {
+            if (!DEV.util.validate.isSize(width)) {
                 console.error('Parameter <width> is not a valid width :: ', '{' , typeof width, '} :: ', width);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
 
-            if (!SELF.isSize(height)) {
+            if (!DEV.util.validate.isSize(height)) {
                 console.error('Parameter <height> is not a valid height :: ', '{' , typeof width, '} :: ', height);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
 
-            if (!SELF.isSize(depth)) {
+            if (!DEV.util.validate.isSize(depth)) {
                 console.error('Parameter <depth> is not a valid depth :: ', '{' , typeof depth, '} :: ', depth);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -540,7 +548,7 @@ function PerspectiveView() {
      */
     pub.setVanishingCell = function setVanishingCell(cell) {
         if (DEV_MODE) {
-            if (!SELF.isCell(cell)) {
+            if (!DEV.util.validate.isCell(cell)) {
                 console.error('Parameter <cell> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -579,7 +587,7 @@ function PerspectiveView() {
      */
     pub.setVanishingPoint = function setVanishingPoint(coordinate) {
         if (DEV_MODE) {
-            if (!SELF.isCoordinate(coordinate)) {
+            if (!DEV.util.validate.isCoordinate(coordinate)) {
                 console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -829,7 +837,7 @@ function PerspectiveView() {
      */
     pub.getVanishingCell = function getVanishingCell(coordinate) {
         if (DEV_MODE) {
-            if (!SELF.isCoordinate(coordinate)) {
+            if (!DEV.util.validate.isCoordinate(coordinate)) {
                 console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -870,11 +878,119 @@ function PerspectiveView() {
 
 
 
-    // -------------------------------------------------------------------------------------- Call constructor
+    // ------------------------------------------------------------------------------ Handle modules
 
 
 
-    (function() { priv.init(); }());
+    /**
+     * Provides an interface for appending modules.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias appendModule
+     * @param  {Object} module - Module object to be appended
+     * @return {void}
+     */
+    pub.appendModule = function appendModule(module) {
+        var id;
+
+        if (DEV_MODE) {
+            if ((!module) || (typeof module !== 'object')) {
+                console.error('Parameter <module> is not a valid PerspectiveView module :: ', '{' , typeof module, '} :: ', module);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        for (id in module) {
+            if (mod.hasOwnProperty(id)) {
+                console.error('There already exists an module named \'' + id + '\'');
+            }
+            else {
+                mod[id] = module[id];
+            }
+        }
+    };
+
+
+
+    /**
+     * Provides an interface for appending development utilities.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias appendDevUtility
+     * @param  {Object} module - Module object to be appended
+     * @return {void}
+     */
+    pub.appendDevUtility = function appendDevUtility(module) {
+        var id;
+
+        if (DEV_MODE) {
+            if ((!module) || (typeof module !== 'object')) {
+                console.error('Parameter <module> is not a valid PerspectiveView dev utility :: ', '{' , typeof module, '} :: ', module);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        for (id in module) {
+            if (DEV.util.hasOwnProperty(id)) {
+                console.error('There already exists an module named \'' + id + '\'');
+            }
+            else {
+                DEV.util[id] = module[id];
+            }
+        }
+    };
+
+
+
+    /**
+     * Returns a requested module.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias getModule
+     * @param  {String} moduleId - The name/id of the requested module
+     * @return {Object}
+     */
+    pub.getModule = function getModule(moduleId) {
+        var id;
+
+        for (id in mod) {
+            if (id === moduleId) {
+                return mod[id];
+            }
+        }
+
+        return {};
+    };
+
+
+
+    /**
+     * Returns a requested development utility.
+     *
+     * @public
+     * @function
+     * @memberof PerspectiveView
+     * @alias getDevUtility
+     * @param  {String} moduleId - The name/id of the requested module
+     * @return {Object}
+     */
+    pub.getDevUtility = function getDevUtility(moduleId) {
+        var id;
+
+        for (id in DEV.util) {
+            if (id === moduleId) {
+                return DEV.util[id];
+            }
+        }
+
+        return {};
+    };
 
 
 
@@ -886,4 +1002,4 @@ function PerspectiveView() {
 
 
 
-}
+})();
