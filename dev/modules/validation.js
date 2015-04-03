@@ -1,7 +1,8 @@
 /**
  * Revealing module for validation.
  *
- * @module
+ * @namespace validate
+ * @memberof PerspectiveView
  * @param {Object} window   - Global window object
  * @param {Object} document - Global document object
  * @param {Object} pv       - PerspectiveView with empty object fallback
@@ -20,7 +21,7 @@
      *
      * @public
      * @ignore
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @type {Object}
      */
     var pub = {};
@@ -34,10 +35,10 @@
     /**
      * Checks if the given value is a valid HTML canvas element.
      *
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @function
      * @alias isHtmlCanvasElement
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isHtmlCanvasElement = function isHtmlCanvasElement(value) {
@@ -50,9 +51,9 @@
      * Checks if the given value is a valid object.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isObject
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isObject = function isObject(value) {
@@ -66,9 +67,9 @@
      * Value must be of type number.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isNumber
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isNumber = function isNumber(value) {
@@ -82,9 +83,9 @@
      * VValue must be of type number and must be greater or equal than zero.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isSize
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isSize = function isSize(value) {
@@ -98,9 +99,9 @@
      * Value must be of type object including properties x and y of type number and they must be greater or equal than zero.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isCoordinate
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isCoordinate = function isCoordinate(value) {
@@ -116,9 +117,9 @@
      * Value must be of type object including properties x and y of type number and they must be greater or equal than zero.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isCell
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isCell = function isCell(value) {
@@ -133,9 +134,9 @@
      * Checks if the given value is an array
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isArray
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isArray = function isArray(value) {
@@ -148,9 +149,9 @@
      * Checks if the given value is a valid map.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isMap
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isMap = function isMap(value) {
@@ -163,9 +164,9 @@
      * Checks if the given value is a string.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isString
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isString= function isString(value) {
@@ -178,9 +179,9 @@
      * Checks if the given value is a valid rendering mode.
      *
      * @function
-     * @memberof PerspectiveView
+     * @memberof! PerspectiveView.validate
      * @alias isRenderMode
-     * @param {*} value
+     * @param {*} value - Value to check for
      * @return {Boolean}
      */
     pub.isRenderMode = function isRenderMode(value) {

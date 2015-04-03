@@ -1,8 +1,8 @@
 /**
  * To create an instance of PerspectiveView
  *
+ * @namespace PerspectiveView
  * @returns {window.PERSPECTIVEVIEW}
- * @constructor
  */
 function PerspectiveView() {
     return window.PERSPECTIVEVIEW;
@@ -11,9 +11,7 @@ function PerspectiveView() {
 
 
 /**
- * PERSPECTIVEVIEW
- *
- * @class
+ * @ignore
  */
 window.PERSPECTIVEVIEW = (function() {
     'use strict';
