@@ -73,12 +73,57 @@
         // The map will be rendered in reversed order, so the orderlist has also to be determent in reversed order
         while (y--) {
             while (x--) {
-                orderlist.push(map[y][x]);
+                orderlist.push({ x: x, y: y });
             }
         }
 
         return orderlist;
     };
+
+
+
+    /**
+     * Handles the rendering of the map
+     *
+     * @private
+     * @memberof! PerspectiveView.render_flat
+     * @function
+     * @alias renderMap
+     * @return {void}
+     */
+    priv.renderMap = function renderMap(map) {
+        var order      = priv.renderOrder,
+            itemAmount = order.length,
+            context    = pv.getContext(),
+            unitSize   = pv.getUnitSize(),
+            width      = unitSize.width,
+            height     = unitSize.height,
+            mapItemPosition,
+            mapItemObject;
+
+        context.save();
+        while (itemAmount--) {
+            mapItemPosition = order[itemAmount];
+            mapItemObject   = map[mapItemPosition.y][mapItemPosition.x];
+
+            if (mapItemObject > 0) {
+                context.fillStyle = 'rgb(50,50,50)';
+            }
+            else {
+                context.fillStyle = 'rgb(255,255,255)';
+            }
+
+            priv.context.fillRect(
+                (mapItemPosition.x * width),
+                (mapItemPosition.y * height),
+                width,
+                height
+            );
+            priv.context.fill();
+        }
+        context.restore();
+    };
+
 
 
     // ------------------------------------------------------------------------------------------------ Public
