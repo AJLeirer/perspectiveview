@@ -99,8 +99,6 @@
             itemAmount = order.length,
             context    = pv.getContext(),
             unitSize   = pv.getUnitSize(),
-            width      = unitSize.width,
-            height     = unitSize.height,
             mapItemPosition,
             mapItemObject;
 
@@ -118,10 +116,10 @@
             }
 
             context.fillRect(
-                (mapItemPosition.x * width),
-                (mapItemPosition.y * height),
-                width,
-                height
+                (mapItemPosition.x * unitSize.x),
+                (mapItemPosition.y * unitSize.y),
+                unitSize.x,
+                unitSize.y
             );
             context.fill();
         }
