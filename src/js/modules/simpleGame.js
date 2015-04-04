@@ -247,7 +247,6 @@
         mod.perspectiveView.setRenderMode('flat');
         mod.perspectiveView.setUnitSize(40, 40);
         mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
-        mod.perspectiveView.setVanishingCell({x: 7, y: 5});
 /**/
 /**/
         // Test config resumed
@@ -258,8 +257,7 @@
             map:            priv.map,
             renderMode:     'unitary',
             unitSize:       {x: 40,  y: 40},
-            vanishingPoint: {x: 260, y: 180},
-            vanishingCell:  {x: 7,   y: 5}
+            vanishingPoint: {x: 260, y: 180}
         });
 /**/
 /**/
