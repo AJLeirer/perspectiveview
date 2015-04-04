@@ -255,6 +255,7 @@ window.PERSPECTIVEVIEW = (function() {
         // Set default values
         pub.setDepth(priv.defaults.depth);
         pub.setMap(priv.defaults.map);
+        pub.setRenderMode(priv.defaults.renderMode);
         pub.setUnitSize(priv.defaults.unit.size.x, priv.defaults.unit.size.y);
         pub.setVanishingPoint(priv.defaults.vanishingPoint);
     };
@@ -339,13 +340,12 @@ window.PERSPECTIVEVIEW = (function() {
             unitSize       = typeof config.unitSize       === 'object' ? config.unitSize       : {},
             vanishingPoint = typeof config.vanishingPoint === 'object' ? config.vanishingPoint : {};
 
-
         config = {
-            canvas:     config.canvas     !== undefined ? config.canvas     : priv.canvas,
-            context:    config.context    !== undefined ? config.context    : priv.context,
-            depth:      config.depth      !== undefined ? config.depth      : priv.depth,
-            map:        config.map        !== undefined ? config.map        : priv.map,
-            renderMode: config.renderMode !== undefined ? config.renderMode : priv.renderMode,
+            canvas:     typeof config.canvas     !== 'undefined' ? config.canvas     : priv.canvas,
+            context:    typeof config.context    !== 'undefined' ? config.context    : priv.context,
+            depth:      typeof config.depth      !== 'undefined' ? config.depth      : priv.depth,
+            map:        typeof config.map        !== 'undefined' ? config.map        : priv.map,
+            renderMode: typeof config.renderMode !== 'undefined' ? config.renderMode : priv.renderMode,
             unitSize: {
                 x: unitSize.x !== undefined ? unitSize.x : priv.unit.size.x,
                 y: unitSize.y !== undefined ? unitSize.y : priv.unit.size.y
@@ -356,6 +356,7 @@ window.PERSPECTIVEVIEW = (function() {
             }
         };
 
+        // todo: A logic has to be implemented that checks, if a common setter method has to be executed only if the common property is listed in the configuration
         pub.setCanvas(config.canvas);
         pub.setContext(config.context);
         pub.setDepth(config.depth);
@@ -594,6 +595,8 @@ window.PERSPECTIVEVIEW = (function() {
 
         priv.vanishingPoint.x = coordinate.x;
         priv.vanishingPoint.y = coordinate.y;
+
+        priv.vanishingCell = pub.getVanishingCell();
     };
 
 

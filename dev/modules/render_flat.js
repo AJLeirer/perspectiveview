@@ -70,7 +70,7 @@
             yAmount   = map.length,
             xAmount   = map[0].length,
             orderlist = [],
-            x,y;
+            x, y;
 
         // The map will be rendered in reversed order, so the orderlist has also to be determent in reversed order
         for(y = (yAmount - 1); y >= 0; y--) {
@@ -102,19 +102,14 @@
             mapItemPosition,
             mapItemObject;
 
-
         context.save();
         while (itemAmount--) {
             mapItemPosition = order[itemAmount];
             mapItemObject   = map[mapItemPosition.y][mapItemPosition.x];
 
-            if (mapItemObject > 0) {
-                context.fillStyle = 'rgb(50,50,50)';
-            }
-            else {
-                context.fillStyle = 'rgb(255,255,255)';
-            }
+            if (mapItemObject === null || mapItemObject === 0) { continue; }
 
+            context.fillStyle = 'rgb(50,50,50)';
             context.fillRect(
                 (mapItemPosition.x * unitSize.x),
                 (mapItemPosition.y * unitSize.y),

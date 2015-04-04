@@ -228,7 +228,7 @@
         mod.map             = app.getModule('simpleMap');
         mod.perspectiveView = new PerspectiveView();
 
-        //mod.perspectiveView.init();
+        mod.perspectiveView.init();
         mod.character.run();
 
         mod.renderer
@@ -255,7 +255,6 @@
             context:        document.getElementById('myCanvas').getContext('2d'),
             depth:          0.05,
             map:            priv.map,
-            renderMode:     'unitary',
             unitSize:       {x: 40,  y: 40},
             vanishingPoint: {x: 260, y: 180}
         });
@@ -263,7 +262,7 @@
 /**/
         mod.perspectiveView.setRenderMode('flat');
         mod.perspectiveView.render();
-        mod.perspectiveView.setRenderMode('unitary');
+        mod.perspectiveView.setRenderMode('specified');
         mod.perspectiveView.render();
 /**/
 /** /
