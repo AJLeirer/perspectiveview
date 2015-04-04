@@ -801,11 +801,14 @@ window.PERSPECTIVEVIEW = (function() {
      * // ...
      *
      * // Get map array
-     * pv.getMap(); // Returns [[1, 1, 1, 1, 1],
-     *              //          [1, 0, 0, 0, 1],
-     *              //          [1, 0, 1, 1, 1],
-     *              //          [1, 0, 0, 0, 1],
-     *              //          [1, 1, 1, 1, 1]]
+     * pv.getMap();
+     * // Returns [
+     * //     [1, 1, 1, 1, 1],
+     * //     [1, 0, 0, 0, 1],
+     * //     [1, 0, 1, 1, 1],
+     * //     [1, 0, 0, 0, 1],
+     * //     [1, 1, 1, 1, 1]
+     * // ]
      */
     pub.getMap = function getMap() {
         return priv.map;
