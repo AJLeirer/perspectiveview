@@ -188,6 +188,7 @@
             mod.renderer.clean();
 
             mod.perspectiveView.setReferencePoint(position.x, position.y);
+            //mod.perspectiveView.setVanishingPoint({x: position.x, y: position.y});
 
             // Real renderer from PerspectiveView
             mod.perspectiveView.render();
@@ -228,7 +229,7 @@
         mod.map             = app.getModule('simpleMap');
         mod.perspectiveView = new PerspectiveView();
 
-        //mod.perspectiveView.init();
+        mod.perspectiveView.init();
         mod.character.run();
 
         mod.renderer
@@ -239,54 +240,18 @@
         priv.map = mod.map.getMap();
 
 /** /
-        // Test config separated
-        mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
-        mod.perspectiveView.setContext(document.getElementById('myCanvas').getContext('2d'));
-        mod.perspectiveView.setDepth(0.05);
-        mod.perspectiveView.setMap(priv.map);
-        mod.perspectiveView.setRenderMode('flat');
-        mod.perspectiveView.setUnitSize(40, 40);
-        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
-        mod.perspectiveView.setVanishingCell({x: 7, y: 5});
-/**/
-/** /
         // Test config resumed
         mod.perspectiveView.setConfig({
             canvas:         document.getElementById('myCanvas'),
             context:        document.getElementById('myCanvas').getContext('2d'),
             depth:          0.05,
+            renderMode:     'specified',
             map:            priv.map,
-            renderMode:     'flat',
             unitSize:       {x: 40,  y: 40},
-            vanishingPoint: {x: 260, y: 180},
-            vanishingCell:  {x: 7,   y: 5}
+            vanishingPoint: {x: 260, y: 180}
         });
-/**/
 
-/*
         mod.perspectiveView.render();
-        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
-*/
-/** /
-        mod.perspectiveView.setConfig({
-            canvas:   document.getElementById('myCanvas'),
-            context:  document.getElementById('myCanvas').getContext('2d'),
-            map:      priv.map,
-            unitSize: {
-                width:  40,
-                height: 40,
-                depth: 0.05
-            },
-            renderMode: 'flat',
-            vanishingCell: {
-                x: 7,
-                y: 5
-            },
-            vanishingPoint: {
-                x: 260,
-                y: 180
-            }
-        });
 /**/
 /**/
         mod.perspectiveView.setConfig({

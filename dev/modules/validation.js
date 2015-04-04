@@ -185,7 +185,10 @@
      * @return {Boolean}
      */
     pub.isRenderMode = function isRenderMode(value) {
-        return (this.isString(value) && (value === 'flat'));
+        return (this.isString(value) && (
+            (value === 'flat') ||
+            (value === 'specified')
+        ));
     };
 
 
