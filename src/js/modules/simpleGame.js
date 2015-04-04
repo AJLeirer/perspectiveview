@@ -262,33 +262,13 @@
             vanishingCell:  {x: 7,   y: 5}
         });
 /**/
-
+/**/
+        mod.perspectiveView.setRenderMode('flat');
         mod.perspectiveView.render();
-/*
-        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
-*/
-/*
-        mod.perspectiveView.setConfig({
-            canvas:   document.getElementById('myCanvas'),
-            context:  document.getElementById('myCanvas').getContext('2d'),
-            map:      priv.map,
-            unitSize: {
-                width:  40,
-                height: 40,
-                depth: 0.05
-            },
-            renderMode: 'flat',
-            vanishingCell: {
-                x: 7,
-                y: 5
-            },
-            vanishingPoint: {
-                x: 260,
-                y: 180
-            }
-        });
-*/
-/*
+        mod.perspectiveView.setRenderMode('unitary');
+        mod.perspectiveView.render();
+/**/
+/** /
         mod.perspectiveView.setConfig({
             canvas:  document.getElementById('myCanvas'),
             unit: {
@@ -302,8 +282,8 @@
             },
             map: priv.map
         });
-*/
-        //pub.start();
+        pub.start();
+/**/
     };
 
 
