@@ -597,6 +597,8 @@ window.PERSPECTIVEVIEW = (function() {
         priv.vanishingPoint.y = coordinate.y;
 
         priv.vanishingCell = pub.getVanishingCell();
+
+        priv.render.init();
     };
 
 

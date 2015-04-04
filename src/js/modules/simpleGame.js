@@ -188,6 +188,7 @@
             mod.renderer.clean();
 
             //mod.perspectiveView.setReferencePoint(position.x, position.y);
+            mod.perspectiveView.setVanishingPoint({x: position.x, y: position.y});
 
             // Real renderer from PerspectiveView
             mod.perspectiveView.render();
@@ -238,31 +239,18 @@
 
         priv.map = mod.map.getMap();
 
-/** /
-        // Test config separated
-        mod.perspectiveView.setCanvas(document.getElementById('myCanvas'));
-        mod.perspectiveView.setContext(document.getElementById('myCanvas').getContext('2d'));
-        mod.perspectiveView.setDepth(0.05);
-        mod.perspectiveView.setMap(priv.map);
-        mod.perspectiveView.setRenderMode('flat');
-        mod.perspectiveView.setUnitSize(40, 40);
-        mod.perspectiveView.setVanishingPoint({x: 260, y: 180});
-/**/
 /**/
         // Test config resumed
         mod.perspectiveView.setConfig({
             canvas:         document.getElementById('myCanvas'),
             context:        document.getElementById('myCanvas').getContext('2d'),
             depth:          0.05,
+            renderMode:     'specified',
             map:            priv.map,
             unitSize:       {x: 40,  y: 40},
             vanishingPoint: {x: 260, y: 180}
         });
-/**/
-/**/
-        mod.perspectiveView.setRenderMode('flat');
-        mod.perspectiveView.render();
-        mod.perspectiveView.setRenderMode('specified');
+
         mod.perspectiveView.render();
 /**/
 /** /
@@ -279,8 +267,8 @@
             },
             map: priv.map
         });
-        pub.start();
 /**/
+        pub.start();
     };
 
 
