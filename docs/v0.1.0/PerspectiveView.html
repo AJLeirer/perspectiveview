@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>PerspectiveView Namespace: PerspectiveView</title>
+	<title>PerspectiveView Class: PerspectiveView</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -27,7 +27,14 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="PerspectiveView.html">PerspectiveView</a></li><li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
+					<li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="PerspectiveView.html">PerspectiveView</a></li>
 				</ul>
 			</li>
 			
@@ -44,10 +51,10 @@
 	<div class="col-md-8">
 	
 		<div id="main">
-    		<h1 class="page-title">Namespace: PerspectiveView</h1>
+    		<h1 class="page-title">Class: PerspectiveView</h1>
 			
 
-	<h1 class="page-title">Namespace: PerspectiveView</h1>
+	<h1 class="page-title">Class: PerspectiveView</h1>
 <section>
 
 <header>
@@ -64,10 +71,27 @@
     <div class="container-overview">
     
         
-            <div class="description">To create an instance of PerspectiveView</div>
-        
+<dt>
+    <h4 class="name" id="PerspectiveView"><span class="type-signature"></span>new PerspectiveView<span class="signature">()</span><span class="type-signature"> &rarr; {window.PERSPECTIVEVIEW}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        To create an instance of PerspectiveView
+    </div>
+    
 
-        
+    
+
+    
+    
+    
+    
+    
+    
 <dl class="details">
 	
 
@@ -111,8 +135,41 @@
 	
 </dl>
 
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">window.PERSPECTIVEVIEW</span>
+
+
+	</dd>
+</dl>
+
 
         
+    
+    
+</dd>
+
     
     </div>
 
@@ -696,7 +753,48 @@ z-axis).
 
         <tr>
             
-                <td class="name"><code>width</code></td>
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Size object
+                <h6>Properties</h6>
+
+<table class="props table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
@@ -719,7 +817,7 @@ z-axis).
 
         <tr>
             
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
@@ -739,26 +837,10 @@ z-axis).
         </tr>
 
 	
+	</tbody>
+</table>
 
-        <tr>
-            
-                <td class="name"><code>depth</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
             </td>
-
-            
-
-            
-
-            <td class="description last">Depth (size on virtual z-axis) as factor</td>
         </tr>
 
 	
@@ -1636,29 +1718,30 @@ var pv = newPerspectiveView();
 // ...
 
 // Get config object
-pv.getConfig(); // Returns {
-                //     canvas:  &lt;canvas&gt;,
-                //     context: {...},
-                //     map:     [[1, 1, 1, 1, 1],
-                //               [1, 0, 0, 0, 1],
-                //               [1, 0, 1, 1, 1],
-                //               [1, 0, 0, 0, 1],
-                //               [1, 1, 1, 1, 1]],
-                //     renderMode: &#x27;flat&#x27;,
-                //     unitSize: {
-                //         width:  50,
-                //         height: 50,
-                //         depth:  0.05
-                //     },
-                //     vanishingPoint: {
-                //         x: 225,
-                //         y: 175
-                //     },
-                //     vanishingCell: {
-                //         x: 4,
-                //         y: 3
-                //     }
-                // }</pre>
+pv.getConfig();
+// Returns {
+//     canvas:  &lt;canvas&gt;,
+//     context: {...},
+//     depth:   0.05,
+//     map:     [[1, 1, 1, 1, 1],
+//               [1, 0, 0, 0, 1],
+//               [1, 0, 1, 1, 1],
+//               [1, 0, 0, 0, 1],
+//               [1, 1, 1, 1, 1]],
+//     renderMode: &#x27;flat&#x27;,
+//     unitSize: {
+//         x: 50,
+//         y: 50
+//     },
+//     vanishingCell: {
+//         x: 4,
+//         y: 3
+//     },
+//     vanishingPoint: {
+//         x: 225,
+//         y: 175
+//     }
+// }</pre>
 
 
     
@@ -1772,6 +1855,119 @@ var pv = newPerspectiveView();
 
 // Get context object
 pv.getContext(); // Returns context of &lt;canvas&gt;</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".getDepth"><span class="type-signature">&lt;static> </span>getDepth<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Returns the depth factor.
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Object</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
+var pv = newPerspectiveView();
+
+// ...
+
+// Get depth factor
+pv.getDepth(); // Returns 0.05</pre>
 
 
     
@@ -2034,11 +2230,14 @@ var pv = newPerspectiveView();
 // ...
 
 // Get map array
-pv.getMap(); // Returns [[1, 1, 1, 1, 1],
-             //          [1, 0, 0, 0, 1],
-             //          [1, 0, 1, 1, 1],
-             //          [1, 0, 0, 0, 1],
-             //          [1, 1, 1, 1, 1]]</pre>
+pv.getMap();
+// Returns [
+//     [1, 1, 1, 1, 1],
+//     [1, 0, 0, 0, 1],
+//     [1, 0, 1, 1, 1],
+//     [1, 0, 0, 0, 1],
+//     [1, 1, 1, 1, 1]
+// ]</pre>
 
 
     
@@ -2414,7 +2613,7 @@ var pv = newPerspectiveView();
 // ...
 
 // Get size object of a unit
-pv.getUnitSize(); // Returns {width: 50, height: 50, depth: 0.05}</pre>
+pv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
 
 
     
@@ -2646,11 +2845,11 @@ pv.getUnitSize(); // Returns {width: 50, height: 50, depth: 0.05}</pre>
 var pv = newPerspectiveView();
 
 // Sizes of a tile
-var width  = 50;   // px
-var height = 50;   // px
-var depth  = 0.05; // as factor
+var x = 50;   // px
+var y = 50;   // px
 
-pv.setUnitSize(width, height, depth);
+// Set the size of a unit/tile
+pv.setUnitSize(x, y);
 
 // Set coordinate to get vanishing cell from
 var coordinate = {
@@ -2869,6 +3068,107 @@ Sets the default values.
 	<dd>
 		
 <span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".render"><span class="type-signature">&lt;static> </span>render<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Renders rhe current state
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">Object</span>
 
 
 	</dd>
@@ -3222,6 +3522,7 @@ var pv = newPerspectiveView();
 // Set a valid config
 pv.setConfig({
     canvas: document.getElementById(&#x27;myCanvas&#x27;),
+    depth: 005,
     map: [
         [1, 1, 1, 1, 1],
         [1, 0, 0, 0, 1],
@@ -3231,9 +3532,12 @@ pv.setConfig({
     ],
     renderMode: &#x27;flat&#x27;,
     unitSize: {
-        width:  50,
-        height: 50,
-        depth:  0.05
+        x: 50,
+        y: 50
+    },
+    vanishingCell: {
+        x: 4,
+        y: 3
     },
     vanishingPoint: {
         x: 225,
@@ -3405,6 +3709,169 @@ var context  = myCanvas.getContext(&#x27;2d&#x27;);
 
 // Set context as new context
 pv.setContext(context);</pre>
+
+
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".setDepth"><span class="type-signature">&lt;static> </span>setDepth<span class="signature">(depth)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Sets the depth factor.
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>depth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Depth (size on virtual z-axis) of an unit/tile as factor</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
+var pv = newPerspectiveView();
+
+// Depth of a tile
+var depth = 0.05;
+
+// Set depth as new depth
+pv.setDepth(depth);</pre>
 
 
     
@@ -3748,7 +4215,7 @@ pv.setRenderMode(mode);</pre>
         
             
 <dt>
-    <h4 class="name" id=".setUnitSize"><span class="type-signature">&lt;static> </span>setUnitSize<span class="signature">(width, height, depth)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id=".setUnitSize"><span class="type-signature">&lt;static> </span>setUnitSize<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
 </dt>
@@ -3791,7 +4258,7 @@ pv.setRenderMode(mode);</pre>
 
         <tr>
             
-                <td class="name"><code>width</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
@@ -3814,7 +4281,7 @@ pv.setRenderMode(mode);</pre>
 
         <tr>
             
-                <td class="name"><code>height</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
@@ -3831,29 +4298,6 @@ pv.setRenderMode(mode);</pre>
             
 
             <td class="description last">Height (size on y-axis) of an unit/tile in px</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>depth</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Depth  (size on virtual z-axis) of an unit/tile as factor</td>
         </tr>
 
 	
@@ -3945,12 +4389,11 @@ pv.setRenderMode(mode);</pre>
 var pv = newPerspectiveView();
 
 // Sizes of a tile
-var width  = 50;   // px
-var height = 50;   // px
-var depth  = 0.05; // as factor
+var x = 50;   // px
+var y = 50;   // px
 
-// Set width, height and depth as new unit sizes
-pv.setUnitSize(width, height, depth);</pre>
+// Set x and y as new unit size
+pv.setUnitSize(x, y);</pre>
 
 
     
@@ -4473,7 +4916,7 @@ pv.setVanishingPoint(coordinate);</pre>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on 2015-04-03T17:18:55+02:00 using the <a
+	on 2015-04-04T11:43:19+02:00 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
