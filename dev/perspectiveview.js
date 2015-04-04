@@ -186,9 +186,9 @@ window.PERSPECTIVEVIEW = (function() {
      * @alias unit
      * @memberof PerspectiveView
      * @type {Object}
-     * @property {Object} size   - Size object
-     * @property {Number} size.x - Width (size on x-axis) in px
-     * @property {Number} size.y - Height (size on y-axis) in px
+     * @property {Object} unit.size   - Size object
+     * @property {Number} unit.size.x - Width (size on x-axis) in px
+     * @property {Number} unit.size.y - Height (size on y-axis) in px
      */
     priv.unit = {
         size: {
@@ -255,9 +255,9 @@ window.PERSPECTIVEVIEW = (function() {
         // Set default values
         pub.setDepth(priv.defaults.depth);
         pub.setMap(priv.defaults.map);
+        pub.setRenderMode(priv.defaults.renderMode);
         pub.setUnitSize(priv.defaults.unit.size.x, priv.defaults.unit.size.y);
         pub.setVanishingPoint(priv.defaults.vanishingPoint);
-        pub.setVanishingCell(priv.defaults.vanishingCell);
     };
 
 
@@ -329,10 +329,6 @@ window.PERSPECTIVEVIEW = (function() {
      *         x: 50,
      *         y: 50
      *     },
-     *     vanishingCell: {
-     *         x: 4,
-     *         y: 3
-     *     },
      *     vanishingPoint: {
      *         x: 225,
      *         y: 175
@@ -342,15 +338,14 @@ window.PERSPECTIVEVIEW = (function() {
     pub.setConfig = function setConfig(configuration) {
         var config         = typeof configuration         === 'object' ? configuration         : {},
             unitSize       = typeof config.unitSize       === 'object' ? config.unitSize       : {},
-            vanishingPoint = typeof config.vanishingPoint === 'object' ? config.vanishingPoint : {},
-            vanishingCell  = typeof config.vanishingCell  === 'object' ? config.vanishingCell  : {};
+            vanishingPoint = typeof config.vanishingPoint === 'object' ? config.vanishingPoint : {};
 
         config = {
-            canvas:     config.canvas     !== undefined ? config.canvas     : priv.canvas,
-            context:    config.context    !== undefined ? config.context    : priv.context,
-            depth:      config.depth      !== undefined ? config.depth      : priv.depth,
-            map:        config.map        !== undefined ? config.map        : priv.map,
-            renderMode: config.renderMode !== undefined ? config.renderMode : priv.renderMode,
+            canvas:     typeof config.canvas     !== 'undefined' ? config.canvas     : priv.canvas,
+            context:    typeof config.context    !== 'undefined' ? config.context    : priv.context,
+            depth:      typeof config.depth      !== 'undefined' ? config.depth      : priv.depth,
+            map:        typeof config.map        !== 'undefined' ? config.map        : priv.map,
+            renderMode: typeof config.renderMode !== 'undefined' ? config.renderMode : priv.renderMode,
             unitSize: {
                 x: unitSize.x !== undefined ? unitSize.x : priv.unit.size.x,
                 y: unitSize.y !== undefined ? unitSize.y : priv.unit.size.y
@@ -358,13 +353,10 @@ window.PERSPECTIVEVIEW = (function() {
             vanishingPoint: {
                 x: vanishingPoint.x !== undefined ? vanishingPoint.x : priv.vanishingPoint.x,
                 y: vanishingPoint.y !== undefined ? vanishingPoint.y : priv.vanishingPoint.y
-            },
-            vanishingCell: {
-                x: vanishingCell.x !== undefined ? vanishingCell.x : priv.vanishingCell.x,
-                y: vanishingCell.y !== undefined ? vanishingCell.y : priv.vanishingCell.y
             }
         };
 
+        // todo: A logic has to be implemented that checks, if a common setter method has to be executed only if the common property is listed in the configuration
         pub.setCanvas(config.canvas);
         pub.setContext(config.context);
         pub.setDepth(config.depth);
@@ -372,7 +364,6 @@ window.PERSPECTIVEVIEW = (function() {
         pub.setRenderMode(config.renderMode);
         pub.setUnitSize(config.unitSize.x, config.unitSize.y);
         pub.setVanishingPoint(config.vanishingPoint);
-        pub.setVanishingCell(config.vanishingCell);
     };
 
 
@@ -567,45 +558,6 @@ window.PERSPECTIVEVIEW = (function() {
 
 
     /**
-     * Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
-     *
-     * @public
-     * @function
-     * @alias setVanishingCell
-     * @memberof PerspectiveView
-     * @param {Object} cell
-     * @param {Number} cell.x - Position on x-axis in units/tiles
-     * @param {Number} cell.y - Position on y-axis in units/tiles
-     * @return {void}
-     *
-     * @example
-     * // Creates an instance of PerspectiveView
-     * var pv = newPerspectiveView();
-     *
-     * // Cell to be set as vanishing cell
-     * var cell = {
-     *     x: 4; // Position on x-axis in the grid
-     *     y: 3; // Position on y-axis in the grid
-     * };
-     *
-     * // Set cell as new vanishing cell
-     * pv.setVanishingCell(cell);
-     */
-    pub.setVanishingCell = function setVanishingCell(cell) {
-        if (DEV_MODE) {
-            if (!DEV.util.validate.isCell(cell)) {
-                console.error('Parameter <cell> is not a valid cell :: ', '{' , typeof cell, '} :: ', cell);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-        }
-
-        priv.vanishingCell.x = Number(cell.x);
-        priv.vanishingCell.y = Number(cell.y);
-    };
-
-
-
-    /**
      * Sets the vanishing point to which refers to the perspective view, like architectural drawing.
      *
      * @public
@@ -644,12 +596,9 @@ window.PERSPECTIVEVIEW = (function() {
         priv.vanishingPoint.x = coordinate.x;
         priv.vanishingPoint.y = coordinate.y;
 
-        pub.setVanishingCell(
-            pub.getVanishingCell({
-                x: coordinate.x,
-                y: coordinate.y
-            })
-        );
+        priv.vanishingCell = pub.getVanishingCell();
+
+        priv.render.init();
     };
 
 
@@ -731,7 +680,7 @@ window.PERSPECTIVEVIEW = (function() {
             renderMode:     pub.getRenderMode(),
             unitSize:       pub.getUnitSize(),
             vanishingPoint: pub.getVanishingPoint(),
-            vanishingCell:  pub.getVanishingCell(pub.getVanishingPoint())
+            vanishingCell:  pub.getVanishingCell()
         };
     };
 
@@ -874,9 +823,6 @@ window.PERSPECTIVEVIEW = (function() {
      * @function
      * @alias getVanishingCell
      * @memberof PerspectiveView
-     * @param {Object} coordinate
-     * @param {Number} coordinate.x - Coordinate on x-axis in px
-     * @param {Number} coordinate.y - Coordinate on y-axis in px
      * @return {Object}
      *
      * @example
@@ -890,27 +836,27 @@ window.PERSPECTIVEVIEW = (function() {
      * // Set the size of a unit/tile
      * pv.setUnitSize(x, y);
      *
-     * // Set coordinate to get vanishing cell from
+     * // Coordinate to be set as vanishing point
      * var coordinate = {
      *     x: 225; // px
      *     y: 175; // px
      * };
      *
-     * // Get vanishing cell of the given parameter coordinate
-     * getVanishingCell(coordinate); // Returns { x: 4, y: 3 }
+     * // Set coordinate as new vanishing point
+     * pv.setVanishingPoint(coordinate);
+     *
+     * // Get vanishing cell
+     * getVanishingCell(); // Returns { x: 4, y: 3 }
      */
-    pub.getVanishingCell = function getVanishingCell(coordinate) {
-        if (DEV_MODE) {
-            if (!DEV.util.validate.isCoordinate(coordinate)) {
-                console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
+    pub.getVanishingCell = function getVanishingCell() {
+        var cell = {};
+
+        if (priv.unit.size.x > 0 && priv.unit.size.y > 0) {
+            cell.x = Math.floor(Number(priv.vanishingPoint.x) / priv.unit.size.x);
+            cell.y = Math.floor(Number(priv.vanishingPoint.y) / priv.unit.size.y);
         }
 
-        return {
-            x: Math.floor(Number(coordinate.x) / priv.unit.size.x),
-            y: Math.floor(Number(coordinate.y) / priv.unit.size.y)
-        };
+        return cell;
     };
 
 
