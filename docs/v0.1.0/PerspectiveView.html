@@ -27,7 +27,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
+					<li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.render_specified.html">PerspectiveView.render_specified</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
 				</ul>
 			</li>
 			
@@ -186,6 +186,9 @@
 
         <dl>
             <dt><a href="namespaces.html#PerspectiveView.render_flat"><a href="PerspectiveView.render_flat.html">render_flat</a></a></dt>
+            <dd></dd>
+        
+            <dt><a href="namespaces.html#PerspectiveView.render_specified"><a href="PerspectiveView.render_specified.html">render_specified</a></a></dt>
             <dd></dd>
         
             <dt><a href="namespaces.html#PerspectiveView.validate"><a href="PerspectiveView.validate.html">validate</a></a></dt>
@@ -753,7 +756,7 @@ z-axis).
 
         <tr>
             
-                <td class="name"><code>size</code></td>
+                <td class="name"><code>unit.size</code></td>
             
 
             <td class="type">
@@ -2622,7 +2625,7 @@ pv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
         
             
 <dt>
-    <h4 class="name" id=".getVanishingCell"><span class="type-signature">&lt;static> </span>getVanishingCell<span class="signature">(coordinate)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".getVanishingCell"><span class="type-signature">&lt;static> </span>getVanishingCell<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
 </dt>
@@ -2639,127 +2642,6 @@ pv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
     
     
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>coordinate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Coordinate on x-axis in px</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Coordinate on y-axis in px</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-            </td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
     
     
     
@@ -2851,14 +2733,17 @@ var y = 50;   // px
 // Set the size of a unit/tile
 pv.setUnitSize(x, y);
 
-// Set coordinate to get vanishing cell from
+// Coordinate to be set as vanishing point
 var coordinate = {
     x: 225; // px
     y: 175; // px
 };
 
-// Get vanishing cell of the given parameter coordinate
-getVanishingCell(coordinate); // Returns { x: 4, y: 3 }</pre>
+// Set coordinate as new vanishing point
+pv.setVanishingPoint(coordinate);
+
+// Get vanishing cell
+getVanishingCell(); // Returns { x: 4, y: 3 }</pre>
 
 
     
@@ -3534,10 +3419,6 @@ pv.setConfig({
     unitSize: {
         x: 50,
         y: 50
-    },
-    vanishingCell: {
-        x: 4,
-        y: 3
     },
     vanishingPoint: {
         x: 225,
@@ -4402,244 +4283,6 @@ pv.setUnitSize(x, y);</pre>
         
             
 <dt>
-    <h4 class="name" id=".setVanishingCell"><span class="type-signature">&lt;static> </span>setVanishingCell<span class="signature">(cell)</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <div class="description">
-        Sets the vanishing cell to which refers to the perspective view for rendering in the right order.
-    </div>
-    
-
-    
-
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>cell</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params table table-striped">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-
-		<th>Type</th>
-
-		
-
-		
-
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-
-	<tbody>
-	
-
-        <tr>
-            
-                <td class="name"><code>x</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Position on x-axis in units/tiles</td>
-        </tr>
-
-	
-
-        <tr>
-            
-                <td class="name"><code>y</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Position on y-axis in units/tiles</td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-            </td>
-        </tr>
-
-	
-	</tbody>
-</table>
-
-    
-    
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		perspectiveview.js
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-    
-    
-
-    
-
-    
-
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type">void</span>
-
-
-	</dd>
-</dl>
-
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Cell to be set as vanishing cell
-var cell = {
-    x: 4; // Position on x-axis in the grid
-    y: 3; // Position on y-axis in the grid
-};
-
-// Set cell as new vanishing cell
-pv.setVanishingCell(cell);</pre>
-
-
-    
-</dd>
-
-        
-            
-<dt>
     <h4 class="name" id=".setVanishingPoint"><span class="type-signature">&lt;static> </span>setVanishingPoint<span class="signature">(coordinate)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
     
@@ -4916,7 +4559,7 @@ pv.setVanishingPoint(coordinate);</pre>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on 2015-04-04T11:43:19+02:00 using the <a
+	on 2015-04-04T15:19:49+02:00 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
