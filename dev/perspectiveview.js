@@ -2,6 +2,7 @@
  * To create an instance of PerspectiveView
  *
  * @namespace PerspectiveView
+ * @constructor
  * @returns {window.PERSPECTIVEVIEW}
  */
 function PerspectiveView() {
@@ -473,8 +474,9 @@ window.PERSPECTIVEVIEW = (function() {
 
         priv.renderMode = mode.toString().toLowerCase();
 
+        // Update render functionality
         priv.render = pub.getModule('render_' + priv.renderMode);
-
+        priv.render.init();
     };
 
 
@@ -991,7 +993,7 @@ window.PERSPECTIVEVIEW = (function() {
         var id;
 
         for (id in DEV.util) {
-            if (id === moduleId) {
+            if (id === moduleId && DEV.util.hasOwnProperty(id)) {
                 return DEV.util[id];
             }
         }

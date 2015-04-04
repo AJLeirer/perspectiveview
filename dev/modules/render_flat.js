@@ -65,8 +65,9 @@
      * @alias getRenderOrder
      * @return {Array}
      */
-    priv.getRenderOrder = function getRenderOrder(map) {
-        var yAmount   = map.length,
+    priv.getRenderOrder = function getRenderOrder() {
+        var map       = pv.getMap(),
+            yAmount   = map.length,
             xAmount   = map[0].length,
             orderlist = [],
             x,y;
@@ -92,8 +93,9 @@
      * @alias renderMap
      * @return {void}
      */
-    priv.renderMap = function renderMap(map) {
-        var order      = priv.renderOrder,
+    priv.renderMap = function renderMap() {
+        var map        = pv.getMap(),
+            order      = priv.renderOrder,
             itemAmount = order.length,
             context    = pv.getContext(),
             unitSize   = pv.getUnitSize(),
@@ -133,6 +135,15 @@
 
 
     /**
+     * Initialize this module.
+     */
+    pub.init = function init() {
+        pub.updateRenderOrder();
+    };
+
+
+
+    /**
      * Public API render method
      *
      * @public
@@ -142,9 +153,22 @@
      * @return {void}
      */
     pub.render = function render() {
-        var map = pv.getMap();
-        priv.renderOrder = priv.getRenderOrder(map);
-        priv.renderMap(map);
+        priv.renderMap();
+    };
+
+
+
+    /**
+     * Updates the order of rendered items.
+     *
+     * @public
+     * @memberof! PerspectiveView.render_flat
+     * @function
+     * @alias updateRenderOrder
+     * @return {void}
+     */
+    pub.updateRenderOrder = function updateRenderOrder() {
+        priv.renderOrder = priv.getRenderOrder();
     };
 
 
