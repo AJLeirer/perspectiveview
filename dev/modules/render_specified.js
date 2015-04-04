@@ -109,10 +109,18 @@
     };
 
 
+
     /**
+     * Returns an array of paths of the six shapes of an cuboid at the given position.
      *
-     * @param position
-     * @param depth
+     * @private
+     * @memberof! PerspectiveView.render_specified
+     * @function
+     * @alias getCuboidPaths
+     * @param {Object} position   - Position in the map
+     * @param {Number} position.x - Absolute x position in the map in units
+     * @param {Number} position.y - Absolute y position in the map in units
+     * @param {Number} depth      - Amount of the depth units
      * @return {Object}
      */
     priv.getCuboidPaths = function getCuboidPaths(position, depth) {
@@ -218,12 +226,21 @@
 
 
 
-    priv.drawPath = function drawPath(configuration) {
-        var config     = typeof configuration   === 'object'    ? configuration   : {},
-            path       = config.path,
-            pathAmount = path.length,
-            color      = config.color,
-            context    = pv.getContext();
+    /**
+     * Draws a stroked, filled, closed and colored shape at the canvas.
+     *
+     * @private
+     * @memberof! PerspectiveView.render_specified
+     * @function
+     * @alias getCuboidPaths
+     * @param {Array}  path  - List of XY-Coordinates
+     * @param {String} color - Color of the drawn shape
+     * @return {void}
+     */
+    priv.drawPath = function drawPath(path, color) {
+        var context    = pv.getContext(),
+            pathAmount = path.length;
+
 
         context.save();
 
@@ -247,51 +264,52 @@
 
 
 
+    /**
+     * Draws a stroked, filled, closed and colored shape at the canvas.
+     *
+     * @private
+     * @memberof! PerspectiveView.render_specified
+     * @function
+     * @alias getCuboidPaths
+     * @param {Object} configuration            - Configuration
+     * @param {Object} configuration.position   - Position in the map
+     * @param {Number} configuration.position.x - Absolute x position in the map in units
+     * @param {Number} configuration.position.y - Absolute y position in the map in units
+     * @param {Object} configuration.data       - Data from every map item
+     * @param {Number} configuration.data.depth - Amount of depth units
+     * @return {void}
+     */
     priv.renderCuboid = function renderCuboid(configuration) {
         var config        = typeof configuration   === 'object'    ? configuration   : {},
             position      = typeof config.position === 'object'    ? config.position : {},
-            depth         = config.depth,
+            data          = typeof config.data     === 'object'    ? config.data     : {},
+            depth         = data.depth,
             vanishingCell = pv.getVanishingCell(),
             paths         = priv.getCuboidPaths(position, depth);
 
         if (depth > 0) {
             // Check if north shape has to be rendered
             if (position.y > vanishingCell.y) {
-                priv.drawPath({
-                    path:  paths.north,
-                    color: 'rgb(27,27,27)'
-                });
+                priv.drawPath(paths.north, 'rgb(27,27,27)');
             }
 
             // Check if East shape has to be rendered
             if (position.x < vanishingCell.x) {
-                priv.drawPath({
-                    path: paths.east,
-                    color: 'rgb(32,32,32)'
-                });
+                priv.drawPath(paths.east, 'rgb(32,32,32)');
             }
 
             // Check if west shape has to be rendered
             if (vanishingCell.x < position.x) {
-                priv.drawPath({
-                    path: paths.west,
-                    color: 'rgb(68,68,68)'
-                });
+                priv.drawPath( paths.west, 'rgb(68,68,68)');
             }
 
             // Check if south shape has to be rendered
             if (vanishingCell.y > position.y) {
-                priv.drawPath({
-                    path: paths.south,
-                    color: 'rgb(72,72,72)'
-                });
+                priv.drawPath( paths.south, 'rgb(72,72,72)');
             }
 
-            // Check if roof shape has to be rendered
-            priv.drawPath({
-                path: paths.roof,
-                color: 'rgb(50,50,50)'
-            });
+            // Roof shape has to be rendered always
+            priv.drawPath(paths.roof, 'rgb(50,50,50)');
         }
     };
 
@@ -326,7 +344,9 @@
                     x: mapItemPosition.x,
                     y: mapItemPosition.y
                 },
-                depth: mapItemObject
+                data: {
+                    depth: mapItemObject
+                }
             });
         }
         context.restore();
