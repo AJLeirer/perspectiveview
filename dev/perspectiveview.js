@@ -2,6 +2,7 @@
  * To create an instance of PerspectiveView
  *
  * @namespace PerspectiveView
+ * @constructor
  * @returns {window.PERSPECTIVEVIEW}
  */
 function PerspectiveView() {
@@ -105,12 +106,14 @@ window.PERSPECTIVEVIEW = (function() {
     priv.defaults = {
         canvas: {},
         context: {},
+        depth: 0.05,
         map: [[0]],
         renderMode: 'flat',
         unit: {
-            width:  32,
-            height: 32,
-            depth:  0.05
+            size: {
+                x:  32,
+                y: 32
+            }
         },
         vanishingCell: {
             x: 0,
@@ -183,14 +186,15 @@ window.PERSPECTIVEVIEW = (function() {
      * @alias unit
      * @memberof PerspectiveView
      * @type {Object}
-     * @property {Number} width  - Width (size on x-axis) in px
-     * @property {Number} height - Height (size on y-axis) in px
-     * @property {Number} depth  - Depth (size on virtual z-axis) as factor
+     * @property {Object} size   - Size object
+     * @property {Number} size.x - Width (size on x-axis) in px
+     * @property {Number} size.y - Height (size on y-axis) in px
      */
     priv.unit = {
-        width:  0,
-        height: 0,
-        depth:  0
+        size: {
+            x: 0,
+            y: 0
+        }
     };
 
 
@@ -229,6 +233,10 @@ window.PERSPECTIVEVIEW = (function() {
 
 
 
+    priv.render = {};
+
+
+
     // ------------------------------------------------------------------------------------------------ Public
     // -------------------------------------------------------------------------------------- Setter
 
@@ -245,8 +253,9 @@ window.PERSPECTIVEVIEW = (function() {
      */
     pub.init = function init() {
         // Set default values
+        pub.setDepth(priv.defaults.depth);
         pub.setMap(priv.defaults.map);
-        pub.setUnitSize(priv.defaults.unit.width , priv.defaults.unit.height , priv.defaults.unit.depth);
+        pub.setUnitSize(priv.defaults.unit.size.x, priv.defaults.unit.size.y);
         pub.setVanishingPoint(priv.defaults.vanishingPoint);
         pub.setVanishingCell(priv.defaults.vanishingCell);
     };
@@ -276,7 +285,7 @@ window.PERSPECTIVEVIEW = (function() {
      */
     pub.setCanvas = function setCanvas(canvas) {
         if (DEV_MODE) {
-            if (!SELF.isHtmlCanvasElement(canvas)) {
+            if (!DEV.util.validate.isHtmlCanvasElement(canvas)) {
                 console.error('Parameter <canvas> is not a valid HTML canvas element :: ', '{' , typeof canvas, '} :: ', canvas);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
@@ -307,6 +316,7 @@ window.PERSPECTIVEVIEW = (function() {
      * // Set a valid config
      * pv.setConfig({
      *     canvas: document.getElementById('myCanvas'),
+     *     depth: 005,
      *     map: [
      *         [1, 1, 1, 1, 1],
      *         [1, 0, 0, 0, 1],
@@ -316,9 +326,12 @@ window.PERSPECTIVEVIEW = (function() {
      *     ],
      *     renderMode: 'flat',
      *     unitSize: {
-     *         width:  50,
-     *         height: 50,
-     *         depth:  0.05
+     *         x: 50,
+     *         y: 50
+     *     },
+     *     vanishingCell: {
+     *         x: 4,
+     *         y: 3
      *     },
      *     vanishingPoint: {
      *         x: 225,
@@ -335,12 +348,12 @@ window.PERSPECTIVEVIEW = (function() {
         config = {
             canvas:     config.canvas     !== undefined ? config.canvas     : priv.canvas,
             context:    config.context    !== undefined ? config.context    : priv.context,
+            depth:      config.depth      !== undefined ? config.depth      : priv.depth,
             map:        config.map        !== undefined ? config.map        : priv.map,
             renderMode: config.renderMode !== undefined ? config.renderMode : priv.renderMode,
             unitSize: {
-                width:  unitSize.width  !== undefined ? unitSize.width  : priv.unit.width,
-                height: unitSize.height !== undefined ? unitSize.height : priv.unit.height,
-                depth:  unitSize.depth  !== undefined ? unitSize.depth  : priv.unit.depth
+                x: unitSize.x !== undefined ? unitSize.x : priv.unit.size.x,
+                y: unitSize.y !== undefined ? unitSize.y : priv.unit.size.y
             },
             vanishingPoint: {
                 x: vanishingPoint.x !== undefined ? vanishingPoint.x : priv.vanishingPoint.x,
@@ -354,8 +367,10 @@ window.PERSPECTIVEVIEW = (function() {
 
         pub.setCanvas(config.canvas);
         pub.setContext(config.context);
+        pub.setDepth(config.depth);
         pub.setMap(config.map);
-        pub.setUnitSize(config.unitSize.width, config.unitSize.height, config.unitSize.depth);
+        pub.setRenderMode(config.renderMode);
+        pub.setUnitSize(config.unitSize.x, config.unitSize.y);
         pub.setVanishingPoint(config.vanishingPoint);
         pub.setVanishingCell(config.vanishingCell);
     };
@@ -386,13 +401,47 @@ window.PERSPECTIVEVIEW = (function() {
      */
     pub.setContext = function setContext(context) {
         if (DEV_MODE) {
-            if (!SELF.isObject(context)) {
+            if (!DEV.util.validate.isObject(context)) {
                 console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', '{' , typeof context, '} :: ', context);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
 
         priv.context = context;
+    };
+
+
+
+    /**
+     * Sets the depth factor.
+     *
+     * @public
+     * @memberof PerspectiveView
+     * @function
+     * @alias setDepth
+     * @param {Number} depth - Depth (size on virtual z-axis) of an unit/tile as factor
+     * @return {void}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // Depth of a tile
+     * var depth = 0.05;
+     *
+     * // Set depth as new depth
+     * pv.setDepth(depth);
+     */
+    pub.setDepth = function setDepth(depth) {
+        if (DEV_MODE) {
+            if (!DEV.util.validate.isSize(depth)) {
+                console.error('Parameter <depth> is not a valid depth factor :: ', '{' , typeof depth, '} :: ', depth);
+                if (DEV.abortOnError) { throw new Error('Script abort'); }
+            }
+        }
+
+        priv.depth = Number(depth);
+
     };
 
 
@@ -468,6 +517,10 @@ window.PERSPECTIVEVIEW = (function() {
         }
 
         priv.renderMode = mode.toString().toLowerCase();
+
+        // Update render functionality
+        priv.render = pub.getModule('render_' + priv.renderMode);
+        priv.render.init();
     };
 
 
@@ -479,9 +532,8 @@ window.PERSPECTIVEVIEW = (function() {
      * @function
      * @alias setUnitSize
      * @memberof PerspectiveView
-     * @param {Number} width  - Width (size on x-axis) of an unit/tile in px
-     * @param {Number} height - Height (size on y-axis) of an unit/tile in px
-     * @param {Number} depth  - Depth  (size on virtual z-axis) of an unit/tile as factor
+     * @param {Number} x - Width (size on x-axis) of an unit/tile in px
+     * @param {Number} y - Height (size on y-axis) of an unit/tile in px
      * @return {void}
      *
      * @example
@@ -489,34 +541,27 @@ window.PERSPECTIVEVIEW = (function() {
      * var pv = newPerspectiveView();
      *
      * // Sizes of a tile
-     * var width  = 50;   // px
-     * var height = 50;   // px
-     * var depth  = 0.05; // as factor
+     * var x = 50;   // px
+     * var y = 50;   // px
      *
-     * // Set width, height and depth as new unit sizes
-     * pv.setUnitSize(width, height, depth);
+     * // Set x and y as new unit size
+     * pv.setUnitSize(x, y);
      */
-    pub.setUnitSize = function setUnitSize(width, height, depth) {
+    pub.setUnitSize = function setUnitSize(x, y) {
         if (DEV_MODE) {
-            if (!DEV.util.validate.isSize(width)) {
-                console.error('Parameter <width> is not a valid width :: ', '{' , typeof width, '} :: ', width);
+            if (!DEV.util.validate.isSize(x)) {
+                console.error('Parameter <x> is not a valid width :: ', '{' , typeof x, '} :: ', x);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
 
-            if (!DEV.util.validate.isSize(height)) {
-                console.error('Parameter <height> is not a valid height :: ', '{' , typeof width, '} :: ', height);
-                if (DEV.abortOnError) { throw new Error('Script abort'); }
-            }
-
-            if (!DEV.util.validate.isSize(depth)) {
-                console.error('Parameter <depth> is not a valid depth :: ', '{' , typeof depth, '} :: ', depth);
+            if (!DEV.util.validate.isSize(y)) {
+                console.error('Parameter <y> is not a valid height :: ', '{' , typeof y, '} :: ', y);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
             }
         }
 
-        priv.unit.width  = Number(width);
-        priv.unit.height = Number(height);
-        priv.unit.depth  = Number(depth);
+        priv.unit.size.x = Number(x);
+        priv.unit.size.y = Number(y);
     };
 
 
@@ -599,10 +644,12 @@ window.PERSPECTIVEVIEW = (function() {
         priv.vanishingPoint.x = coordinate.x;
         priv.vanishingPoint.y = coordinate.y;
 
-        pub.setVanishingCell(pub.getVanishingCell({
-            x: coordinate.x,
-            y: coordinate.y
-        }));
+        pub.setVanishingCell(
+            pub.getVanishingCell({
+                x: coordinate.x,
+                y: coordinate.y
+            })
+        );
     };
 
 
@@ -651,49 +698,40 @@ window.PERSPECTIVEVIEW = (function() {
      * // ...
      *
      * // Get config object
-     * pv.getConfig(); // Returns {
-     *                 //     canvas:  <canvas>,
-     *                 //     context: {...},
-     *                 //     map:     [[1, 1, 1, 1, 1],
-     *                 //               [1, 0, 0, 0, 1],
-     *                 //               [1, 0, 1, 1, 1],
-     *                 //               [1, 0, 0, 0, 1],
-     *                 //               [1, 1, 1, 1, 1]],
-     *                 //     renderMode: 'flat',
-     *                 //     unitSize: {
-     *                 //         width:  50,
-     *                 //         height: 50,
-     *                 //         depth:  0.05
-     *                 //     },
-     *                 //     vanishingPoint: {
-     *                 //         x: 225,
-     *                 //         y: 175
-     *                 //     },
-     *                 //     vanishingCell: {
-     *                 //         x: 4,
-     *                 //         y: 3
-     *                 //     }
-     *                 // }
+     * pv.getConfig();
+     * // Returns {
+     * //     canvas:  <canvas>,
+     * //     context: {...},
+     * //     depth:   0.05,
+     * //     map:     [[1, 1, 1, 1, 1],
+     * //               [1, 0, 0, 0, 1],
+     * //               [1, 0, 1, 1, 1],
+     * //               [1, 0, 0, 0, 1],
+     * //               [1, 1, 1, 1, 1]],
+     * //     renderMode: 'flat',
+     * //     unitSize: {
+     * //         x: 50,
+     * //         y: 50
+     * //     },
+     * //     vanishingCell: {
+     * //         x: 4,
+     * //         y: 3
+     * //     },
+     * //     vanishingPoint: {
+     * //         x: 225,
+     * //         y: 175
+     * //     }
+     * // }
      */
     pub.getConfig = function getConfig() {
         return {
-            canvas:     priv.canvas,
-            context:    priv.context,
-            map:        priv.map,
-            renderMode: priv.renderMode,
-            unitSize: {
-                width:  priv.unit.width,
-                height: priv.unit.height,
-                depth:  priv.unit.depth
-            },
-            vanishingPoint: {
-                x: priv.vanishingPoint.x,
-                y: priv.vanishingPoint.y
-            },
-            vanishingCell: {
-                x: priv.vanishingCell.x,
-                y: priv.vanishingCell.y
-            }
+            canvas:         pub.getCanvas(),
+            context:        pub.getContext(),
+            map:            pub.getMap(),
+            renderMode:     pub.getRenderMode(),
+            unitSize:       pub.getUnitSize(),
+            vanishingPoint: pub.getVanishingPoint(),
+            vanishingCell:  pub.getVanishingCell(pub.getVanishingPoint())
         };
     };
 
@@ -724,6 +762,30 @@ window.PERSPECTIVEVIEW = (function() {
 
 
     /**
+     * Returns the depth factor.
+     *
+     * @public
+     * @memberof PerspectiveView
+     * @function
+     * @alias getDepth
+     * @return {Object}
+     *
+     * @example
+     * // Creates an instance of PerspectiveView
+     * var pv = newPerspectiveView();
+     *
+     * // ...
+     *
+     * // Get depth factor
+     * pv.getDepth(); // Returns 0.05
+     */
+    pub.getDepth = function getDepth() {
+        return priv.depth;
+    };
+
+
+
+    /**
      * Returns the map array.
      *
      * @public
@@ -739,11 +801,14 @@ window.PERSPECTIVEVIEW = (function() {
      * // ...
      *
      * // Get map array
-     * pv.getMap(); // Returns [[1, 1, 1, 1, 1],
-     *              //          [1, 0, 0, 0, 1],
-     *              //          [1, 0, 1, 1, 1],
-     *              //          [1, 0, 0, 0, 1],
-     *              //          [1, 1, 1, 1, 1]]
+     * pv.getMap();
+     * // Returns [
+     * //     [1, 1, 1, 1, 1],
+     * //     [1, 0, 0, 0, 1],
+     * //     [1, 0, 1, 1, 1],
+     * //     [1, 0, 0, 0, 1],
+     * //     [1, 1, 1, 1, 1]
+     * // ]
      */
     pub.getMap = function getMap() {
         return priv.map;
@@ -779,10 +844,10 @@ window.PERSPECTIVEVIEW = (function() {
      * Returns the size of a unit/tile.
      *
      * @public
+     * @memberof PerspectiveView
      * @function
      * @alias getUnitSize
-     * @memberof PerspectiveView
-     * @return {{width: priv.unit.width, height: priv.unit.height, depth: priv.unit.depth}}
+     * @return {Object}
      *
      * @example
      * // Creates an instance of PerspectiveView
@@ -791,13 +856,12 @@ window.PERSPECTIVEVIEW = (function() {
      * // ...
      *
      * // Get size object of a unit
-     * pv.getUnitSize(); // Returns {width: 50, height: 50, depth: 0.05}
+     * pv.getUnitSize(); // Returns {x: 50, y: 50}
      */
     pub.getUnitSize = function getUnitSize() {
         return {
-            width:  priv.unit.width,
-            height: priv.unit.height,
-            depth:  priv.unit.depth
+            x: priv.unit.size.x,
+            y: priv.unit.size.y
         };
     };
 
@@ -820,11 +884,11 @@ window.PERSPECTIVEVIEW = (function() {
      * var pv = newPerspectiveView();
      *
      * // Sizes of a tile
-     * var width  = 50;   // px
-     * var height = 50;   // px
-     * var depth  = 0.05; // as factor
+     * var x = 50;   // px
+     * var y = 50;   // px
      *
-     * pv.setUnitSize(width, height, depth);
+     * // Set the size of a unit/tile
+     * pv.setUnitSize(x, y);
      *
      * // Set coordinate to get vanishing cell from
      * var coordinate = {
@@ -844,8 +908,8 @@ window.PERSPECTIVEVIEW = (function() {
         }
 
         return {
-            x: Math.floor(Number(coordinate.x) / priv.unit.width),
-            y: Math.floor(Number(coordinate.y) / priv.unit.height)
+            x: Math.floor(Number(coordinate.x) / priv.unit.size.x),
+            y: Math.floor(Number(coordinate.y) / priv.unit.size.y)
         };
     };
 
@@ -984,12 +1048,31 @@ window.PERSPECTIVEVIEW = (function() {
         var id;
 
         for (id in DEV.util) {
-            if (id === moduleId) {
+            if (id === moduleId && DEV.util.hasOwnProperty(id)) {
                 return DEV.util[id];
             }
         }
 
         return {};
+    };
+
+
+
+    // ------------------------------------------------------------------------------------------------ Render
+
+
+
+    /**
+     * Renders rhe current state
+     *
+     * @public
+     * @memberof PerspectiveView
+     * @function
+     * @alias render
+     * @return {Object}
+     */
+    pub.render = function render() {
+        priv.render.render();
     };
 
 
