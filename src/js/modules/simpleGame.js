@@ -187,8 +187,8 @@
             // Helper
             mod.renderer.clean();
 
-            //mod.perspectiveView.setReferencePoint(position.x, position.y);
-            mod.perspectiveView.setVanishingPoint({x: position.x, y: position.y});
+            mod.perspectiveView.setReferencePoint(position.x, position.y);
+            //mod.perspectiveView.setVanishingPoint({x: position.x, y: position.y});
 
             // Real renderer from PerspectiveView
             mod.perspectiveView.render();
@@ -239,7 +239,7 @@
 
         priv.map = mod.map.getMap();
 
-/**/
+/** /
         // Test config resumed
         mod.perspectiveView.setConfig({
             canvas:         document.getElementById('myCanvas'),
@@ -253,7 +253,7 @@
 
         mod.perspectiveView.render();
 /**/
-/** /
+/**/
         mod.perspectiveView.setConfig({
             canvas:  document.getElementById('myCanvas'),
             unit: {
