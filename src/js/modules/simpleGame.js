@@ -256,7 +256,7 @@
             context:        document.getElementById('myCanvas').getContext('2d'),
             depth:          0.05,
             map:            priv.map,
-            renderMode:     'flat',
+            renderMode:     'unitary',
             unitSize:       {x: 40,  y: 40},
             vanishingPoint: {x: 260, y: 180},
             vanishingCell:  {x: 7,   y: 5}

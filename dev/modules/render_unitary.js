@@ -1,13 +1,13 @@
 /**
- * Revealing module for rendering flat maps.
+ * Revealing module for rendering maps with a unitary height.
  *
- * @namespace render_flat
+ * @namespace render_unitary
  * @memberof PerspectiveView
  * @param {Object} window   - Global window object
  * @param {Object} document - Global document object
  * @param {Object} pv       - PerspectiveView with empty object fallback
  */
-;(function render_flat(win, doc, pv) {
+;(function render_unitary(win, doc, pv) {
     'use strict';
 
 
@@ -21,7 +21,7 @@
      *
      * @private
      * @ignore
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @type {Object}
      */
     var priv = {},
@@ -33,7 +33,7 @@
      *
      * @public
      * @ignore
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @type {Object}
      */
     pub = {};
@@ -47,7 +47,7 @@
      * Stores the order of to rendered map items.
      *
      * @private
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getRenderOrder
      * @type {Array}
@@ -60,7 +60,7 @@
      * Returns an array of the ordered map items.
      *
      * @private
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getRenderOrder
      * @return {Array}
@@ -72,12 +72,7 @@
             orderlist = [],
             x,y;
 
-        // The map will be rendered in reversed order, so the orderlist has also to be determent in reversed order
-        for(y = (yAmount - 1); y >= 0; y--) {
-            for(x = (xAmount - 1); x >= 0; x--) {
-                orderlist.push({ x: x, y: y });
-            }
-        }
+        // ...
 
         return orderlist;
     };
@@ -88,7 +83,7 @@
      * Handles the rendering of the map
      *
      * @private
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias renderMap
      * @return {void}
@@ -102,28 +97,7 @@
             mapItemPosition,
             mapItemObject;
 
-
-        context.save();
-        while (itemAmount--) {
-            mapItemPosition = order[itemAmount];
-            mapItemObject   = map[mapItemPosition.y][mapItemPosition.x];
-
-            if (mapItemObject > 0) {
-                context.fillStyle = 'rgb(50,50,50)';
-            }
-            else {
-                context.fillStyle = 'rgb(255,255,255)';
-            }
-
-            context.fillRect(
-                (mapItemPosition.x * unitSize.x),
-                (mapItemPosition.y * unitSize.y),
-                unitSize.x,
-                unitSize.y
-            );
-            context.fill();
-        }
-        context.restore();
+        // ...
     };
 
 
@@ -136,7 +110,7 @@
      * Initialize this module.
      *
      * @public
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias init
      * @return {void}
@@ -151,7 +125,7 @@
      * Public API render method
      *
      * @public
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias render
      * @return {void}
@@ -166,7 +140,7 @@
      * Updates the order of rendered items.
      *
      * @public
-     * @memberof! PerspectiveView.render_flat
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias updateRenderOrder
      * @return {void}
@@ -181,7 +155,7 @@
 
 
 
-    pv.appendModule({render_flat: pub});
+    pv.appendModule({render_unitary: pub});
 
 
 
