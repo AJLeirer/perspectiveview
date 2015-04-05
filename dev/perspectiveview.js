@@ -24,20 +24,8 @@ window.PERSPECTIVEVIEW = (function() {
 
 
     /**
-     * Toggle the development mode.
-     * If DEV_MODE = true all parameters of all method will be validated and repeats logging outputs.
-     *
-     * @private
-     * @alias DEV_MODE
-     * @memberof PerspectiveView
-     * @type {Boolean}
-     */
-    var DEV_MODE = true,
-
-
-
-    /**
-     * Contains the settings for DEV_MODE
+     * Contains the settings for developing mode
+     * If DEY.enable = true all parameters of all method will be validated and repeats logging outputs.
      *
      * @private
      * @alias DEV
@@ -45,10 +33,12 @@ window.PERSPECTIVEVIEW = (function() {
      * @type {Object}
      * @property {Boolean} abortOnError - Script will abort if an error occurs
      */
-    DEV = {
+    var DEV = {
+        enable:       true,
         abortOnError: false,
         util: {}
     };
+
 
 
     // ------------------------------------------------------------------------------------------------- Scope
@@ -284,7 +274,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setCanvas(canvas);
      */
     pub.setCanvas = function setCanvas(canvas) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isHtmlCanvasElement(canvas)) {
                 console.error('Parameter <canvas> is not a valid HTML canvas element :: ', '{' , typeof canvas, '} :: ', canvas);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -336,34 +326,35 @@ window.PERSPECTIVEVIEW = (function() {
      * });
      */
     pub.setConfig = function setConfig(configuration) {
-        var config         = typeof configuration         === 'object' ? configuration         : {},
-            unitSize       = typeof config.unitSize       === 'object' ? config.unitSize       : {},
-            vanishingPoint = typeof config.vanishingPoint === 'object' ? config.vanishingPoint : {};
+        var config = typeof configuration === 'object' ? configuration : {};
 
-        config = {
-            canvas:     typeof config.canvas     !== 'undefined' ? config.canvas     : priv.canvas,
-            context:    typeof config.context    !== 'undefined' ? config.context    : priv.context,
-            depth:      typeof config.depth      !== 'undefined' ? config.depth      : priv.depth,
-            map:        typeof config.map        !== 'undefined' ? config.map        : priv.map,
-            renderMode: typeof config.renderMode !== 'undefined' ? config.renderMode : priv.renderMode,
-            unitSize: {
-                x: unitSize.x !== undefined ? unitSize.x : priv.unit.size.x,
-                y: unitSize.y !== undefined ? unitSize.y : priv.unit.size.y
-            },
-            vanishingPoint: {
-                x: vanishingPoint.x !== undefined ? vanishingPoint.x : priv.vanishingPoint.x,
-                y: vanishingPoint.y !== undefined ? vanishingPoint.y : priv.vanishingPoint.y
-            }
-        };
+        if (typeof config.canvas !== 'undefined') {
+            pub.setCanvas(config.canvas);
+        }
 
-        // todo: A logic has to be implemented that checks, if a common setter method has to be executed only if the common property is listed in the configuration
-        pub.setCanvas(config.canvas);
-        pub.setContext(config.context);
-        pub.setDepth(config.depth);
-        pub.setMap(config.map);
-        pub.setRenderMode(config.renderMode);
-        pub.setUnitSize(config.unitSize.x, config.unitSize.y);
-        pub.setVanishingPoint(config.vanishingPoint);
+        if (typeof config.context !== 'undefined') {
+            pub.setContext(config.context);
+        }
+
+        if (typeof config.depth !== 'undefined') {
+            pub.setDepth(config.depth);
+        }
+
+        if (typeof config.map !== 'undefined') {
+            pub.setMap(config.map);
+        }
+
+        if (typeof config.renderMode !== 'undefined') {
+            pub.setRenderMode(config.renderMode);
+        }
+
+        if (typeof config.unitSize === 'object') {
+            pub.setUnitSize(config.unitSize.x, config.unitSize.y);
+        }
+
+        if (typeof config.vanishingPoint === 'object') {
+            pub.setVanishingPoint(config.vanishingPoint);
+        }
     };
 
 
@@ -391,7 +382,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setContext(context);
      */
     pub.setContext = function setContext(context) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isObject(context)) {
                 console.error('Parameter <context> is not a valid context of an HTML canvas element :: ', '{' , typeof context, '} :: ', context);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -424,7 +415,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setDepth(depth);
      */
     pub.setDepth = function setDepth(depth) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isSize(depth)) {
                 console.error('Parameter <depth> is not a valid depth factor :: ', '{' , typeof depth, '} :: ', depth);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -433,6 +424,32 @@ window.PERSPECTIVEVIEW = (function() {
 
         priv.depth = Number(depth);
 
+    };
+
+
+
+    /**
+     * Sets the configuration for developing mode.
+     *
+     * @public
+     * @memberof PerspectiveView
+     * @function
+     * @alias setDevelopment
+     * @param {Object}  configuration              - Configuration
+     * @param {Boolean} configuration.enable       - Enables the developing mode
+     * @param {Boolean} configuration.abortOnError - Aborting the script if an error occurs
+     * @return {void}
+     */
+    pub.setDevelopment = function setDevelopment(configuration) {
+        var config = typeof configuration === 'object' ? configuration : {};
+
+        if (typeof config.enable !== 'undefined') {
+            DEV.enable = config.enable;
+        }
+
+        if (typeof config.abortOnError !== 'undefined') {
+            DEV.abortOnError = config.abortOnError;
+        }
     };
 
 
@@ -466,7 +483,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setMap(map);
      */
     pub.setMap = function setMap(map) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isMap(map)) {
                 console.error('Parameter <map> is not a valid map :: ', '{' , typeof map, '} :: ', map);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -500,7 +517,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setRenderMode(mode);
      */
     pub.setRenderMode = function setRenderMode(mode) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isRenderMode(mode)) {
                 console.error('Parameter <mode> is not a valid rendering mode :: ', '{' , typeof mode, '} :: ', mode);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -539,7 +556,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setUnitSize(x, y);
      */
     pub.setUnitSize = function setUnitSize(x, y) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isSize(x)) {
                 console.error('Parameter <x> is not a valid width :: ', '{' , typeof x, '} :: ', x);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -583,7 +600,7 @@ window.PERSPECTIVEVIEW = (function() {
      * pv.setVanishingPoint(coordinate);
      */
     pub.setVanishingPoint = function setVanishingPoint(coordinate) {
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if (!DEV.util.validate.isCoordinate(coordinate)) {
                 console.error('Parameter <coordinate> is not a valid coordinate :: ', '{' , typeof coordinate, '} :: ', coordinate);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -905,7 +922,7 @@ window.PERSPECTIVEVIEW = (function() {
     pub.appendModule = function appendModule(module) {
         var id;
 
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if ((!module) || (typeof module !== 'object')) {
                 console.error('Parameter <module> is not a valid PerspectiveView module :: ', '{' , typeof module, '} :: ', module);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }
@@ -937,7 +954,7 @@ window.PERSPECTIVEVIEW = (function() {
     pub.appendDevUtility = function appendDevUtility(module) {
         var id;
 
-        if (DEV_MODE) {
+        if (DEV.enable) {
             if ((!module) || (typeof module !== 'object')) {
                 console.error('Parameter <module> is not a valid PerspectiveView dev utility :: ', '{' , typeof module, '} :: ', module);
                 if (DEV.abortOnError) { throw new Error('Script abort'); }

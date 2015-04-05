@@ -267,8 +267,8 @@
             },
             map: priv.map
         });
-/**/
         pub.start();
+/**/
     };
 
 
