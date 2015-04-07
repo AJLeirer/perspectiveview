@@ -27,7 +27,7 @@
 			<li class="dropdown">
 				<a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.render_specified.html">PerspectiveView.render_specified</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
+					<li><a href="PerspectiveView.render_flat.html">PerspectiveView.render_flat</a></li><li><a href="PerspectiveView.render_specified.html">PerspectiveView.render_specified</a></li><li><a href="PerspectiveView.render_unitary.html">PerspectiveView.render_unitary</a></li><li><a href="PerspectiveView.validate.html">PerspectiveView.validate</a></li>
 				</ul>
 			</li>
 			
@@ -191,6 +191,9 @@
             <dt><a href="namespaces.html#PerspectiveView.render_specified"><a href="PerspectiveView.render_specified.html">render_specified</a></a></dt>
             <dd></dd>
         
+            <dt><a href="namespaces.html#PerspectiveView.render_unitary"><a href="PerspectiveView.render_unitary.html">render_unitary</a></a></dt>
+            <dd></dd>
+        
             <dt><a href="namespaces.html#PerspectiveView.validate"><a href="PerspectiveView.validate.html">validate</a></a></dt>
             <dd></dd>
         </dl>
@@ -283,8 +286,7 @@
 <dd>
     
     <div class="description">
-        Stores the context of the HTML canvas element.
-This property will be set per default as a 2d-context, when the canvas element will be set by user.
+        Stores the context of the HTML canvas element.This property will be set per default as a 2d-context, when the canvas element will be set by user.
     </div>
     
 
@@ -432,7 +434,7 @@ This property will be set per default as a 2d-context, when the canvas element w
 <dd>
     
     <div class="description">
-        Contains the settings for DEV_MODE
+        Contains the settings for developing modeIf DEY.enable = true all parameters of all method will be validated and repeats logging outputs.
     </div>
     
 
@@ -550,81 +552,6 @@ This property will be set per default as a 2d-context, when the canvas element w
 
         
             
-<dt class="name" id=".DEV_MODE">
-    <h4><span class="type-signature">&lt;private, static> </span>DEV_MODE<span class="type-signature"> :Boolean</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        Toggle the development mode.
-If DEV_MODE = true all parameters of all method will be validated and repeats logging outputs.
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Boolean</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-	
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source">
-		perspectiveview.js
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
 <dt class="name" id=".map">
     <h4><span class="type-signature">&lt;private, static> </span>map<span class="type-signature"> :Array</span></h4>
 
@@ -633,10 +560,7 @@ If DEV_MODE = true all parameters of all method will be validated and repeats lo
 <dd>
     
     <div class="description">
-        Stores the map or just a part of the users map.
-A map is a 2d array containing number values. A zero marks a free/accessible unit/tile, a number higher than zero
-is a blocked unit/tile and will rendered as a cuboid where the number declares the depth (size on virtual
-z-axis).
+        Stores the map or just a part of the users map.A map is a 2d array containing number values. A zero marks a free/accessible unit/tile, a number higher than zerois a blocked unit/tile and will rendered as a cuboid where the number declares the depth (size on virtualz-axis).
     </div>
     
 
@@ -1602,13 +1526,7 @@ z-axis).
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get canvas element
-pv.getCanvas(); // Returns &lt;canvas&gt;</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get canvas elementpv.getCanvas(); // Returns &lt;canvas&gt;</pre>
 
 
     
@@ -1715,36 +1633,7 @@ pv.getCanvas(); // Returns &lt;canvas&gt;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get config object
-pv.getConfig();
-// Returns {
-//     canvas:  &lt;canvas&gt;,
-//     context: {...},
-//     depth:   0.05,
-//     map:     [[1, 1, 1, 1, 1],
-//               [1, 0, 0, 0, 1],
-//               [1, 0, 1, 1, 1],
-//               [1, 0, 0, 0, 1],
-//               [1, 1, 1, 1, 1]],
-//     renderMode: &#x27;flat&#x27;,
-//     unitSize: {
-//         x: 50,
-//         y: 50
-//     },
-//     vanishingCell: {
-//         x: 4,
-//         y: 3
-//     },
-//     vanishingPoint: {
-//         x: 225,
-//         y: 175
-//     }
-// }</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get config objectpv.getConfig();// Returns {//     canvas:  &lt;canvas&gt;,//     context: {...},//     depth:   0.05,//     map:     [[1, 1, 1, 1, 1],//               [1, 0, 0, 0, 1],//               [1, 0, 1, 1, 1],//               [1, 0, 0, 0, 1],//               [1, 1, 1, 1, 1]],//     renderMode: &#x27;flat&#x27;,//     unitSize: {//         x: 50,//         y: 50//     },//     vanishingCell: {//         x: 4,//         y: 3//     },//     vanishingPoint: {//         x: 225,//         y: 175//     }// }</pre>
 
 
     
@@ -1851,13 +1740,7 @@ pv.getConfig();
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get context object
-pv.getContext(); // Returns context of &lt;canvas&gt;</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get context objectpv.getContext(); // Returns context of &lt;canvas&gt;</pre>
 
 
     
@@ -1964,13 +1847,7 @@ pv.getContext(); // Returns context of &lt;canvas&gt;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get depth factor
-pv.getDepth(); // Returns 0.05</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get depth factorpv.getDepth(); // Returns 0.05</pre>
 
 
     
@@ -2227,20 +2104,7 @@ pv.getDepth(); // Returns 0.05</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get map array
-pv.getMap();
-// Returns [
-//     [1, 1, 1, 1, 1],
-//     [1, 0, 0, 0, 1],
-//     [1, 0, 1, 1, 1],
-//     [1, 0, 0, 0, 1],
-//     [1, 1, 1, 1, 1]
-// ]</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get map arraypv.getMap();// Returns [//     [1, 1, 1, 1, 1],//     [1, 0, 0, 0, 1],//     [1, 0, 1, 1, 1],//     [1, 0, 0, 0, 1],//     [1, 1, 1, 1, 1]// ]</pre>
 
 
     
@@ -2497,13 +2361,7 @@ pv.getMap();
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get render mode
-pv.getRenderMode(); // Returns &#x27;flat&#x27;</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get render modepv.getRenderMode(); // Returns &#x27;flat&#x27;</pre>
 
 
     
@@ -2610,13 +2468,7 @@ pv.getRenderMode(); // Returns &#x27;flat&#x27;</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get size object of a unit
-pv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get size object of a unitpv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
 
 
     
@@ -2723,27 +2575,7 @@ pv.getUnitSize(); // Returns {x: 50, y: 50}</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Sizes of a tile
-var x = 50;   // px
-var y = 50;   // px
-
-// Set the size of a unit/tile
-pv.setUnitSize(x, y);
-
-// Coordinate to be set as vanishing point
-var coordinate = {
-    x: 225; // px
-    y: 175; // px
-};
-
-// Set coordinate as new vanishing point
-pv.setVanishingPoint(coordinate);
-
-// Get vanishing cell
-getVanishingCell(); // Returns { x: 4, y: 3 }</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Sizes of a tilevar x = 50;   // pxvar y = 50;   // px// Set the size of a unit/tilepv.setUnitSize(x, y);// Coordinate to be set as vanishing pointvar coordinate = {    x: 225; // px    y: 175; // px};// Set coordinate as new vanishing pointpv.setVanishingPoint(coordinate);// Get vanishing cellgetVanishingCell(); // Returns { x: 4, y: 3 }</pre>
 
 
     
@@ -2850,13 +2682,7 @@ getVanishingCell(); // Returns { x: 4, y: 3 }</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// ...
-
-// Get vanishing point
-getVanishingPoint(); // Returns { x: 225, y: 175 }</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// ...// Get vanishing pointgetVanishingPoint(); // Returns { x: 225, y: 175 }</pre>
 
 
     
@@ -2873,8 +2699,7 @@ getVanishingPoint(); // Returns { x: 225, y: 175 }</pre>
     
     
     <div class="description">
-        Constructor, will be called if a new instance of PerspectiveView has been initialized.
-Sets the default values.
+        Constructor, will be called if a new instance of PerspectiveView has been initialized.Sets the default values.
     </div>
     
 
@@ -3238,14 +3063,7 @@ Sets the default values.
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Get HTML canvas element
-var canvas = document.getElementById(&#x27;myCanvas&#x27;);
-
-// Set canvas as new canvas
-pv.setCanvas(canvas);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Get HTML canvas elementvar canvas = document.getElementById(&#x27;myCanvas&#x27;);// Set canvas as new canvaspv.setCanvas(canvas);</pre>
 
 
     
@@ -3401,30 +3219,7 @@ pv.setCanvas(canvas);</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Set a valid config
-pv.setConfig({
-    canvas: document.getElementById(&#x27;myCanvas&#x27;),
-    depth: 005,
-    map: [
-        [1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1],
-        [1, 0, 1, 1, 1],
-        [1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1]
-    ],
-    renderMode: &#x27;flat&#x27;,
-    unitSize: {
-        x: 50,
-        y: 50
-    },
-    vanishingPoint: {
-        x: 225,
-        y: 175
-    }
-});</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Set a valid configpv.setConfig({    canvas: document.getElementById(&#x27;myCanvas&#x27;),    depth: 005,    map: [        [1, 1, 1, 1, 1],        [1, 0, 0, 0, 1],        [1, 0, 1, 1, 1],        [1, 0, 0, 0, 1],        [1, 1, 1, 1, 1]    ],    renderMode: &#x27;flat&#x27;,    unitSize: {        x: 50,        y: 50    },    vanishingPoint: {        x: 225,        y: 175    }});</pre>
 
 
     
@@ -3441,8 +3236,7 @@ pv.setConfig({
     
     
     <div class="description">
-        Sets the HTML canvas element the map manipulations should be rendered to.
-Automatically the context is set as 2d.
+        Sets the HTML canvas element the map manipulations should be rendered to.Automatically the context is set as 2d.
     </div>
     
 
@@ -3581,15 +3375,7 @@ Automatically the context is set as 2d.
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Get HTML canvas element and its context
-var myCanvas = document.getElementById(&#x27;myCanvas&#x27;);
-var context  = myCanvas.getContext(&#x27;2d&#x27;);
-
-// Set context as new context
-pv.setContext(context);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Get HTML canvas element and its contextvar myCanvas = document.getElementById(&#x27;myCanvas&#x27;);var context  = myCanvas.getContext(&#x27;2d&#x27;);// Set context as new contextpv.setContext(context);</pre>
 
 
     
@@ -3745,16 +3531,231 @@ pv.setContext(context);</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Depth of a tile
-var depth = 0.05;
-
-// Set depth as new depth
-pv.setDepth(depth);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Depth of a tilevar depth = 0.05;// Set depth as new depthpv.setDepth(depth);</pre>
 
 
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id=".setDevelopment"><span class="type-signature">&lt;static> </span>setDevelopment<span class="signature">(configuration)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Sets the configuration for developing mode.
+    </div>
+    
+
+    
+
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>configuration</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Configuration
+                <h6>Properties</h6>
+                
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>enable</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Enables the developing mode</td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>abortOnError</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Aborting the script if an error occurs</td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+            </td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+	
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source">
+		perspectiveview.js
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+    
+    
+
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type">void</span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
     
 </dd>
 
@@ -3769,9 +3770,7 @@ pv.setDepth(depth);</pre>
     
     
     <div class="description">
-        Sets the map or just a part of the map.
-A valid map must be a 2d array of numbers, where zero will not be rendered and all numbers greater than zero
-will be rendered as a cuboid.
+        Sets the map or just a part of the map.A valid map must be a 2d array of numbers, where zero will not be rendered and all numbers greater than zerowill be rendered as a cuboid.
     </div>
     
 
@@ -3910,20 +3909,7 @@ will be rendered as a cuboid.
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Simple map 5 x 5 units/tiles
-var map = [
-    [1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1]
-];
-
-// Set map as new map
-pv.setMap(map);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Simple map 5 x 5 units/tilesvar map = [    [1, 1, 1, 1, 1],    [1, 0, 0, 0, 1],    [1, 0, 1, 1, 1],    [1, 0, 0, 0, 1],    [1, 1, 1, 1, 1]];// Set map as new mappv.setMap(map);</pre>
 
 
     
@@ -3940,8 +3926,7 @@ pv.setMap(map);</pre>
     
     
     <div class="description">
-        Sets the type/mode of rendering.
-Value must be a string in lower cases. Valid modes: [flat]
+        Sets the type/mode of rendering.Value must be a string in lower cases. Valid modes: [flat]
     </div>
     
 
@@ -4080,14 +4065,7 @@ Value must be a string in lower cases. Valid modes: [flat]
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Mode to be set as rendering mode. Should be written in lower cases!
-var mode = &#x27;flat&#x27;;
-
-// Set mode as new render mode
-pv.setRenderMode(mode);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Mode to be set as rendering mode. Should be written in lower cases!var mode = &#x27;flat&#x27;;// Set mode as new render modepv.setRenderMode(mode);</pre>
 
 
     
@@ -4266,15 +4244,7 @@ pv.setRenderMode(mode);</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Sizes of a tile
-var x = 50;   // px
-var y = 50;   // px
-
-// Set x and y as new unit size
-pv.setUnitSize(x, y);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Sizes of a tilevar x = 50;   // pxvar y = 50;   // px// Set x and y as new unit sizepv.setUnitSize(x, y);</pre>
 
 
     
@@ -4502,17 +4472,7 @@ pv.setUnitSize(x, y);</pre>
     
         <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveView
-var pv = newPerspectiveView();
-
-// Coordinate to be set as vanishing point
-var coordinate = {
-    x: 225; // px
-    y: 175; // px
-};
-
-// Set coordinate as new vanishing point
-pv.setVanishingPoint(coordinate);</pre>
+    <pre class="sunlight-highlight-javascript">// Creates an instance of PerspectiveViewvar pv = newPerspectiveView();// Coordinate to be set as vanishing pointvar coordinate = {    x: 225; // px    y: 175; // px};// Set coordinate as new vanishing pointpv.setVanishingPoint(coordinate);</pre>
 
 
     
@@ -4559,7 +4519,7 @@ pv.setVanishingPoint(coordinate);</pre>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a>
-	on 2015-04-04T15:24:17+02:00 using the <a
+	on 2015-04-07T19:40:26+02:00 using the <a
 	href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 </span>
 </footer>
