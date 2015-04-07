@@ -187,7 +187,8 @@
     pub.isRenderMode = function isRenderMode(value) {
         return (this.isString(value) && (
             (value === 'flat') ||
-            (value === 'specified')
+            (value === 'specified')  ||
+            (value === 'unitary')
         ));
     };
 

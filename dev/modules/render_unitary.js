@@ -1,15 +1,16 @@
 /**
- * Revealing module for rendering maps with specified heights.
+ * Revealing module for rendering maps with a unitary height.
  *
- * @namespace render_specified
+ * @namespace render_unitary
  * @memberof PerspectiveView
  * @param {Object} window   - Global window object
  * @param {Object} document - Global document object
  * @param {Object} pv       - PerspectiveView with empty object fallback
  */
-;(function render_specified(win, doc, pv) {
+;(function render_unitary(win, doc, pv) {
     'use strict';
 
+    // todo: Has to be simplified. It is currently a copy of render_specified!
 
 
     // ------------------------------------------------------------------------------------------------- Scope
@@ -21,7 +22,7 @@
      *
      * @private
      * @ignore
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @type {Object}
      */
     var priv = {},
@@ -33,7 +34,7 @@
      *
      * @public
      * @ignore
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @type {Object}
      */
     pub = {};
@@ -47,7 +48,7 @@
      * Stores the order of to rendered map items.
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getRenderOrder
      * @type {Array}
@@ -60,7 +61,7 @@
      * Returns an array of the ordered map items.
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getRenderOrder
      * @return {Array}
@@ -114,7 +115,7 @@
      * Returns an array of paths of the six shapes of an cuboid at the given position.
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getCuboidPaths
      * @param {Object} position   - Position in the map
@@ -129,7 +130,7 @@
             depthFactor                 = pv.getDepth(),
             absoluteObjectBasePositionX = Number(position.x * unitSize.x),
             absoluteObjectBasePositionY = Number(position.y * unitSize.y),
-            objectDepth                 = depth * depthFactor,
+            objectDepth                 = 1 * depthFactor,
             ground = {
                 tlx: absoluteObjectBasePositionX,
                 tly: absoluteObjectBasePositionY,
@@ -230,7 +231,7 @@
      * Draws a stroked, filled, closed and colored shape at the canvas.
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getCuboidPaths
      * @param {Array}  path  - List of XY-Coordinates
@@ -268,7 +269,7 @@
      * Draws a stroked, filled, closed and colored shape at the canvas.
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias getCuboidPaths
      * @param {Object} configuration            - Configuration
@@ -319,7 +320,7 @@
      * Handles the rendering of the map
      *
      * @private
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias renderMap
      * @return {void}
@@ -362,7 +363,7 @@
      * Initialize this module.
      *
      * @public
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias init
      * @return {void}
@@ -377,7 +378,7 @@
      * Public API render method
      *
      * @public
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias render
      * @return {void}
@@ -392,7 +393,7 @@
      * Updates the order of rendered items.
      *
      * @public
-     * @memberof! PerspectiveView.render_specified
+     * @memberof! PerspectiveView.render_unitary
      * @function
      * @alias updateRenderOrder
      * @return {void}
@@ -407,7 +408,7 @@
 
 
 
-    pv.appendModule({render_specified: pub});
+    pv.appendModule({render_unitary: pub});
 
 
 
