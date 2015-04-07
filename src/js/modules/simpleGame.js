@@ -245,7 +245,7 @@
             canvas:         document.getElementById('myCanvas'),
             context:        document.getElementById('myCanvas').getContext('2d'),
             depth:          0.05,
-            renderMode:     'unitary',
+            renderMode:     'specified',
             map:            priv.map,
             unitSize:       {x: 40,  y: 40},
             vanishingPoint: {x: 260, y: 180}
